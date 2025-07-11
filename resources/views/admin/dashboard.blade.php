@@ -96,88 +96,9 @@
             </div>
         </div>
         <div class="card-body">
-            <div id="chart1"></div>
+            <h2>Pending...</h2>
         </div>
     </div>
-    <div class="row">
-        <div class="col-12 col-lg-8">
-            <div class="card radius-10">
-                <div class="card-header border-bottom-0 bg-transparent">
-                    <div class="d-lg-flex align-items-center">
-                        <div>
-                            <h6 class="font-weight-bold mb-2 mb-lg-0">Historical Analytics</h6>
-                        </div>
-                        <div class="dropdown ms-auto">
-                            <div class="cursor-pointer text-dark font-24 dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown"><i class="bx bx-dots-horizontal-rounded text-option"></i>
-                            </div>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="javaScript:;">Action</a>
-                                <a class="dropdown-item" href="javaScript:;">Another action</a>
-                                <div class="dropdown-divider"></div>	
-                                <a class="dropdown-item" href="javaScript:;">Something else here</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="d-flex align-items-center ms-auto font-13 gap-2">
-                        <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle text-danger me-1"></i>Visitors</span>
-                        <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle text-success me-1"></i>Chats</span>
-                        <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle text-info me-1"></i>Page Views</span>
-                    </div>
-                    <div id="chart2"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-lg-4">
-            <div class="card radius-10 bg-primary">
-                <div class="card-body">
-                    <h6 class="text-white">Active Visitors</h6>
-                    <h4 class="font-weight-bold text-white">3467</h4>
-                    <p class="font-13 text-white">Page view per minute</p>
-                    <div id="chart3"></div>
-                </div>
-            </div>
-            <div class="card radius-10">
-                <div class="card-body">
-                    <div class="revenue-by-channel">
-                        <h6 class="mb-4 font-weight-bold">Revenue by Channel</h6>
-                        <div class="progress-wrapper">
-                            <div class="d-flex align-items-center">
-                                <div class="text-secondary">Direct</div>
-                                <div class="ms-auto pe-4">$1,24,685</div>
-                                <div class="text-success">65.6%</div>
-                            </div>
-                            <div class="progress mt-2" style="height:3px;">
-                                <div class="progress-bar" role="progressbar" style="width: 65%"></div>
-                            </div>
-                        </div>
-                        <div class="progress-wrapper mt-3">
-                            <div class="d-flex align-items-center">
-                                <div class="text-secondary">Referral</div>
-                                <div class="ms-auto pe-4">$1,22,863</div>
-                                <div class="text-success">45.6%</div>
-                            </div>
-                            <div class="progress mt-2" style="height:3px;">
-                                <div class="progress-bar" role="progressbar" style="width: 55%"></div>
-                            </div>
-                        </div>
-                        <div class="progress-wrapper mt-3">
-                            <div class="d-flex align-items-center">
-                                <div class="text-secondary">Social</div>
-                                <div class="ms-auto pe-4">$1,24,685</div>
-                                <div class="text-danger">25.2%</div>
-                            </div>
-                            <div class="progress mt-2" style="height:3px;">
-                                <div class="progress-bar" role="progressbar" style="width: 35%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--end row-->
 </div>
 
 
