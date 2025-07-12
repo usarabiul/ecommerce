@@ -30,10 +30,10 @@ trait UserPermission{
 
 				empty(json_decode($activeRole->permission, true)['servicesOthers']['category']) && \Request::is('admin/services/categories*') ||
 
-				empty(json_decode($activeRole->permission, true)['medies']['list']) && \Route::is('admin.medies')||
-				empty(json_decode($activeRole->permission, true)['medies']['add']) && \Route::is('admin.mediesCreate') ||
-				empty(json_decode($activeRole->permission, true)['medies']['add']) && \Route::is('admin.mediesUpdate') ||
-				empty(json_decode($activeRole->permission, true)['medies']['delete']) && \Route::is('admin.mediesDelete') || 
+				// empty(json_decode($activeRole->permission, true)['medies']['list']) && \Route::is('admin.medies')||
+				// empty(json_decode($activeRole->permission, true)['medies']['add']) && \Route::is('admin.mediesCreate') ||
+				// empty(json_decode($activeRole->permission, true)['medies']['add']) && \Route::is('admin.mediesUpdate') ||
+				// empty(json_decode($activeRole->permission, true)['medies']['delete']) && \Route::is('admin.mediesDelete') || 
 
 				empty(json_decode($activeRole->permission, true)['clients']['list']) && \Route::is('admin.clients')||
 				empty(json_decode($activeRole->permission, true)['clients']['add']) && \Route::is('admin.clientsCreate') ||

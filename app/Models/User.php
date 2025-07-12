@@ -134,7 +134,7 @@ class User extends Authenticatable
                 return $this->imageFile->file_url; 
              }
          }else{
-             return 'public/medies/profile.png';
+             return 'medies/profile.png';
          }
      }
      
@@ -157,7 +157,7 @@ class User extends Authenticatable
          if($this->bannerFile){
              return $this->bannerFile->file_url;
          }else{
-             return 'public/app-assets/images/carousel/22.jpg';
+             return 'app-assets/images/carousel/22.jpg';
          }
      }
      

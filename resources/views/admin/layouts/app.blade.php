@@ -97,10 +97,10 @@
                 $(this).toggleClass('active-show');
                 if ($(this).hasClass('active-show')) {
                     $('input.password').prop('type','text');
-                    $(this).empty().append('<i class="fa fa-eye"></i>');
+                    $(this).empty().append('<i class="bx bx-show"></i>');
                 } else {
                     $('input.password').prop('type','password');
-                    $(this).empty().append('<i class="fa fa-eye-slash"></i>');
+                    $(this).empty().append('<i class="bx bx-hide"></i>');
                 }
           });
 

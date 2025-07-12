@@ -335,14 +335,18 @@
 							</div>
 						</a>
 						<ul class="dropdown-menu dropdown-menu-end">
-							<li><a class="dropdown-item" href="javascript:;"><i class="bx bx-user"></i><span>My Profile</span></a>
+							<li><a class="dropdown-item" href="{{route('admin.myProfile')}}"><i class="bx bx-user"></i><span>My Profile</span></a>
 							</li>
-							<li><a class="dropdown-item" href="javascript:;"><i class='bx bx-home-circle'></i><span>My Dashboard</span></a>
+							<li><a class="dropdown-item" href="{{route('customer.dashboard')}}"><i class='bx bx-home-circle'></i><span>My Dashboard</span></a>
 							</li>
 							<li>
 								<div class="dropdown-divider mb-0"></div>
 							</li>
-							<li><a class="dropdown-item" href="javascript:;"><i class='bx bx-log-out-circle'></i><span>Logout</span></a>
+							<li>
+								<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class='bx bx-log-out-circle'></i><span>Logout</span></a>
+								<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+									@csrf
+								</form>
 							</li>
 						</ul>
 					</div>

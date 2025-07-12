@@ -207,7 +207,7 @@ function uploadFile($file,$src,$srcType,$fileUse,$author=null,$fileStatus=true){
     
     $name = basename($file->getClientOriginalName(), '.'.$file->getClientOriginalExtension());
     $fullname = basename($file->getClientOriginalName());
-    $ext =$file->getClientOriginalExtension();
+    $ext =strtolower($file->getClientOriginalExtension());
     $size =$file->getSize();
     $mimeType = $file->getMimeType();
 
@@ -217,7 +217,7 @@ function uploadFile($file,$src,$srcType,$fileUse,$author=null,$fileStatus=true){
 
     $img =time().'.'.uniqid().'.'.$file->getClientOriginalExtension();
     $path ="medies/".$folder;
-    $fullpath ="public/medies/".$folder.'/'.$img;
+    $fullpath ="medies/".$folder.'/'.$img;
     $media->src_type=$srcType;
     $media->use_Of_file=$fileUse;
     $media->src_id=$src;
