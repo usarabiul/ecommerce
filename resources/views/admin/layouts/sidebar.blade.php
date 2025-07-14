@@ -175,18 +175,18 @@
 						<div class="menu-title">Setting </div>
 					</a>
 					<ul>
-						<li> <a href="component-alerts.html"><i class="bx bx-right-arrow-alt"></i>General Settings</a>
+						<li> <a href="{{route('admin.setting','general')}}"><i class="bx bx-right-arrow-alt"></i>General Settings</a>
 						</li>
-						<li> <a href="component-accordions.html"><i class="bx bx-right-arrow-alt"></i>Mail Setting</a>
+						<li> <a href="{{route('admin.setting','mail')}}"><i class="bx bx-right-arrow-alt"></i>Mail Setting</a>
 						</li>
-						<li> <a href="component-badges.html"><i class="bx bx-right-arrow-alt"></i>SMS Setting</a>
+						<li> <a href="{{route('admin.setting','sms')}}"><i class="bx bx-right-arrow-alt"></i>SMS Setting</a>
 						</li>
-						<li> <a href="component-badges.html"><i class="bx bx-right-arrow-alt"></i>Social Setting</a>
+						<li> <a href="{{route('admin.setting','social')}}"><i class="bx bx-right-arrow-alt"></i>Social Setting</a>
 						</li>
 					</ul>
 				</li>
 				<li>
-					<a href="https://themeforest.net/user/codervent" target="_blank">
+					<a href="{{route('admin.setting','document')}}" target="_blank">
 						<div class="parent-icon"><i class='bx bx-headphone' ></i>
 						</div>
 						<div class="menu-title">Support</div>
@@ -213,7 +213,6 @@
          </li>
 
          <!--Permission Check List Menus Start-->
-
          @if($roles = Auth::user()->permission)
 
          @if(

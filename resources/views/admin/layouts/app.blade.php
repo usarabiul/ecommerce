@@ -33,7 +33,13 @@
     <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/css/header-colors.css')}}" />
 
     <style type="text/css">
-       
+      .card-title {
+          margin: 0;
+      }
+      .card-header {
+          background-color: rgb(0 0 0);
+          color: white;
+      }
     </style>
 
      @stack('css')

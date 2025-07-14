@@ -103,7 +103,7 @@ class General extends Model
          {
             return $this->logo;
          }else{
-            return 'public/medies/no-logo.png';
+            return 'medies/no-logo.png';
          }
      }
  
@@ -113,7 +113,7 @@ class General extends Model
          {
             return $this->favicon;
          }else{
-            return 'public/medies/no-favicon.png';
+            return 'medies/no-favicon.png';
          }
      }
 
