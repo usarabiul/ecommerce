@@ -534,7 +534,7 @@ class AdminController extends Controller
       }
 
     })
-    ->select(['id','name','slug','view','type','template','created_at','addedby_id','status','fetured'])
+    ->select(['id','name','slug','view','type','template','created_at','addedby_id','status','featured'])
     ->paginate(25)->appends([
       'search'=>$r->search,
       'status'=>$r->status,
@@ -542,21 +542,21 @@ class AdminController extends Controller
       'endDate'=>$r->endDate,
     ]);
 
-    //Total Count Results
-    $totals = DB::table('posts')->where('status','<>','temp')
+    //Total Count Result
+    $total = DB::table('posts')->where('status','<>','temp')
     ->where('type',0)
     ->selectRaw('count(*) as total')
     ->selectRaw("count(case when status = 'active' then 1 end) as active")
     ->selectRaw("count(case when status = 'inactive' then 1 end) as inactive")
     ->first();
 
-    return view(adminTheme().'pages.pagesAll',compact('pages','totals'));
+    return view(adminTheme().'pages.pagesAll',compact('pages','total'));
 
   }
 
   public function pagesAction(Request $r,$action,$id=null){
 
-    if($action=='create'){
+      if($action=='create'){
         $page =Post::where('type',0)->where('status','temp')->where('addedby_id',Auth::id())->first();
         if(!$page){
           $page =new Post();
@@ -585,14 +585,16 @@ class AdminController extends Controller
       if($action=='update' && $r->isMethod('post')){
 
         $check = $r->validate([
-            'name' => 'required|max:191',
+            'name' => 'required|max:200',
+            'slug' => 'nullable|max:240',
             'template' => 'nullable|max:100',
             'seo_title' => 'nullable|max:120',
             'seo_description' => 'nullable|max:200',
-            'seo_keyword' => 'nullable|max:300',
+            'seo_keyword' => 'nullable',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'banner' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
+
 
         $page->name=$r->name;
         $page->short_description=$r->short_description;
@@ -622,8 +624,8 @@ class AdminController extends Controller
           uploadFile($file,$src,$srcType,$fileUse,$author);
         }
         ///////Image Upload End////////////
-
-        $slug =Str::slug($r->name);
+        $page->auto_slug=$r->slug?true:false;
+        $slug =Str::slug($r->slug?:$r->name);
         if($slug==null){
           $page->slug=$page->id;
         }else{
@@ -638,7 +640,7 @@ class AdminController extends Controller
           $page->created_at =$r->created_at;
         }
         $page->status =$r->status?'active':'inactive';
-        $page->fetured =$r->fetured?1:0;
+        $page->featured =$r->featured?1:0;
         $page->editedby_id =Auth::id();
         $page->save();
         
@@ -2771,27 +2773,6 @@ public function userRoles(Request $r){
       return view(adminTheme().'setting.general',compact('general','type'));
     }else if($type=='mail'){
       return view(adminTheme().'setting.mail',compact('general','type'));
-    }else if($type=='preview-mail'){
-        
-        if($r->template=='Contact Mail'){
-            $data =array(
-                        'title'=>'Test mail for testing',
-                        'name'=>'Demo Name',
-                        'phone'=>'+8801745454545',
-                        'email'=>'demoemail@gmail.com',
-                        'subject'=>'Testing Contact Mail for Admin',
-                        'comment'=>'We are testing for email testing form admin access . i hope all are successfully working.',
-                    );
-            $datas =array('r'=>$data);
-            return view('mails.ContactMail',compact('general','type','datas'));
-        }elseif($r->template=='Register Mail'){
-            
-            $user =Auth::user();
-            $datas =array('user'=>$user);
-            return view('mails.registrationMail',compact('general','type','datas'));
-        }
-      return view('mails.deafultMail',compact('general','type'));
-      
     }else if($type=='sms'){
       return view(adminTheme().'setting.sms',compact('general','type'));
     }else if($type=='social'){
@@ -2860,7 +2841,6 @@ public function userRoles(Request $r){
             'subtitle' => 'nullable|max:200',
             'mobile' => 'nullable|max:100',
             'email' => 'nullable|max:100',
-            'currency' => 'nullable|max:10',
             'website' => 'nullable|max:100',
             'meta_author' => 'nullable|max:100',
             'meta_title' => 'nullable|max:200',
@@ -2876,7 +2856,6 @@ public function userRoles(Request $r){
         $general->email=$r->email;
         $general->address_one=$r->address_one;
         $general->address_two=$r->address_two;
-        $general->currency=$r->currency;
         $general->website=$r->website;
         $general->meta_author=$r->meta_author;
         $general->meta_title=$r->meta_title;
@@ -2884,8 +2863,6 @@ public function userRoles(Request $r){
         $general->meta_description=$r->meta_description;
         $general->script_head=$r->script_head;
         $general->script_body=$r->script_body;
-        $general->custom_css=$r->custom_css;
-        $general->custom_js=$r->custom_js;
         $general->copyright_text=$r->footer_text;
         
 
@@ -2970,7 +2947,6 @@ public function userRoles(Request $r){
             $general->banner =$fullPath;
 
         }
-        $general->commingsoon_mode=$r->commingsoon_mode?true:false;
         $general->save();
 
         Session()->flash('success','General Updated Are Successfully Done!');
@@ -2981,7 +2957,7 @@ public function userRoles(Request $r){
     if($type=='mail'){
 
       $check = $r->validate([
-            'mail_from_address' => 'nullable|max:100',
+            'mail_from_address' => 'nullable|max:1',
             'mail_from_name' => 'nullable|max:100',
             'mail_driver' => 'nullable|max:100',
             'mail_host' => 'nullable|max:100',
@@ -2989,7 +2965,6 @@ public function userRoles(Request $r){
             'mail_encryption' => 'nullable|max:100',
             'mail_username' => 'nullable|max:100',
             'mail_password' => 'nullable|max:100',
-            'admin_mails' => 'nullable|max:1000',
         ]);
 
       $general->mail_from_address=$r->mail_from_address;
@@ -3000,12 +2975,7 @@ public function userRoles(Request $r){
       $general->mail_encryption=$r->mail_encryption;
       $general->mail_username=$r->mail_username;
       $general->mail_password=$r->mail_password;
-      $general->admin_mails=$r->admin_mails;
       $general->mail_status=$r->mail_status?true:false;
-      $general->register_mail_user=$r->register_mail_user?true:false;
-      $general->register_mail_author=$r->register_mail_author?true:false;
-      $general->forget_password_mail_user=$r->forget_password_mail_user?true:false;
-      $general->register_verify_mail_user=$r->register_verify_mail_user?true:false;
       $general->save();
 
       Session()->flash('success','Mail Updated Are Successfully Done!');
@@ -3015,31 +2985,22 @@ public function userRoles(Request $r){
     if($type=='send-testing-mail'){
 
         $check = $r->validate([
-            'mail_type' => 'required|max:200',
             'mail_address' => 'required|max:200',
         ]);
         
         if(general()->mail_status && $r->mail_address){
             //Mail Data
             
-            if($r->mail_type=='Contact Mail'){
-                $data =array(
-                        'title'=>'Test mail for testing',
-                        'name'=>'Demo Name',
-                        'phone'=>'+8801745454545',
-                        'email'=>'demoemail@gmail.com',
-                        'subject'=>'Testing Contact Mail for Admin',
-                        'comment'=>'We are testing for email testing form admin access . i hope all are successfully working.',
-                    );
-                $datas =array('r'=>$data);
-                $template ='mails.ContactMail';
-            }elseif($r->mail_type=='Register Mail'){
-                $user =Auth::user();
-                $datas =array('user'=>$user);
-                $template ='mails.registrationMail';
-            }else{
-                $template ='mails.deafultMail';
-            }
+            $data =array(
+                    'title'=>'Test mail for testing',
+                    'name'=>'Demo Name',
+                    'phone'=>'+8801745454545',
+                    'email'=>'demoemail@gmail.com',
+                    'subject'=>'Testing Contact Mail for Admin',
+                    'comment'=>'We are testing for email testing form admin access . i hope all are successfully working.',
+                );
+            $datas =array('r'=>$data);
+            $template ='mails.ContactMail';
             
             $toEmail =$r->mail_address?:general()->mail_address;
             $toName =general()->mail_from_name;
@@ -3080,7 +3041,6 @@ public function userRoles(Request $r){
             'sms_url_masking' => 'nullable|max:200',
             'sms_username' => 'nullable|max:50',
             'sms_password' => 'nullable|max:50',
-            'admin_numbers' => 'nullable|max:1000',
         ]);
         
       $general->sms_type=$r->sms_type;
@@ -3089,12 +3049,7 @@ public function userRoles(Request $r){
       $general->sms_url_masking=$r->sms_url_masking;
       $general->sms_username=$r->sms_username;
       $general->sms_password=$r->sms_password;
-      $general->admin_numbers=$r->admin_numbers;
       $general->sms_status=$r->sms_status?true:false;
-      $general->register_sms_user=$r->register_sms_user?true:false;
-      $general->register_sms_author=$r->register_sms_author?true:false;
-      $general->forget_password_sms_user=$r->forget_password_sms_user?true:false;
-      $general->register_verify_sms_user=$r->register_verify_sms_user?true:false;
       $general->save();
 
       Session()->flash('success','SMS Updated Are Successfully Done!');
@@ -3111,6 +3066,8 @@ public function userRoles(Request $r){
             'linkedin_link' => 'nullable|max:200',
             'pinterest_link' => 'nullable|max:200',
             'youtube_link' => 'nullable|max:200',
+            'whatsapp_link' => 'nullable|max:100',
+            'messanger_link' => 'nullable|max:100',
             'fb_app_id' => 'nullable|max:100',
             'fb_app_secret' => 'nullable|max:100',
             'fb_app_redirect_url' => 'nullable|max:200',
@@ -3128,6 +3085,8 @@ public function userRoles(Request $r){
         $general->linkedin_link=$r->linkedin_link;
         $general->pinterest_link=$r->pinterest_link;
         $general->youtube_link=$r->youtube_link;
+        $general->whatsapp_link=$r->whatsapp_link;
+        $general->messanger_link=$r->messanger_link;
         $general->fb_app_id=$r->fb_app_id;
         $general->fb_app_secret=$r->fb_app_secret;
         $general->fb_app_redirect_url=$r->fb_app_redirect_url;

@@ -36,7 +36,7 @@
 					</ul>
 				</li>
 				<li>
-					<a href="widgets.html">
+					<a href="{{route('admin.pages')}}">
 						<div class="parent-icon"><i class='bx bx-edit'></i>
 						</div>
 						<div class="menu-title">Pages</div>

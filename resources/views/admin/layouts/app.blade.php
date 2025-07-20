@@ -40,6 +40,31 @@
           background-color: rgb(0 0 0);
           color: white;
       }
+       ul.statuslist {
+            text-align: right;
+        }
+
+        ul.statuslist li {
+            display: inline-block;
+        }
+
+        ul.statuslist li a {
+            border: 1px solid #d1cece;
+            padding: 3px 6px;
+            border-radius: 15px;
+            display: inline-block;
+            margin: 3px 1px;
+            font-size: 12px;
+        }
+
+         .slugEditData{
+            display:none;
+            height: 30px;
+            padding: 4px 10px;
+        }
+        .showPassword{
+          cursor:pointer;
+        }
     </style>
 
      @stack('css')

@@ -18,10 +18,10 @@ trait UserPermission{
 				empty(json_decode($activeRole->permission, true)['postsOther']['tags']) && \Request::is('admin/posts/tags*')||
 				empty(json_decode($activeRole->permission, true)['postsOther']['comments']) && \Request::is('admin/posts/comments*')||
 
-				empty(json_decode($activeRole->permission, true)['pages']['list']) && \Route::is('admin.pages')||
-				empty(json_decode($activeRole->permission, true)['pages']['add']) && \Route::is('admin.pagesCreate') ||
-				empty(json_decode($activeRole->permission, true)['pages']['add']) && \Route::is('admin.pagesUpdate') ||
-				empty(json_decode($activeRole->permission, true)['pages']['delete']) && \Route::is('admin.pagesDelete') ||
+				// empty(json_decode($activeRole->permission, true)['pages']['list']) && \Route::is('admin.pages')||
+				// empty(json_decode($activeRole->permission, true)['pages']['add']) && \Route::is('admin.pagesCreate') ||
+				// empty(json_decode($activeRole->permission, true)['pages']['add']) && \Route::is('admin.pagesUpdate') ||
+				// empty(json_decode($activeRole->permission, true)['pages']['delete']) && \Route::is('admin.pagesDelete') ||
 
 				empty(json_decode($activeRole->permission, true)['services']['list']) && \Route::is('admin.services')||
 				empty(json_decode($activeRole->permission, true)['services']['add']) && \Route::is('admin.servicesCreate') ||
