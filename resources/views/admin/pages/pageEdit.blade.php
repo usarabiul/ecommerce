@@ -9,36 +9,32 @@
 </style>
 @endpush 
 @section('contents')
+<div class="page-content">
 
-<div class="content-header row">
-    <div class="content-header-left col-md-6 col-12 mb-2">
-        <h3 class="content-header-title mb-0">Page Edit</h3>
-        <div class="row breadcrumbs-top">
-            <div class="breadcrumb-wrapper col-12">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard </a></li>
-                    <li class="breadcrumb-item active">Page Edit</li>
+    <!--breadcrumb-->
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">Page Edit</div>
+        <div class="ps-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 p-0">
+                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}"><i class="bx bx-home-alt"></i></a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="{{route('admin.pages')}}">Page list</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Page Edit</li>
                 </ol>
+            </nav>
+        </div>
+        <div class="ms-auto">
+            <div class="btn-group">
+                <a class="btn btn-outline-primary" href="{{route('admin.pagesAction','create')}}">Add Page</a>
+                <a href="{{route('admin.pagesAction',['edit',$page->id])}}" class="btn btn-primary"><i class="bx bx-refresh"></i></a>
             </div>
         </div>
     </div>
-    <div class="content-header-right col-md-6 col-12 mb-md-0 mb-2">
-        <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
-            <a class="btn btn-outline-primary" href="{{route('admin.pages')}}">BACK</a>
-            <!--<a class="btn btn-outline-info MenuSetting" href="javascript:void(0)" data-id="{{$page->id}}">Add Menus</a>-->
-            @isset(json_decode(Auth::user()->permission->permission, true)['pages']['add'])
-            <a class="btn btn-outline-primary" href="{{route('admin.pagesAction','create')}}" onclick="return confirm('Are You Want To New page?')">Add Page</a>
-            @endisset
-            <a class="btn btn-outline-primary" href="{{route('admin.pagesAction',['edit',$page->id])}}">
-                <i class="fa-solid fa-rotate"></i>
-            </a>
-        </div>
-    </div>
-</div>
+    <!--end breadcrumb-->
 
-<div class="content-body">
-    <!-- Basic Elements start -->
-    <section class="basic-elements">
+
     @include(adminTheme().'alerts')
         <form action="{{route('admin.pagesAction',['update',$page->id])}}" method="post" enctype="multipart/form-data">
             @csrf
@@ -54,30 +50,38 @@
                         </div>
                         <div class="card-content">
                             <div class="card-body">
-                                <a href="{{route('admin.contentEditor',['page',$page->id])}}" class="btn btn-info">NIT-Editor</a>
-                                <div class="form-group">
-                                    <label for="name">Page Name 
+                                <div class="mb-1">
+                                    <label class="form-label">Name 
                                         @if($page->template)
                                     	<span style="color: #ccc;">({{$page->template}})</span>
                                     	@endif
                                     </label>
-                                    <input type="text" class="form-control {{$errors->has('name')?'error':''}}" name="name" placeholder="Enter Page Name" value="{{$page->name?:old('name')}}" required="" />
+                                    <input type="text" class="form-control {{$errors->has('name')?'is-invalid':''}}" name="name" placeholder="Enter Name" value="{{old('name')?:$page->name}}" required="" />
                                     @if ($errors->has('name'))
-                                    <p style="color: red; margin: 0; font-size: 10px;">{{ $errors->first('name') }}</p>
+                                    <div class="invalid-feedback">{{ $errors->first('name') }}</div>
                                     @endif
                                 </div>
-                                <div class="form-group">
-                                    <label for="short_description">Short Description </label>
-                                    <textarea name="short_description" class="form-control {{$errors->has('short_description')?'error':''}}" placeholder="Enter Short Description">{!!$page->short_description!!}</textarea>
+                                <div class="mb-3 input-group">
+                                    <label class="slugEdit" for="slug" style="color: #3F51B5;cursor: pointer;width: 130px;padding: 3px;"><span>{{$page->auto_slug?'Custom Slug':'Auto Slug'}} </span> <i class="fa fa-edit"></i></label>
+                                    <input type="text" class="slugEditData form-control {{$errors->has('slug')?'error':''}}"
+                                        @if($page->auto_slug) 
+                                            name="slug"
+                                            style="display:block;"
+                                        @endif
+                                    placeholder="Page Slug" value="{{$page->slug?:old('slug')}}" />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Short Description </label>
+                                    <textarea name="short_description" class="form-control {{$errors->has('short_description')?'is-invalid':''}}" placeholder="Enter Short Description">{!!old('short_description')?:$page->short_description!!}</textarea>
                                     @if ($errors->has('short_description'))
-                                    <p style="color: red; margin: 0; font-size: 10px;">{{ $errors->first('short_description') }}</p>
+                                    <div class="invalid-feedback">{{ $errors->first('short_description') }}</div>
                                     @endif
                                 </div>
-                                <div class="form-group">
-                                    <label for="description">Description </label>
-                                    <textarea name="description" class="{{$errors->has('description')?'error':''}} summernote" placeholder="Enter Description">{!!$page->description!!}</textarea>
+                                <div class="mb-3">
+                                    <label class="form-label">Description </label>
+                                    <textarea name="description" class="{{$errors->has('description')?'is-invalid':''}} tinyEditor" placeholder="Enter Description">{!!old('description')?:$page->description!!}</textarea>
                                     @if ($errors->has('description'))
-                                    <p style="color: red; margin: 0; font-size: 10px;">{{ $errors->first('description') }}</p>
+                                    <div class="invalid-feedback">{{ $errors->first('description') }}</div>
                                     @endif
                                 </div>
                             </div>
@@ -90,25 +94,25 @@
                         </div>
                         <div class="card-content">
                             <div class="card-body">
-                                <div class="form-group">
-                                    <label for="seo_title">SEO Meta Title</label>
-                                    <input type="text" class="form-control {{$errors->has('seo_title')?'error':''}}" name="seo_title" placeholder="Enter SEO Meta Title" value="{{$page->seo_title?:old('seo_title')}}" />
+                                <div class="mb-3">
+                                    <label class="form-label">SEO Meta Title</label>
+                                    <input type="text" class="form-control {{$errors->has('seo_title')?'is-invalid':''}}" name="seo_title" placeholder="Enter SEO Meta Title" value="{{old('seo_title')?:$page->seo_title}}" />
                                     @if ($errors->has('seo_title'))
-                                    <p style="color: red; margin: 0; font-size: 10px;">{{ $errors->first('seo_title') }}</p>
+                                    <div class="invalid-feedback">{{ $errors->first('seo_title') }}</div>
                                     @endif
                                 </div>
-                                <div class="form-group">
-                                    <label for="seo_description">SEO Meta Description </label>
-                                    <textarea name="seo_description" class="form-control {{$errors->has('seo_description')?'error':''}}" placeholder="Enter SEO Meta Description">{!!$page->seo_description!!}</textarea>
+                                <div class="mb-3">
+                                    <label class="form-label">SEO Meta Description </label>
+                                    <textarea name="seo_description" class="form-control {{$errors->has('seo_description')?'is-invalid':''}}" placeholder="Enter SEO Meta Description">{!!old('seo_description')?:$page->seo_description!!}</textarea>
                                     @if ($errors->has('seo_description'))
-                                    <p style="color: red; margin: 0; font-size: 10px;">{{ $errors->first('seo_description') }}</p>
+                                    <div class="invalid-feedback">{{ $errors->first('seo_description') }}</div>
                                     @endif
                                 </div>
-                                <div class="form-group">
-                                    <label for="seo_keyword">SEO Meta Keyword </label>
-                                    <textarea name="seo_keyword" class="form-control {{$errors->has('seo_keyword')?'error':''}}" placeholder="Enter SEO Meta Keyword">{!!$page->seo_keyword!!}</textarea>
+                                <div class="mb-3">
+                                    <label class="form-label">SEO Meta Keyword </label>
+                                    <textarea name="seo_keyword" class="form-control {{$errors->has('seo_keyword')?'is-invalid':''}}" placeholder="Enter SEO Meta Keyword">{!!old('seo_keyword')?:$page->seo_keyword!!}</textarea>
                                     @if ($errors->has('seo_keyword'))
-                                    <p style="color: red; margin: 0; font-size: 10px;">{{ $errors->first('seo_keyword') }}</p>
+                                    <div class="invalid-feedback">{{ $errors->first('seo_keyword') }}</div>
                                     @endif
                                 </div>
                             </div>
@@ -123,14 +127,15 @@
                         </div>
                         <div class="card-content">
                             <div class="card-body">
-                                <div class="form-group">
-                                    <label for="image">Page Image</label>
-                                    <input type="file" name="image" class="form-control {{$errors->has('image')?'error':''}}" />
+                                <div class="mb-3">
+                                    <label class="form-label">Image</label>
+                                    <input type="file" name="image" accept="image/*" class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" />
                                     @if ($errors->has('image'))
-                                    <p style="color: red; margin: 0; font-size: 10px;">{{ $errors->first('image') }}</p>
+                                    <div class="invalid-feedback">{{ $errors->first('image') }}</div>
                                     @endif
                                 </div>
-                                <div class="form-group">
+                                
+                                <div class="mb-3">
                                     <img src="{{asset($page->image())}}" style="max-width: 100px;" />
                                     @isset(json_decode(Auth::user()->permission->permission, true)['pages']['add'])
                                     @if($page->imageFile)
@@ -138,14 +143,14 @@
                                     @endif
                                     @endisset
                                 </div>
-                                <div class="form-group">
-                                    <label for="banner">Page Banner</label>
-                                    <input type="file" name="banner" class="form-control {{$errors->has('banner')?'error':''}}" />
+                                <div class="mb-3">
+                                    <label class="form-label">Banner</label>
+                                    <input type="file" name="banner"  accept="image/*" class="form-control {{$errors->has('banner')?'is-invalid':''}}" />
                                     @if ($errors->has('banner'))
-                                    <p style="color: red; margin: 0; font-size: 10px;">{{ $errors->first('banner') }}</p>
+                                    <div class="invalid-feedback">{{ $errors->first('banner') }}</div>
                                     @endif
                                 </div>
-                                <div class="form-group">
+                                <div class="mb-3">
                                     <img src="{{asset($page->banner())}}" style="max-width: 200px;" />
                                     @isset(json_decode(Auth::user()->permission->permission, true)['pages']['add'])
                                     @if($page->bannerFile)
@@ -164,9 +169,9 @@
                         <div class="card-content">
                             <div class="card-body">
                                 @if ($errors->has('galleries*'))
-                                <p style="color: red; margin: 0; font-size: 10px;">The Galleries Must Be a Number</p>
+                                <div class="invalid-feedback">The Galleries Must Be a Number</div>
                                 @endif
-                                <select data-placeholder="Select Gallery..." name="galleries[]" class="select2 form-control" multiple="multiple">
+                                <select  name="galleries[]" class="selectpicker form-control" title="Select Gallery" multiple="">
                                     @foreach($galleries as $i=>$gallery)
                                     <option value="{{$gallery->id}}" @foreach($page->postTags as $posttag) {{$posttag->reff_id==$gallery->id?'selected':''}} @endforeach>{{$gallery->name}}</option>
                                     @endforeach
@@ -181,10 +186,10 @@
                         </div>
                         <div class="card-content">
                             <div class="card-body">
-                                <div class="form-group">
-                                    <label for="template">Page Template</label>
-                                    <select class="form-control" name="template">
-                                        <option value="">Default Template</option>
+                                <div class="mb-3">
+                                    <label class="form-label">Page Template</label>
+                                    <select class="selectpicker form-control" name="template" title="Select Template">
+                                        <option value="" {{$page->template==null?'selected':''}} >Default Template</option>
                                         <option value="Front Page" {{$page->template=='Front Page'?'selected':''}}>Front Page</option>
                                         <option value="Privacy Policy" {{$page->template=='Privacy Policy'?'selected':''}}>Privacy Policy</option>
                                         <option value="Latest Blog" {{$page->template=='Latest Blog'?'selected':''}}>Latest Blog</option>
@@ -196,74 +201,48 @@
                                         <option value="All Clients" {{$page->template=='All Clients'?'selected':''}}>All Clients</option>
                                     </select>
                                     @if ($errors->has('template'))
-                                    <p style="color: red; margin: 0; font-size: 10px;">{{ $errors->first('template') }}</p>
+                                    <div class="invalid-feedback">{{ $errors->first('template') }}</div>
                                     @endif
                                 </div>
                                 <div class="row">
-                                    <div class="form-group col-6">
-                                        <label for="status">Page Status</label>
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="status" name="status" {{$page->status=='active'?'checked':''}}/>
-                                            <label class="custom-control-label" for="status">Active</label>
+                                    <div class="mb-3 col-6">
+                                        <label class="form-label">  Status</label>
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" class="form-check-input" name="status" {{$page->status=='active'?'checked':''}} >Active
+                                            </label>
                                         </div>
                                     </div>
-                                    <div class="form-group col-6">
-                                        <label for="fetured">Page Featured</label>
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="fetured" name="fetured" {{$page->fetured?'checked':''}}/>
-                                            <label class="custom-control-label" for="fetured">Active</label>
+                                    <div class="mb-3 col-6">
+                                        <label class="form-label">Featured</label>
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" class="form-check-input" name="featured" {{$page->featured?'checked':''}} >Active
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="mb-3">
                                     <label>Published Date</label>
                                     <input type="date" class="form-control form-control-sm" name="created_at" value="{{$page->created_at->format('Y-m-d')}}">
                                     @if ($errors->has('created_at'))
-                                    <p style="color: red; margin: 0; font-size: 10px;">{{ $errors->first('created_at') }}</p>
+                                    <div class="invalid-feedback">{{ $errors->first('created_at') }}</div>
                                     @endif
                                 </div>
-                                @isset(json_decode(Auth::user()->permission->permission, true)['pages']['add'])
-                                <button type="submit" class="btn btn-primary mr-sm-1 mb-1 mb-sm-0">Save changes</button>
-                                @endif
+
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </form>
-        
-        
-        <div class="card">
-            <div class="card-header" style="border-bottom: 1px solid #e3ebf3;">
-                <h4 class="card-title">Add Menu</h4>
-            </div>
-            <div class="card-content">
-                <div class="card-body">
-                    @include(adminTheme().'menus.includes.menuSetting',['item_id'=>$page->id,'menu_type'=>1])
-                </div>
-            </div>
-        </div>
-        
-    </section>
-    <!-- Basic Inputs end -->
 </div>
 
 @endsection @push('js')
 <script>
-    $(".summernote").summernote({
-        placeholder: "Write Your Contents",
-        tabsize: 2,
-        height: 120,
-        toolbar: [
-            ["style", ["style"]],
-            ["font", ["bold", "underline"]],
-            ["color", ["color"]],
-            ["para", ["ul", "ol", "paragraph"]],
-            ["table", ["table"]],
-            ["insert", ["link", "picture"]],
-            ["view", ["fullscreen", "codeview"]],
-        ],
-    });
+
 </script>
 
 @endpush

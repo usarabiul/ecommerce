@@ -18,6 +18,7 @@
     <link href="{{asset(assetLinkAdmin().'/assets/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet" />
     <link href="{{asset(assetLinkAdmin().'/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css')}}" rel="stylesheet" />
     <link href="{{asset(assetLinkAdmin().'/assets/plugins/metismenu/css/metisMenu.min.css')}}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- loader-->
     <link href="{{asset(assetLinkAdmin().'/assets/css/pace.min.css')}}" rel="stylesheet" />
     <script src="{{asset(assetLinkAdmin().'/assets/js/pace.min.js')}}"></script>
@@ -39,6 +40,9 @@
       .card-header {
           background-color: rgb(0 0 0);
           color: white;
+      }
+      table tr td {
+          vertical-align: middle;
       }
        ul.statuslist {
             text-align: right;
@@ -99,16 +103,62 @@
     <script src="{{asset(assetLinkAdmin().'/assets/js/index3.js')}}"></script>
     <!--app JS-->
     <script src="{{asset(assetLinkAdmin().'/assets/js/app.js')}}"></script>
+
+    <script src="{{asset('tinymce/tinymce.min.js')}}"></script>
     
-     <script type="text/javascript">
-      $( function() {
-              $( ".sortable" ).sortable();
-              $( ".sortable" ).disableSelection();
-          } );
-    </script>
      <script>
       $(document).ready(function(){
+
+        $('.slugEdit').click(function(){
+            $('.slugEditData').toggle();
+             var span = $(this).find('span');
+            var isCustom = span.text().trim() === 'Auto Slug';
+            span.text(isCustom ? 'Custom Slug' : 'Auto Slug');
+            var input = $('.slugEditData');
+            if (isCustom) {
+                input.attr('name', 'slug');
+            } else {
+                input.removeAttr('name');
+            }
+        });
+
+        tinymce.init({
+            selector: 'textarea.tinyEditor',
+            height: 300,
+            menubar: false,
+            statusbar: false,
+            plugins: 'lists advlist image link fullscreen advcode code',
+            toolbar: 'undo redo | styles | bold italic underline | alignleft aligncenter alignright alignjustify |' + 
+            'bullist numlist outdent advlist | link image | preview media fullscreen  | code |' +
+            'forecolor backcolor emoticons | fontsize',
+            image_title: true,
+            automatic_uploads: true,
+            file_picker_types: 'image',
+            file_picker_callback: function (cb, value, meta) {
+                var input = document.createElement('input');
+                input.setAttribute('type', 'file');
+                input.setAttribute('accept', 'image/*');
+                input.onchange = function () {
+                  var file = this.files[0];
+                  var reader = new FileReader();
+                  reader.onload = function () {
+                    var id = 'blobid' + (new Date()).getTime();
+                    var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+                    var base64 = reader.result.split(',')[1];
+                    var blobInfo = blobCache.create(id, file, base64);
+                    blobCache.add(blobInfo);
+                    cb(blobInfo.blobUri(), { title: file.name });
+                  };
+                  reader.readAsDataURL(file);
+                };
+                input.click();
+              },
+            content_style: 'body{font-family:Helvetica,Arial,sans-serif; font-size:16px}',
+            font_size_formats: '8px 10px 12px 14px 16px 18px 24px 36px 48px',
+        });
           
+        $( ".sortable" ).sortable();
+        $( ".sortable" ).disableSelection();
 
         $('#PrintAction').on("click", function () {
             $('.PrintAreaContact').printThis();

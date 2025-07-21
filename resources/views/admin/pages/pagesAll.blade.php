@@ -57,8 +57,8 @@
                     </div>
                 </div>
                 <div class="table-responsive" style="min-height:300px;">
-                    <table class="table table-responsive-md">
-                        <thead>
+                    <table class="table">
+                        <thead class="table-light">
                             <tr>
                                 <th style="min-width: 60px;width: 60px;text-align: center;">SL</th>
                                 <th style="min-width: 300px;">Name</th>
@@ -95,17 +95,17 @@
                                 </td>
                                 <td>
                                     @if($page->status=='active')
-                                    <span class="badge badge-success">Active </span>
+                                    <span class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3">Active </span>
                                     @elseif($page->status=='inactive')
-                                    <span class="badge badge-danger">Inactive </span>
+                                    <span class="badge rounded-pill text-warning bg-light-danger p-2 text-uppercase px-3">Inactive </span>
                                     @else
-                                    <span class="badge badge-danger">Draft </span>
+                                    <span class="badge rounded-pill text-warning bg-light-danger p-2 text-uppercase px-3">Draft </span>
                                     @endif
                                 </td>
                                 <td style="text-align:center;">
                                     <div class="dropdown">
                                         <button type="button" class="btn btn-success light sharp" data-bs-toggle="dropdown">
-                                            <i class="fas fa-ellipsis-h"></i>
+                                            <i class="fa fa-ellipsis-v"></i>
                                         </button>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item" href="{{route('admin.pagesAction',['edit',$page->id])}}"><i class="fa fa-edit"></i> Edit </a>
