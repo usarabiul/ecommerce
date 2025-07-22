@@ -28,6 +28,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link href="{{asset(assetLinkAdmin().'/assets/css/app.css')}}" rel="stylesheet">
     <link href="{{asset(assetLinkAdmin().'/assets/css/icons.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
     <!-- Theme Style CSS -->
     <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/css/dark-theme.css')}}" />
     <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/css/semi-dark.css')}}" />
@@ -69,6 +70,9 @@
         .showPassword{
           cursor:pointer;
         }
+        .bootstrap-select .dropdown-toggle:focus, .bootstrap-select>select.mobile-device:focus+.dropdown-toggle{
+          outline: 5px auto #ebe3e3 !important;
+        }
     </style>
 
      @stack('css')
@@ -101,6 +105,8 @@
     <script src="{{asset(assetLinkAdmin().'/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js')}}"></script>
     <script src="{{asset(assetLinkAdmin().'/assets/plugins/apexcharts-bundle/js/apexcharts.min.js')}}"></script>
     <script src="{{asset(assetLinkAdmin().'/assets/js/index3.js')}}"></script>
+    <!-- Bootstrap-Select JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
     <!--app JS-->
     <script src="{{asset(assetLinkAdmin().'/assets/js/app.js')}}"></script>
 
@@ -108,6 +114,8 @@
     
      <script>
       $(document).ready(function(){
+
+        $('.selectpicker').selectpicker();
 
         $('.slugEdit').click(function(){
             $('.slugEditData').toggle();

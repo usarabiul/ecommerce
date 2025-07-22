@@ -37,73 +37,73 @@
                         <form action="{{route('admin.myProfile')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" value="profile" name="actionType">
-                            <div class="media d-flex">
+                            <div class="d-flex">
                                 <a href="javascript: void(0);">
-                                    <img src="{{asset($user->image())}}" class="ProfileImage rounded mr-75" alt="profile image" />
+                                    <img src="{{asset($user->image())}}" class="ProfileImage" alt="profile image" />
                                 </a>
-                                <div class="media-body mt-2">
+                                <div class="media-body mt-75">
                                     <div class="col-12 px-0 d-flex flex-sm-row flex-column justify-content-start">
-                                        <label class="btn btn-sm btn-primary mx-2" for="account-upload">Upload new photo </label>
+                                        <label class="btn btn-info btn-xs mx-2" for="account-upload">Upload new photo </label>
                                         <input type="file" name="image" id="account-upload" hidden="" />
                                         @if($user->imageFile)
-                                        <a href="{{route('admin.mediesDelete',$user->imageFile->id)}}" class="mediaDelete btn btn-sm btn-secondary mx-2">Reset </a>
+                                        <a href="{{route('admin.mediesDelete',$user->imageFile->id)}}" class="mediaDelete btn btn-xs btn-danger mx-2">Reset </a>
                                         @endif
                                     </div>
                                     @if ($errors->has('image'))
-                                    <p style="color: red; margin: 0; font-size: 10px;">{{ $errors->first('image') }}</p>
+                                    <div class="invalid-feedback">{{ $errors->first('image') }}</div>
                                     @endif
-                                    <p class="text-muted ml-75 mt-50"><small>Allowed JPG, GIF or PNG. Max size of 2048kB</small></p>
+                                    <p class="mx-2"><small>Allowed JPG, GIF or PNG. Max size of 2048kB</small></p>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 mb-3">
                                     <label class="form-label">Name* </label>
-                                    <input type="text" class="form-control {{$errors->has('name')?'error':''}}" name="name" placeholder="Enter Name" value="{{$user->name?:old('name')}}" required="" />
+                                    <input type="text" class="form-control {{$errors->has('name')?'is-invalid':''}}" name="name" placeholder="Enter Name" value="{{old('name')?:$user->name}}" required="" />
                                     @if ($errors->has('name'))
-                                    <div style="color: red;">{{ $errors->first('name') }}</div>
+                                    <div class="invalid-feedback">{{ $errors->first('name') }}</div>
                                     @endif
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-12 mb-3">
                                     <label class="form-label">Email* </label>
-                                    <input type="email" class="form-control {{$errors->has('email')?'error':''}}" name="email" placeholder="Enter Email" value="{{$user->email?:old('email')}}" required="" />
+                                    <input type="email" class="form-control {{$errors->has('email')?'is-invalid':''}}" name="email" placeholder="Enter Email" value="{{old('email')?:$user->email}}" required="" />
                                     @if ($errors->has('email'))
-                                    <div style="color: red;">{{ $errors->first('email') }}</div>
+                                    <div class="invalid-feedback">{{ $errors->first('email') }}</div>
                                     @endif
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-12 mb-3">
                                     <label class="form-label">Mobile* </label>
-                                    <input type="text" class="form-control {{$errors->has('mobile')?'error':''}}" name="mobile" placeholder="Enter Mobile" value="{{$user->mobile?:old('mobile')}}" />
+                                    <input type="text" class="form-control {{$errors->has('mobile')?'is-invalid':''}}" name="mobile" placeholder="Enter Mobile" value="{{old('mobile')?:$user->mobile}}" />
                                     @if ($errors->has('mobile'))
-                                    <div style="color: red;">{{ $errors->first('mobile') }}</div>
+                                    <div class="invalid-feedback">{{ $errors->first('mobile') }}</div>
                                     @endif
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-12 mb-3">
                                     <label class="form-label">Gender </label>
-                                    <select class="form-control {{$errors->has('gender')?'error':''}}" name="gender">
+                                    <select class="form-control {{$errors->has('gender')?'is-invalid':''}}" name="gender">
                                         <option value="">Select Gender</option>
                                         <option value="Male" {{$user->gender=='Male'?'selected':''}}>Male</option>
                                         <option value="Female" {{$user->gender=='Female'?'selected':''}}>Female</option>
                                     </select>
                                     @if ($errors->has('gender'))
-                                    <div style="color: red;">{{ $errors->first('gender') }}</div>
+                                    <div class="invalid-feedback">{{ $errors->first('gender') }}</div>
                                     @endif
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-12 mb-3">
                                     <label class="form-label">Division </label>
-                                    <select id="division" class="form-control {{$errors->has('division')?'error':''}}" name="division">
+                                    <select id="division" class="form-control {{$errors->has('division')?'is-invalid':''}}" name="division">
                                         <option value="">Select Division</option>
                                         @foreach(App\Models\Country::where('type',2)->where('parent_id',1)->get() as $data)
                                         <option value="{{$data->id}}" {{$data->id==$user->division?'selected':''}}>{{$data->name}}</option>
                                         @endforeach
                                     </select>
                                     @if ($errors->has('division'))
-                                    <div style="color: red;">{{ $errors->first('division') }}</div>
+                                    <div class="invalid-feedback">{{ $errors->first('division') }}</div>
                                     @endif
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-12 mb-3">
                                     <label class="form-label">District </label>
-                                    <select id="district" class="form-control {{$errors->has('district')?'error':''}}" name="district">
+                                    <select id="district" class="form-control {{$errors->has('district')?'is-invalid':''}}" name="district">
                                         @if($user->division==null)
                                         <option value="">No District</option>
                                         @else
@@ -113,12 +113,12 @@
                                         @endforeach @endif
                                     </select>
                                     @if ($errors->has('district'))
-                                    <div style="color: red;">{{ $errors->first('district') }}</div>
+                                    <div class="invalid-feedback">{{ $errors->first('district') }}</div>
                                     @endif
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-12 mb-3">
                                     <label class="form-label">City </label>
-                                    <select id="city" class="form-control {{$errors->has('city')?'error':''}}" name="city">
+                                    <select id="city" class="form-control {{$errors->has('city')?'is-invalid':''}}" name="city">
                                         @if($user->district==null)
                                         <option value="">No City</option>
                                         @else
@@ -128,22 +128,22 @@
                                         @endforeach @endif
                                     </select>
                                     @if ($errors->has('city'))
-                                    <div style="color: red;">{{ $errors->first('city') }}</div>
+                                    <div class="invalid-feedback">{{ $errors->first('city') }}</div>
                                     @endif
                                 </div>
                                 
                                 <div class="col-xl-6 col-lg-6 col-md-12 mb-3">
                                     <label class="form-label">Postal Code</label>
-                                    <input type="text" class="form-control {{$errors->has('postal_code')?'error':''}}" name="postal_code" placeholder="Enter Postal Code" value="{{$user->postal_code?:old('postal_code')}}" />
+                                    <input type="text" class="form-control {{$errors->has('postal_code')?'is-invalid':''}}" name="postal_code" placeholder="Enter Postal Code" value="{{old('postal_code')?:$user->postal_code}}" />
                                     @if ($errors->has('postal_code'))
-                                    <div style="color: red;">{{ $errors->first('postal_code') }}</div>
+                                    <div class="invalid-feedback">{{ $errors->first('postal_code') }}</div>
                                     @endif
                                 </div>
                                 <div class="col-xl-12 col-lg-12 col-md-12 mb-3">
                                     <label class="form-label">Address Line</label>
-                                    <input type="text" class="form-control {{$errors->has('address')?'error':''}}" name="address" placeholder="Enter Address" value="{{$user->address_line1?:old('address')}}" />
+                                    <input type="text" class="form-control {{$errors->has('address')?'is-invalid':''}}" name="address" placeholder="Enter Address" value="{{old('address')?:$user->address_line1}}" />
                                     @if ($errors->has('address'))
-                                    <div style="color: red;">{{ $errors->first('address') }}</div>
+                                    <div class="invalid-feedback">{{ $errors->first('address') }}</div>
                                     @endif
                                 </div>
 
@@ -170,27 +170,27 @@
                                 <div class="col-xl-12 col-lg-12 col-md-12 mb-3">
                                     <label class="form-label">Old password </label>
                                     <div class="input-group">
-                                        <input type="password" class="form-control password" placeholder="Old Password" name="old_password" value="{{old('old_password')}}" required="" />
+                                        <input type="password" class="form-control {{$errors->has('old_password')?'is-invalid':''}} password " placeholder="Old Password" name="old_password" value="{{old('old_password')}}" required="" />
                                         <div class="input-group-text showPassword">
-                                            <i class="bx bx-hide"></i>
+                                            <i class="fa fa-eye-slash"></i>
                                         </div>
                                     </div>
                                     @if ($errors->has('old_password'))
-                                    <div style="color: red;">{{ $errors->first('old_password') }}</div>
+                                    <div class="invalid-feedback">{{ $errors->first('old_password') }}</div>
                                     @endif
                                 </div>
                                 <div class="col-xl-12 col-lg-12 col-md-12 mb-3">
                                     <label class="form-label">New Password </label>
-                                    <input type="password" class="form-control password {{$errors->has('password')?'error':''}}" name="password" placeholder="New password" required="" />
+                                    <input type="password" class="form-control password {{$errors->has('password')?'is-invalid':''}}" name="password" placeholder="New password" required="" />
                                     @if ($errors->has('password'))
-                                    <div style="color: red;">{{ $errors->first('password') }}</div>
+                                    <div class="invalid-feedback">{{ $errors->first('password') }}</div>
                                     @endif
                                 </div>
                                 <div class="col-xl-12 col-lg-12 col-md-12 mb-3">
                                     <label class="form-label">Confirmed Password </label>
-                                    <input type="password" class="form-control password {{$errors->has('password_confirmation')?'error':''}}" name="password_confirmation" placeholder="Confirmed password" required="" />
+                                    <input type="password" class="form-control password {{$errors->has('password_confirmation')?'is-invalid':''}}" name="password_confirmation" placeholder="Confirmed password" required="" />
                                     @if ($errors->has('password_confirmation'))
-                                    <div style="color: red;">{{ $errors->first('password_confirmation') }}</div>
+                                    <div class="invalid-feedback">{{ $errors->first('password_confirmation') }}</div>
                                     @endif
                                 </div>
 

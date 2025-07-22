@@ -206,7 +206,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="mb-3 col-6">
-                                        <label class="form-label">  Status</label>
+                                        <label class="form-label">  Status</label><br>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label">
                                                 <input type="checkbox" class="form-check-input" name="status" {{$page->status=='active'?'checked':''}} >Active
@@ -214,7 +214,7 @@
                                         </div>
                                     </div>
                                     <div class="mb-3 col-6">
-                                        <label class="form-label">Featured</label>
+                                        <label class="form-label">Featured</label><br>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label">
                                                 <input type="checkbox" class="form-check-input" name="featured" {{$page->featured?'checked':''}} >Active
