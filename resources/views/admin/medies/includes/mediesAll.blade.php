@@ -1,13 +1,13 @@
 @foreach($medies as $media)
 <li>
-    <div class="mediaImagediv" data-toggle="modal"  data-target="#default{{$media->id}}">
+    <div class="mediaImagediv" data-bs-toggle="modal"  data-bs-target="#default{{$media->id}}">
         <img src="{{asset($media->image())}}" />
     </div>
-    @isset(json_decode(Auth::user()->permission->permission, true)['medies']['delete'])
+
     <div style="top: 0; position: absolute;">
         <input type="checkbox" name="mediaid[]" value="{{$media->id}}" />
     </div>
-    @endisset
+
     <div style="top: 0; right: 0; position: absolute; background: #ffffff; padding: 2px 5px;">
         <a href="{{route('admin.mediesEdit',$media->id)}}" target="_blank"> <i class="fa fa-edit"></i></a>
     </div>
@@ -18,9 +18,7 @@
     	 <div class="modal-content">
     	   <div class="modal-header">
     		 <h4 class="modal-title" id="myModalLabel1">File Details</h4>
-    		 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-    		   <span aria-hidden="true">&times; </span>
-    		 </button>
+    		 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     	   </div>
     	   <div class="modal-body">
     	   	    <div class="row">

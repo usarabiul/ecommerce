@@ -43,7 +43,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="widgets.html">
+					<a href="{{route('admin.medies')}}">
 						<div class="parent-icon"><i class='bx bx-images'></i>
 						</div>
 						<div class="menu-title">Media Assets</div>
