@@ -131,20 +131,20 @@
 					<a class="has-arrow" href="javascript:;">
 						<div class="parent-icon"><i class="bx bx-user"></i>
 						</div>
-						<div class="menu-title">All Users</div>
+						<div class="menu-title">Admin Users</div>
 					</a>
 					<ul>
-						<li> <a href="charts-apex-chart.html"><i class="bx bx-right-arrow-alt"></i>User list</a>
+						<li> <a href="{{route('admin.usersAdmin')}}"><i class="bx bx-right-arrow-alt"></i>Admin list</a>
 						</li>
-						<li> <a href="charts-chartjs.html"><i class="bx bx-right-arrow-alt"></i>Add User</a>
+						<li> <a href="charts-chartjs.html"><i class="bx bx-right-arrow-alt"></i>Roles Permission</a>
 						</li>
 					</ul>
 				</li>
 				<li>
-					<a href="widgets.html">
+					<a href="{{route('admin.usersCustomer')}}">
 						<div class="parent-icon"><i class='bx bx-user-circle'></i>
 						</div>
-						<div class="menu-title">Admin Users</div>
+						<div class="menu-title">All Users</div>
 					</a>
 				</li>
 				<li class="menu-label">Report Management</li>
