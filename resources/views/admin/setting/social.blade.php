@@ -4,7 +4,7 @@
 <style type="text/css"></style>
 @endpush @section('contents')
 
-<div class="page-content">
+
 
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
@@ -211,8 +211,7 @@
                 </div>
             </div>
         </div>
-
     </form>
-</div>
+
 
 @endsection @push('js') @endpush

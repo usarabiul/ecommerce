@@ -3,7 +3,7 @@
 @endsection @push('css')
 <style type="text/css"></style>
 @endpush @section('contents')
-<div class="page-content">
+
     <div class="row row-cols-1 row-cols-lg-4">
         <div class="col">
             <div class="card radius-10 overflow-hidden bg-gradient-cosmic">
@@ -99,7 +99,7 @@
             <h2>Pending...</h2>
         </div>
     </div>
-</div>
+
 
 
 @endsection @push('js')
