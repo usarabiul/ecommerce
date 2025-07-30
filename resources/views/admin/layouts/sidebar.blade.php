@@ -25,13 +25,13 @@
 						<div class="menu-title">Blog Posts</div>
 					</a>
 					<ul>
-						<li> <a href="app-emailbox.html"><i class="bx bx-right-arrow-alt"></i>Blogs List</a>
+						<li> <a href="{{route('admin.posts')}}"><i class="bx bx-right-arrow-alt"></i>Blogs List</a>
 						</li>
-						<li> <a href="app-chat-box.html"><i class="bx bx-right-arrow-alt"></i>New Blog</a>
+						<li> <a href="{{route('admin.postsAction',['create'])}}"><i class="bx bx-right-arrow-alt"></i>New Blog</a>
 						</li>
-						<li> <a href="app-file-manager.html"><i class="bx bx-right-arrow-alt"></i>Categories</a>
+						<li> <a href="{{route('admin.postsCategories')}}"><i class="bx bx-right-arrow-alt"></i>Categories</a>
 						</li>
-						<li> <a href="app-contact-list.html"><i class="bx bx-right-arrow-alt"></i>Comments</a>
+						<li> <a href="{{route('admin.postsCommentsAll')}}"><i class="bx bx-right-arrow-alt"></i>Comments</a>
 						</li>
 					</ul>
 				</li>
@@ -91,35 +91,35 @@
 				</li>
 				<li class="menu-label">General widgets</li>
 				<li>
-					<a href="widgets.html">
+					<a href="{{route('admin.clients')}}">
 						<div class="parent-icon"><i class='bx bx-grid-alt'></i>
 						</div>
 						<div class="menu-title">Clients</div>
 					</a>
 				</li>
 				<li>
-					<a href="widgets.html">
+					<a href="{{route('admin.brands')}}">
 						<div class="parent-icon"><i class='bx bx-grid-alt'></i>
 						</div>
 						<div class="menu-title">Brands</div>
 					</a>
 				</li>
 				<li>
-					<a href="widgets.html">
+					<a href="{{route('admin.sliders')}}">
 						<div class="parent-icon"><i class='bx bx-image'></i>
 						</div>
 						<div class="menu-title">Sliders</div>
 					</a>
 				</li>
 				<li>
-					<a href="widgets.html">
+					<a href="{{route('admin.galleries')}}">
 						<div class="parent-icon"><i class='bx bx-images'></i>
 						</div>
 						<div class="menu-title">Galleries</div>
 					</a>
 				</li>
 				<li>
-					<a href="widgets.html">
+					<a href="{{route('admin.menus')}}">
 						<div class="parent-icon"><i class='bx bx-menu'></i>
 						</div>
 						<div class="menu-title">Menus List</div>

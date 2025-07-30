@@ -1307,7 +1307,7 @@ class AdminController extends Controller
           }
 
       })
-      ->select(['id','name','slug','type','created_at','addedby_id','status','fetured'])
+      ->select(['id','name','slug','type','created_at','addedby_id','status','featured'])
       ->paginate(25)->appends([
         'search'=>$r->search,
         'status'=>$r->status,
@@ -1331,10 +1331,11 @@ class AdminController extends Controller
         $client =Attribute::where('type',3)->where('status','temp')->where('addedby_id',Auth::id())->first();
         if(!$client){
           $client =new Attribute();
+          $client->type =3;
+          $client->status ='temp';
+          $client->addedby_id =Auth::id();
         }
-        $client->type =3;
-        $client->status ='temp';
-        $client->addedby_id =Auth::id();
+        $client->created_at=Carbon::now();
         $client->save();
 
         return redirect()->route('admin.clientsAction',['edit',$client->id]);
@@ -1371,7 +1372,7 @@ class AdminController extends Controller
         $client->short_description=$r->short_description;
         $client->description=$r->description;
         $client->seo_title=$r->seo_title;
-        $client->short_description=$r->short_description;
+        $client->seo_description=$r->seo_description;
         $client->seo_keyword=$r->seo_keyword;
 
         ///////Image UploadStart////////////
@@ -1402,19 +1403,20 @@ class AdminController extends Controller
 
         ///////Banner Upload End////////////
 
-        $slug =Str::slug($r->name);
-         if($slug==null){
-          $client->slug=$client->id;
-         }else{
-          if(Attribute::where('type',3)->where('slug',$slug)->whereNotIn('id',[$client->id])->count() >0){
-          $client->slug=$slug.'-'.$client->id;
-          }else{
-          $client->slug=$slug;
-          }
+        $slug = Str::slug($r->name);
+        if (!$slug) {
+            $client->slug = $client->id;
+        } else {
+            $exists = Attribute::where('type',3)->where('slug', $slug)->where('id', '!=', $client->id)->exists();
+            $client->slug = $exists ? $slug . '-' . $client->id : $slug;
+        }
+        $createDate = $r->created_at ? Carbon::parse($r->created_at . ' ' . Carbon::now()->format('H:i:s')) : Carbon::now();
+        if (!$createDate->isSameDay($client->created_at)) {
+          $client->created_at = $createDate;
         }
 
         $client->status =$r->status?'active':'inactive';
-        $client->fetured =$r->fetured?1:0;
+        $client->featured =$r->featured?1:0;
         $client->editedby_id =Auth::id();
         $client->save();
 

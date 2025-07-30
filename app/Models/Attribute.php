@@ -66,7 +66,7 @@ class Attribute extends Model
         if($this->imageFile){
             return $this->imageFile->file_url;
         }else{
-            return 'public/medies/noimage.jpg';
+            return 'medies/noimage.jpg';
         }
     }
     
@@ -87,7 +87,7 @@ class Attribute extends Model
         if($this->bannerFile){
             return $this->bannerFile->file_url;
         }else{
-            return 'public/medies/no-banner.png';
+            return 'medies/no-banner.png';
         }
     }
     

@@ -88,7 +88,9 @@
         
         @include(adminTheme().'layouts.header')
           <div class="page-wrapper">
+            <div class="page-content">
               @yield('contents')
+            </div>
           </div>
 
           <div class="overlay toggle-icon"></div>
