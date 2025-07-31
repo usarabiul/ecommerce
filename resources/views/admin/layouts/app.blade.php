@@ -107,6 +107,7 @@
     <script src="{{asset(assetLinkAdmin().'/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js')}}"></script>
     <script src="{{asset(assetLinkAdmin().'/assets/plugins/apexcharts-bundle/js/apexcharts.min.js')}}"></script>
     <script src="{{asset(assetLinkAdmin().'/assets/js/index3.js')}}"></script>
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.min.js"></script>
     <!-- Bootstrap-Select JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
     <!--app JS-->
@@ -167,7 +168,9 @@
             font_size_formats: '8px 10px 12px 14px 16px 18px 24px 36px 48px',
         });
           
-        $( ".sortable" ).sortable();
+        $(".sortable").sortable({
+          handle: ".dragable"
+        });
         $( ".sortable" ).disableSelection();
 
         $('#PrintAction').on("click", function () {

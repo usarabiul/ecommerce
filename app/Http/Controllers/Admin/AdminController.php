@@ -1696,7 +1696,7 @@ class AdminController extends Controller
            $q->where('addedby_id',auth::id()); 
           }
       })
-      ->select(['id','name','location','type','created_at','addedby_id','status','fetured'])
+      ->select(['id','name','location','type','created_at','addedby_id','status','featured'])
       ->paginate(25);
 
       
