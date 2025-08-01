@@ -3,59 +3,47 @@
         <table class="table table-striped table-bordered table-hover" >
             <thead>
                 <tr>
-                    <th width="30%">
-                        <label style="cursor: pointer;margin-bottom: 0;">
-                        @isset(json_decode(Auth::user()->permission->permission, true)['galleries']['delete'])
-                        <input class="checkbox" type="checkbox" class="form-control" id="checkall">  All 
-                        @endisset
-                        <span class="checkCounter"></span>
-                      </label>
-                    Image</th>
-                    <th width="70%">Content</th>
+                    <th style="width:50px;min-width:50px;">Drag</th>
+                    <th style="width:250px;min-width:250px;">
+                        <label>
+                            <input type="checkbox" class="form-check-input m-0" id="checkall"  > All <span class="checkCounter"></span>
+                        </label>
+                        Item Delete
+                    </th>
+                    <th style="min-width:300px;">Content</th>
                 </tr>
             </thead>
-            <tbody id="sortable">
+            <tbody class="sortable">
             @foreach($gallery->galleryImages as $i=>$image)
                 <tr>
-                    <td style="cursor: move;">
-                    @if(isset(json_decode(Auth::user()->permission->permission, true)['galleries']['add']))
-                    <span>Title</span>
-                    <input type="text" class="form-control"  name="imageName[]" placeholder="Enter Title" value="{{$image->alt_text}}">
-                    @else
-                    <span>Title</span>
-                    <input type="text" class="form-control" disabled=""  placeholder="Enter Title" value="{{$image->alt_text}}">
-                    @endif
-                    
-                    <img src="{{asset($image->file_url)}}" style="max-width: 100px;">
-                    @isset(json_decode(Auth::user()->permission->permission, true)['galleries']['delete'])
-                    <input type="checkbox" name="checkid[]" value="{{$image->id}}"> <i class="fa fa-trash text-danger"></i>
-                    @endisset
-                    @isset(json_decode(Auth::user()->permission->permission, true)['galleries']['add'])
-                    <input type="hidden" name="imageid[]" value="{{$image->id}}">
-                    @endisset
-                    
-                    
+                    <td class="dragable" style="cursor: move;text-align: center;background: #e7e7e7;font-size: 35px;">
+                        <i class="fa fa-arrows-v"></i>
                     </td>
-                    <td style="cursor: move;">
-                    
-                    @if(isset(json_decode(Auth::user()->permission->permission, true)['galleries']['add']))
-                    <span>Description</span>
-                    <textarea class="form-control" rows="4" name="imageDescription[]" placeholder="Write Description">{{$image->description}}</textarea>
-                    @else
-                    <span>Description</span>
-                    <textarea class="form-control" rows="4" disabled="" placeholder="Write Description">{{$image->description}}</textarea>
-                    @endif
+                    <td>
+                        
+                        <div class="mb-1">
+                            <span class="form-label">Title</span>
+                            <input type="text" class="form-control"  name="imageName[]" placeholder="Enter Title" value="{{$image->alt_text}}">
+                        </div>
+                            <img src="{{asset($image->file_url)}}" style="max-width: 100px;">
+                        <br>
+                        <input type="hidden" name="imageid[]" value="{{$image->id}}">
+                        <label>
+                            <input type="checkbox" class="form-check-input" name="checkid[]" value="{{$image->id}}" >
+                        </label>
+                        <b>SL:</b> {{$i+1}}
+                        
+                    </td>
+                    <td>
+                        <span>Description</span>
+                        <textarea class="form-control" rows="4" name="imageDescription[]" placeholder="Write Description">{{$image->description}}</textarea>
                     </td>
                 </tr>
-        @endforeach
+            @endforeach
             </tbody>
         </table>
     </div>
 
+@else
+    <h4 style="text-align: center;font-size: 30px;color: #e7e7e7;">No Gallery Item </h4>
 @endif
-<script type="text/javascript">
-    $( function() {
-            $( "#sortable" ).sortable();
-            $( "#sortable" ).disableSelection();
-        } );
-</script>

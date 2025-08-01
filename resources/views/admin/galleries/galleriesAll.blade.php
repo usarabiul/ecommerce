@@ -34,48 +34,61 @@
     </div>
     <div class="card-content">
         <div class="card-body">
-            <div class="table-responsive">
+            <div class="table-responsive" style="min-height:300px;">
                 <table class="table">
                     <thead class="table-light">
                         <tr>
-                            <th style="min-width: 60px;">S:L</th>
+                            <th style="min-width: 50px;width:50px;">S:L</th>
                             <th style="min-width: 300px;">Gallery Name</th>
-                            <th style="max-width: 100px;">Items</th>
-                            <th style="min-width: 200px;width:200px;">Action</th>
+                            <th style="max-width: 100px;text-align:center;">Items</th>
+                            <th style="min-width: 60px;width:60px;">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($galleries as $i=>$gallery)
                         <tr>
+                            <td>{{$galleries->currentpage()==1?$i+1:$i+($galleries->perpage()*($galleries->currentpage() - 1))+1}}</td>
                             <td>
-                                {{$i+1}}
-                            </td>
-                            <td>
-                                <span>{{$gallery->name}}</span><br />
+                                <span>{{$gallery->name}}
+                                    @if($gallery->location)
+                                    <span style="color:#ccc;">({{$gallery->location}})</span>
+                                    @endif
+                                </span>
+                                <br />
                                 @if($gallery->status=='active')
-                                <span><i class="fa fa-check" style="color: #1ab394;"></i></span>
+                                <span class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3">Active </span>
+                                @elseif($gallery->status=='inactive')
+                                <span class="badge rounded-pill text-warning bg-light-danger p-2 text-uppercase px-3">Inactive </span>
                                 @else
-                                <span><i class="fa fa-times" style="color: #ed5565;"></i></span>
-                                @endif @if($gallery->fetured==true)
-                                <span><i class="fa fa-star" style="color: #1ab394;"></i></span>
+                                <span class="badge rounded-pill text-warning bg-light-danger p-2 text-uppercase px-3">Draft </span>
                                 @endif
-                                <span style="font-size: 10px;">
+                                <span style="color:#ccc;">
                                     <i class="fa fa-user" style="color: #1ab394;"></i>
                                     {{$gallery->user?$gallery->user->name:'No Author'}}
                                 </span>
                             </td>
                             <td style="text-align: center;">
-                                ({{$gallery->galleryImages->count()}}) Images
+                                ({{$gallery->galleryImages->count()}}) items
                             </td>
-                            <td class="center">
-                                <a href="{{route('admin.galleriesAction',['edit',$gallery->id])}}" class="btn btn-md btn-info">Config</a>
-
-                                @isset(json_decode(Auth::user()->permission->permission, true)['galleries']['delete'])
-                                <a href="{{route('admin.galleriesAction',['delete',$gallery->id])}}" class="btn btn-md btn-danger" onclick="return confirm('Are You Want To Delete?')"><i class="fa fa-trash"></i></a>
-                                @endisset
+                           
+                            <td style="text-align:center;">
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-success light sharp" data-bs-toggle="dropdown">
+                                        <i class="fa fa-ellipsis-v"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="{{route('admin.galleriesAction',['edit',$gallery->id])}}"><i class="fa fa-edit"></i> Edit </a>
+                                        <a class="dropdown-item" href="{{route('admin.galleriesAction',['delete',$gallery->id])}}" onclick="return confirm('Are You Want To Delete')" ><i class="fa fa-trash"></i> Delete </a>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         @endforeach
+                        @if($galleries->count()==0)
+                            <tr>
+                                <td colspan="5" class="text-center">No Result Found</td>
+                            </tr>
+                        @endif
                     </tbody>
                 </table>
                 {{$galleries->links('pagination')}}

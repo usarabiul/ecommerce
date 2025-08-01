@@ -37,7 +37,7 @@
                 <table class="table">
                     <thead class="table-light">
                         <tr>
-                            <th style="min-width: 100px;width:100px;">S:L</th>
+                            <th style="min-width: 50px;width:50px;">SL</th>
                             <th style="min-width: 300px;">Slider Name</th>
                             <th style="max-width: 100px;width:100px;">Slide Item</th>
                             <th style="max-width: 80px;width:80px;">Image</th>

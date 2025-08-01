@@ -1,7 +1,7 @@
-<div class="card-header" style="padding: 8px 15px; border: 1px solid #00b5b8; margin-top: 3px;" data-toggle="collapse" href="#accordion3" aria-expanded="false" aria-controls="accordion3">
+<div class="card-header" style="padding: 8px 15px; border: 1px solid #000; margin-top: 3px;" data-bs-toggle="collapse" href="#accordion3" aria-expanded="false" aria-controls="accordion3">
     <a class="card-title lead collapsed" href="#" style="font-size: 14px;">Post Categories</a>
 </div>
-<div id="accordion3" style="border: 1px solid #00b5b8;border-top: none;" role="tabpanel" data-parent="#accordionWrapa1" class="collapse" aria-expanded="false">
+<div id="accordion3" style="border: 1px solid #000;border-top: none;"  class="collapse" >
     <div class="card-content">
         <div class="card-body" style="padding:10px;">
             <form action="{{route('admin.menusItemsPost',$menu->id)}}" method="post">

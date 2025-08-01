@@ -143,8 +143,8 @@ class MenusController extends Controller
       }
 
       //Check Authorized User
-        $allPer = empty(json_decode(Auth::user()->permission->permission, true)['menus']['all']);
-        if($allPer && $role->addedby_id!=Auth::id()){
+         $allPer = empty(json_decode(Auth::user()->permission->permission, true)['menus']['all']);
+        if($allPer && $menu->addedby_id!=Auth::id()){
           Session()->flash('error','You are unauthorized Try!!');
           return redirect()->route('admin.menus');
         }

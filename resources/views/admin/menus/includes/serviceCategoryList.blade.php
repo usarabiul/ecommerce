@@ -1,7 +1,7 @@
-<div class="card-header" style="padding: 8px 15px; border: 1px solid #00b5b8; margin: 2px 0;" data-toggle="collapse" href="#accordion4" aria-expanded="false" aria-controls="accordion4">
+<div class="card-header" style="padding: 8px 15px; border: 1px solid #000; margin: 2px 0;" data-bs-toggle="collapse" href="#accordion4" aria-expanded="false" aria-controls="accordion4">
     <a class="card-title lead collapsed" href="#" style="font-size: 14px;">Service Categories</a>
 </div>
-<div id="accordion4" style="border: 1px solid #00b5b8;" role="tabpanel" data-parent="#accordionWrapa1" class="collapse" aria-expanded="false">
+<div id="accordion4" style="border: 1px solid #000;"  class="collapse" >
     <div class="card-content">
         <div class="card-body" style="padding:10px;">
             <form action="{{route('admin.menusItemsPost',$menu->id)}}" method="post">
