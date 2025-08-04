@@ -212,21 +212,21 @@ class PostsController extends Controller
         }
         ///////Banner Uploard End////////////
 
-        $slug =Str::slug($r->slug?:$r->name);
-        if($slug==null){
-          $post->slug=$post->id;
-        }else{
-          if(Post::where('type',1)->where('slug',$slug)->whereNotIn('id',[$post->id])->count() >0){
-          $post->slug=$slug.'-'.$post->id;
-          }else{
-          $post->slug=$slug;
-          }
+        $post->auto_slug = $r->slug ? true : false;
+        $slug = Str::slug($r->slug ?: $r->name);
+        if (!$slug) {
+            $post->slug = $post->id;
+        } else {
+            $exists = Post::where('type', 1)->where('slug', $slug)->where('id', '!=', $post->id)->exists();
+            $post->slug = $exists ? $slug . '-' . $post->id : $slug;
         }
-        if($r->created_at){
-          $post->created_at =$r->created_at;
+        $createDate = $r->created_at ? Carbon::parse($r->created_at . ' ' . Carbon::now()->format('H:i:s')) : Carbon::now();
+        if (!$createDate->isSameDay($post->created_at)) {
+          $post->created_at = $createDate;
         }
+        
         $post->status =$r->status?'active':'inactive';
-        $post->fetured =$r->fetured?1:0;
+        $post->featured =$r->featured?1:0;
         $post->editedby_id =Auth::id();
         $post->save();
 
