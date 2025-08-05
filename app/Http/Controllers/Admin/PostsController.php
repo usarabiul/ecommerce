@@ -700,18 +700,19 @@ class PostsController extends Controller
           uploadFile($file,$src,$srcType,$fileUse,$author);
         }
         ///////Banner Uploard End////////////
-        $slug =Str::slug($r->name);
-        if($slug==null){
-          $category->slug=$category->id;
-        }else{
-          if(Attribute::where('type',6)->where('slug',$slug)->whereNotIn('id',[$category->id])->count() >0){
-          $category->slug=$slug.'-'.$category->id;
-          }else{
-          $category->slug=$slug;
-          }
+        $slug = Str::slug($r->name);
+        if (!$slug) {
+            $category->slug = $category->id;
+        } else {
+            $exists = Attribute::where('type', 6)->where('slug', $slug)->where('id', '!=', $category->id)->exists();
+            $category->slug = $exists ? $slug . '-' . $category->id : $slug;
+        }
+        $createDate = $r->created_at ? Carbon::parse($r->created_at . ' ' . Carbon::now()->format('H:i:s')) : Carbon::now();
+        if (!$createDate->isSameDay($category->created_at)) {
+          $category->created_at = $createDate;
         }
         $category->status =$r->status?'active':'inactive';
-        $category->fetured =$r->fetured?1:0;
+        $category->featured =$r->featured?1:0;
         $category->editedby_id =Auth::id();
         $category->save();
         Session()->flash('success','Your Are Successfully Done');

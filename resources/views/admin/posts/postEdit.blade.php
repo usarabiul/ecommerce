@@ -256,11 +256,7 @@
 
 @endsection @push('js')
     <script>
-        $(function() {
-            $('#hero-demo').tagEditor({
-                placeholder: 'Enter tags ...',
-            });
-        });
+       
     </script>
 
 @endpush

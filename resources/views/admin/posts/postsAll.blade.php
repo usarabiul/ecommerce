@@ -10,25 +10,25 @@
 @section('contents')
 
 <!--breadcrumb-->
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">Posts List</div>
-        <div class="ps-3">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-0 p-0">
-                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}"><i class="bx bx-home-alt"></i></a>
-                    </li>
-                    <li class="breadcrumb-item active" >Posts List</li>
-                </ol>
-            </nav>
-        </div>
-        <div class="ms-auto">
-            <div class="btn-group">
-                <a class="btn btn-outline-primary" href="{{route('admin.postsAction','create')}}">Add Post</a>
-                <a href="{{route('admin.posts')}}" class="btn btn-primary"><i class="bx bx-refresh"></i></a>
-            </div>
+<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+    <div class="breadcrumb-title pe-3">Posts List</div>
+    <div class="ps-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0 p-0">
+                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}"><i class="bx bx-home-alt"></i></a>
+                </li>
+                <li class="breadcrumb-item active" >Posts List</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="ms-auto">
+        <div class="btn-group">
+            <a class="btn btn-outline-primary" href="{{route('admin.postsAction','create')}}">Add Post</a>
+            <a href="{{route('admin.posts')}}" class="btn btn-primary"><i class="bx bx-refresh"></i></a>
         </div>
     </div>
-    <!--end breadcrumb-->
+</div>
+<!--end breadcrumb-->
 
 @include(adminTheme().'alerts')
 

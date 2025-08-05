@@ -1,7 +1,7 @@
 <div class="sidebar-wrapper" data-simplebar="true">
 			<div class="sidebar-header">
 				<div>
-					<img src="assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
+					<img src="{{asset(general()->favicon())}}" class="logo-icon" alt="logo icon">
 				</div>
 				<div>
 					<h4 class="logo-text">Ecommerce</h4>
@@ -18,20 +18,25 @@
 						<div class="menu-title">Dashboard</div>
 					</a>
 				</li>
-				<li>
+				<li class="{{Request::is('admin/posts*')? 'mm-active' : ''}}">
 					<a href="javascript:;" class="has-arrow">
 						<div class="parent-icon"><i class='bx bx-spa' ></i>
 						</div>
 						<div class="menu-title">Blog Posts</div>
 					</a>
-					<ul>
-						<li> <a href="{{route('admin.posts')}}"><i class="bx bx-right-arrow-alt"></i>Blogs List</a>
+					<ul class="mm-collapse {{Request::is('admin/posts*')? 'mm-show' : ''}}">
+						<li class="
+            @if( Request::is('admin/posts/categories*') || Request::is('admin/posts/comments*') )
+            @else
+            {{Request::is('admin/posts*')? 'mm-active' : ''}}
+            @endif 
+            "> <a href="{{route('admin.posts')}}"><i class="bx bx-right-arrow-alt"></i>Blogs List</a>
 						</li>
 						<li> <a href="{{route('admin.postsAction',['create'])}}"><i class="bx bx-right-arrow-alt"></i>New Blog</a>
 						</li>
-						<li> <a href="{{route('admin.postsCategories')}}"><i class="bx bx-right-arrow-alt"></i>Categories</a>
+						<li class="{{Request::is('admin/posts/categories*')? 'mm-active' : ''}}" > <a href="{{route('admin.postsCategories')}}"><i class="bx bx-right-arrow-alt"></i>Categories</a>
 						</li>
-						<li> <a href="{{route('admin.postsCommentsAll')}}"><i class="bx bx-right-arrow-alt"></i>Comments</a>
+						<li class="{{Request::is('admin/posts/comments*')? 'mm-active' : ''}}"> <a href="{{route('admin.postsCommentsAll')}}"><i class="bx bx-right-arrow-alt"></i>Comments</a>
 						</li>
 					</ul>
 				</li>
