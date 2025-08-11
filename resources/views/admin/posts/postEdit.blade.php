@@ -199,17 +199,8 @@
                 </div>
                 <div class="card-content">
                     <div class="card-body">
+                        <label class="form-label">Tag Comma (,) multiple</label>
                         <textarea id="hero-demo" name="tagskey">{!!$post->tags?:old('tagskey')!!}</textarea>
-                        
-                        
-                        <!--@if ($errors->has('tags*'))-->
-                        <!--<p style="color: red; margin: 0; font-size: 10px;">The Tags Must Be a Number</p>-->
-                        <!--@endif-->
-                        <!--<select data-placeholder="Select Tags..." name="tags[]" class="select2 form-control" multiple="multiple">-->
-                        <!--    @foreach($tags as $i=>$tag)-->
-                        <!--    <option value="{{$tag->id}}" @foreach($post->postTags as $posttag) {{$posttag->reff_id==$tag->id?'selected':''}} @endforeach>{{$tag->name}}</option>-->
-                        <!--    @endforeach-->
-                        <!--</select>-->
                     </div>
                 </div>
             </div>
@@ -254,9 +245,13 @@
 </form>
 
 
-@endsection @push('js')
+@endsection 
+@push('js')
     <script>
-       
+       $(function() {
+            $('#hero-demo').tagEditor({
+                placeholder: 'Enter tags ...',
+            });
+        });
     </script>
-
 @endpush

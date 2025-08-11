@@ -29,53 +29,32 @@ class PostsController extends Controller
 
       $allPer = empty(json_decode(Auth::user()->permission->permission, true)['posts']['all']);
 
-    // Filter Action Start
+      // Filter Action Start
       if($r->action){
-        if($r->checkid){
-
-        $datas=Post::latest()->where('type',1)->whereIn('id',$r->checkid)->get();
-
-        foreach($datas as $data){
-
-            if($r->action==1){
-              $data->status='active';
-              $data->save();
-            }elseif($r->action==2){
-              $data->status='inactive';
-              $data->save();
-            }elseif($r->action==3){
-              $data->fetured=true;
-              $data->save();
-            }elseif($r->action==4){
-              $data->fetured=false;
-              $data->save();
-            }elseif($r->action==5){
-              
-              $medias =Media::latest()->where('src_type',1)->where('src_id',$data->id)->get();
-              foreach($medias as $media){
-                if(File::exists($media->file_url)){
-                  File::delete($media->file_url);
-                }
-                $media->delete();
-              }
-
-              $data->postCtgs()->delete();
-              $data->postTags()->delete();
-              $data->postComments()->delete();
-              $data->delete();
+        if ($r->filled('checkid')) {
+          $datas =Post::where('type', 1)->whereIn('id', $r->checkid);
+          if (in_array($r->action, [1, 2, 3, 4])) {
+            if ($r->action == 1) $datas->update(['status' => 'active']);
+            if ($r->action == 2) $datas->update(['status' => 'inactive']);
+            if ($r->action == 3) $datas->update(['featured' => true]);
+            if ($r->action == 4) $datas->update(['featured' => false]);
+          }elseif($r->action==5){
+            foreach($datas as $data){
+                $data->medias->each(function ($media) {
+                    if (File::exists($media->file_url)) File::delete($media->file_url);
+                    $media->delete();
+                });
+                $data->postCtgs()->delete();
+                $data->postTags()->delete();
+                $data->postComments()->delete();
+                $data->delete();
             }
-
+          }
+          session()->flash('success', 'Action Successfully Completed!');
+        } else {
+            session()->flash('info', 'Please select at least one post');
         }
-
-        Session()->flash('success','Action Successfully Completed!');
-
-        }else{
-          Session()->flash('info','Please Need To Select Minimum One Post');
-        }
-
-        return redirect()->back();
       }
-
       //Filter Action End
 
 
@@ -108,16 +87,20 @@ class PostsController extends Controller
           }
         
         if($r->status){
-             $q->where('status',$r->status); 
+            if($r->status=='featued'){
+              $q->where('featured',true); 
+            }else{
+              $q->where('status',$r->status); 
+            }
         }
 
         // Check Permission
         if($allPer){
-         $q->where('addedby_id',auth::id()); 
+          $q->where('addedby_id',auth::id()); 
         }
 
       })
-      ->select(['id','name','slug','created_at','addedby_id','status'])
+      ->select(['id','name','slug','created_at','addedby_id','status','featured'])
       ->paginate(25)->appends([
         'search'=>$r->search,
         'status'=>$r->status,
@@ -126,15 +109,16 @@ class PostsController extends Controller
       ]);
       
       //Total Count Results
-      $totals = DB::table('posts')->where('status','<>','temp')
+      $total= Post::where('status','<>','temp')
       ->where('type',1)
       ->selectRaw('count(*) as total')
       ->selectRaw("count(case when status = 'active' then 1 end) as active")
       ->selectRaw("count(case when status = 'inactive' then 1 end) as inactive")
+      ->selectRaw("count(case when featured = true then 1 end) as featured")
       ->first();
 
 
-      return view(adminTheme().'posts.postsAll',compact('posts','totals'));
+      return view(adminTheme().'posts.postsAll',compact('posts','total'));
     }
 
     public function postsAction(Request $r,$action,$id=null){
@@ -150,7 +134,6 @@ class PostsController extends Controller
         }
         $post->created_at=Carbon::now();
         $post->save();
-
         return redirect()->route('admin.postsAction',['edit',$post->id]);
       }
       //Add Post  End
@@ -176,10 +159,12 @@ class PostsController extends Controller
             'seo_title' => 'nullable|max:200',
             'seo_description' => 'nullable|max:250',
             'catagoryid.*' => 'nullable|numeric',
-            'tags.*' => 'nullable|numeric',
+            'tagskey' => 'nullable|max:500',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'banner' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
+        $preTagArray =array_map('trim', explode(',', $post->tags));
 
         $post->name=$r->name;
         $post->short_description=$r->short_description;
@@ -211,7 +196,6 @@ class PostsController extends Controller
           uploadFile($file,$src,$srcType,$fileUse,$author);
         }
         ///////Banner Uploard End////////////
-
         $post->auto_slug = $r->slug ? true : false;
         $slug = Str::slug($r->slug ?: $r->name);
         if (!$slug) {
@@ -224,57 +208,60 @@ class PostsController extends Controller
         if (!$createDate->isSameDay($post->created_at)) {
           $post->created_at = $createDate;
         }
-        
+
         $post->status =$r->status?'active':'inactive';
         $post->featured =$r->featured?1:0;
         $post->editedby_id =Auth::id();
         $post->save();
 
-         //Category posts
-        if($r->categoryid){
+        
 
-          $post->postCtgs()->whereNotIn('reff_id',$r->categoryid)->delete();
-    
-          for ($i=0; $i < count($r->categoryid); $i++) {
-    
-            $ctg = $post->postCtgs()->where('reff_id',$r->categoryid[$i])->first();
-    
-            if(!$ctg){
-              $ctg =new PostAttribute();
-              $ctg->src_id=$post->id;
-              $ctg->reff_id=$r->categoryid[$i];
-              $ctg->type=1;
-            }
-            $ctg->drag=$i;
-            $ctg->save();
+          //Category posts
+          if ($r->categoryid) {
+              $post->postCtgs()->whereNotIn('reff_id', $r->categoryid)->delete();
+              foreach ($r->categoryid as $index => $categoryId){
+                $ctg = $post->postCtgs()->where('reff_id', $categoryId)->first();
+                if (!$ctg) {
+                    $ctg = new PostAttribute();
+                    $ctg->src_id = $post->id;
+                    $ctg->reff_id = $categoryId;
+                    $ctg->type = 1;
+                }
+                $ctg->drag = $index;
+                $ctg->save();
+              }
+          } else {
+              $post->postCtgs()->delete();
           }
-    
-        }else{
-            $post->postCtgs()->delete();
+
+
+          // Post tag Entry
+          $tagsArray = array_unique(array_map('trim', explode(',', $post->tags)));
+          $diffArray = array_diff($preTagArray, $tagsArray);
+          foreach ($diffArray as $tag) {
+              $tagPostCount = Post::where('type',1)->where('tags', 'LIKE', '%' . $tag . '%')
+                                  ->count();
+              if ($tagPostCount == 0) {
+                  Attribute::where('type', 7)->where('name', $tag)->delete();
+              }
+          }
+
+          if($post->tags){
+            //Recheck new entry
+            foreach($tagsArray as $tag){
+              $tagPost =Attribute::where('type',7)->where('name',$tag)->first();
+              if(!$tagPost){
+                $tagPost =new Attribute();
+                $tagPost->type =7;
+                $tagPost->name =$tag;
+                $tagPost->slug =Str::slug($tag);
+                $tagPost->status ='active';
+                $tagPost->addedby_id =Auth::id();
+                $tagPost->save();
+              }
+            }
           }
           
-          //Tag posts
-            if($r->tags){
-    
-              $post->postTags()->whereNotIn('reff_id',$r->tags)->delete();
-    
-              for ($i=0; $i < count($r->tags); $i++) {
-                $tag = $post->postTags()->where('reff_id',$r->tags[$i])->first();
-    
-                  if(!$tag){
-                    $tag =new PostAttribute();
-                    $tag->type=2;
-                    $tag->src_id=$post->id;
-                    $tag->reff_id=$r->tags[$i];
-                  }
-                  $tag->drag=$i;
-                  $tag->save();
-            }
-          }else{
-            $post->postTags()->delete();
-          }
-            
-    
           Session()->flash('success','Your Are Successfully Updated');
           return redirect()->back();
 

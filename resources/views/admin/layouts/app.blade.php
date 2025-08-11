@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/css/dark-theme.css')}}" />
     <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/css/semi-dark.css')}}" />
     <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/css/header-colors.css')}}" />
+    <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/css/tag-editor.css')}}" >
 
     <style type="text/css">
       .card-title {
@@ -106,6 +107,7 @@
     <script src="{{asset(assetLinkAdmin().'/assets/plugins/metismenu/js/metisMenu.min.js')}}"></script>
     <script src="{{asset(assetLinkAdmin().'/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js')}}"></script>
     <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.min.js"></script>
+    <script src="{{asset(assetLinkAdmin().'/assets/js/tag-editor.js')}}"></script>
     <!-- Bootstrap-Select JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
     <!--app JS-->
