@@ -20,7 +20,7 @@
 
 <!--breadcrumb-->
 <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-    <div class="breadcrumb-title pe-3">Page Edit</div>
+    <div class="breadcrumb-title pe-3">Profile Edit</div>
     <div class="ps-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb mb-0 p-0">
@@ -162,6 +162,27 @@
                             <div class="invalid-feedback">{{ $errors->first('address') }}</div>
                             @endif
                         </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 mb-3">
+                            <label for="status">User Status</label>
+                            <br>
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" name="status" {{$user->status?'checked':''}} >Active
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 mb-3">
+                                <label>User Role</label>
+                                <select name="role" class="form-control {{$errors->has('role')?'error':''}}">
+                                    <option value="">Select Role</option>
+                                    @foreach($roles as $role)
+                                    <option value="{{$role->id}}" {{$user->permission_id==$role->id?'selected':''}}>{{$role->name}}</option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('role'))
+                                <div class="invalid-feedback">{{ $errors->first('role') }}</div>
+                                @endif
+                            </div>
 
                         <div class="col-12">
                             <button type="submit" class="btn btn-success">Save changes</button>

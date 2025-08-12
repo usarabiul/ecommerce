@@ -23,7 +23,7 @@
         </div>
         <div class="ms-auto">
             <div class="btn-group">
-                <a class="btn btn-outline-primary" href="{{route('admin.pagesAction','create')}}">Add User</a>
+                <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#AddUser">Add User</button>
                 <a href="{{route('admin.usersCustomer')}}" class="btn btn-primary"><i class="bx bx-refresh"></i></a>
             </div>
         </div>
@@ -144,7 +144,7 @@
 
 </div>
 
-@isset(json_decode(Auth::user()->permission->permission, true)['users']['add'])
+
  <!-- Modal -->
  <div class="modal fade text-left" id="AddUser" tabindex="-1" role="dialog">
    <div class="modal-dialog" role="document">
@@ -185,7 +185,7 @@
 	 </div>
    </div>
  </div>
-@endisset
+
 
 
 
