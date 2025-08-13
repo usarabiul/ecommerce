@@ -9,16 +9,14 @@
                 <input type="hidden" name="parent" value="{{$parent->id}}" />
                 <div class="form-group" style="margin-bottom: 5px;">
                     <label for="name">Select Categories</label>
-                    <select data-placeholder="Select Categories..." name="blogCategories[]" class="select2 form-control" multiple="multiple" required="">
+                    <select name="blogCategories[]" class="selectpicker form-control" title="Select Category" multiple="multiple" required="">
                         @foreach($blogCategories as $i=>$bctg)
                         <option value="{{$bctg->id}}">{{$bctg->name}}</option>
                         @if($bctg->subctgs->count() >0) @include(adminTheme().'menus.includes.postCategorySubList',['subcategories' => $bctg->subctgs,'i'=>1]) @endif
                         @endforeach
                     </select>
                 </div>
-                @isset(json_decode(Auth::user()->permission->permission, true)['menus']['add'])
                 <button type="submit" class="btn btn-sm btn-block btn-primary" style="padding:10px;"><i class="fa fa-plus"></i> Add</button>
-                @endisset
             </form>
         </div>
     </div>
