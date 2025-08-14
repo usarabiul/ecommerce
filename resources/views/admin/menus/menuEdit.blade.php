@@ -1,6 +1,6 @@
 @extends(adminTheme().'layouts.app') 
 @section('title')
-<title>{{websiteTitle('Menu Config')}}</title>
+<title>{{websiteTitle('Menu Update')}}</title>
 @endsection 
 @push('css')
 
@@ -26,7 +26,7 @@
 @section('contents')
 <!--breadcrumb-->
 <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-    <div class="breadcrumb-title pe-3">Menus List</div>
+    <div class="breadcrumb-title pe-3">Menus Update</div>
     <div class="ps-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb mb-0 p-0">
@@ -36,7 +36,7 @@
                 <li class="breadcrumb-item">
                     <a href="{{route('admin.menus')}}">Menus List</a>
                 </li>
-                <li class="breadcrumb-item active">Menu Edit</li>
+                <li class="breadcrumb-item active">Menu Update</li>
             </ol>
         </nav>
     </div>
@@ -52,6 +52,7 @@
     </div>
 </div>
 <!--end breadcrumb-->
+
 
 
 @include(adminTheme().'alerts')
