@@ -113,17 +113,17 @@
                             <td>{{$user->email}}</td>
                             <td> 
                                 @if($user->permission)
-                                <span class="badge badge-info">{{$user->permission->name}}</span>
+                                <span class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3">{{$user->permission->name}}</span>
                                 @else
-                                <span class="badge badge-danger">Un-athorize</span>
+                                <span class="badge rounded-pill text-warning bg-light-danger p-2 text-uppercase px-3">Un-athorize</span>
                                 @endif
                             </td>
 
                             <td>
                                 @if($user->status)
-                                <span class="badge badge-success">Active </span>
+                                <span class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3">Active </span>
                                 @else
-                                <span class="badge badge-danger">Inactive </span>
+                                <span class="badge rounded-pill text-warning bg-light-danger p-2 text-uppercase px-3">Draft </span>
                                 @endif
                             </td>
                             <td style="text-align:center;">

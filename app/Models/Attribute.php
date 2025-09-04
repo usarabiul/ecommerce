@@ -69,15 +69,6 @@ class Attribute extends Model
             return 'medies/noimage.jpg';
         }
     }
-    
-    public function imageName(){
-        
-        if($this->imageFile){
-            return $this->imageFile->file_rename;
-        }else{
-            return 'noimage.jpg';
-        }
-    }
 
     public function bannerFile(){
         return $this->hasOne(Media::class,'src_id')->where('src_type',3)->where('use_Of_file',2);
@@ -91,14 +82,6 @@ class Attribute extends Model
         }
     }
     
-    public function bannerName(){
-        
-        if($this->bannerFile){
-            return $this->bannerFile->file_rename;
-        }else{
-            return 'no-banner.png';
-        }
-    }
 
     public function galleryImages(){
         return $this->hasMany(Media::class,'src_id')->where('use_Of_file',3)->orderBy('drag','asc');
@@ -195,18 +178,17 @@ class Attribute extends Model
                 if($this->pageLink->template=='Front Page'){
                     return route("index");
                 }else{
-                    return $this->pageLink->slug;
+                    return route('pageView',$this->pageLink->slug);
                 }
-                
             }
 
         }elseif($this->menu_type==2){
             if($this->blogCtgLink){
-                return 'blog/category/'.$this->blogCtgLink->slug;
+                return route('blogCategory',$this->blogCtgLink->slug);
             }
         }elseif($this->menu_type==3){
             if($this->serviceCtgLink){
-                return 'service/category/'.$this->serviceCtgLink->slug;
+                return route('serviceCategory',$this->serviceCtgLink->slug);
             }
         }else{
             return $this->slug;
