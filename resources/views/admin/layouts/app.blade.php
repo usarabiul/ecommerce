@@ -14,25 +14,17 @@
      @yield('title')
     <link rel="apple-touch-icon" href="{{asset(general()->favicon())}}" />
     <link rel="shortcut icon" type="image/x-icon" href="{{asset(general()->favicon())}}" />
-    <!--plugins-->
-    <link href="{{asset(assetLinkAdmin().'/assets/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet" />
-    <link href="{{asset(assetLinkAdmin().'/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css')}}" rel="stylesheet" />
-    <link href="{{asset(assetLinkAdmin().'/assets/plugins/metismenu/css/metisMenu.min.css')}}" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- loader-->
-    <link href="{{asset(assetLinkAdmin().'/assets/css/pace.min.css')}}" rel="stylesheet" />
-    <script src="{{asset(assetLinkAdmin().'/assets/js/pace.min.js')}}"></script>
-    <!-- Bootstrap CSS -->
-    <link href="{{asset(assetLinkAdmin().'/assets/css/bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{asset(assetLinkAdmin().'/assets/css/bootstrap-extended.css')}}" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link href="{{asset(assetLinkAdmin().'/assets/css/app.css')}}" rel="stylesheet">
-    <link href="{{asset(assetLinkAdmin().'/assets/css/icons.css')}}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
-    <!-- Theme Style CSS -->
-    <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/css/dark-theme.css')}}" />
-    <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/css/semi-dark.css')}}" />
-    <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/css/header-colors.css')}}" />
+
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600" rel="stylesheet"><!-- End GOOGLE FONT -->
+    <!-- BEGIN PLUGINS STYLES -->
+    <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/vendor/open-iconic/font/css/open-iconic-bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}">
+    <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/vendor/flatpickr/flatpickr.min.css')}}">
+    <!-- END PLUGINS STYLES -->
+    <!-- BEGIN THEME STYLES -->
+    <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/stylesheets/theme.min.css')}}" data-skin="default">
+    <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/stylesheets/custom.css')}}">
     <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/css/tag-editor.css')}}" >
 
     <style type="text/css">
@@ -81,38 +73,40 @@
    <!-- END: Head-->
 
    <!-- BEGIN: Body-->
-   <body>
+   <body class="default-skin pace-done">
       <!--wrapper-->
-	    <div class="wrapper">
+	    <div class="app">
     
+        @include(adminTheme().'layouts.header')
+
         @include(adminTheme().'layouts.sidebar')
         
-        @include(adminTheme().'layouts.header')
-          <div class="page-wrapper">
-            <div class="page-content">
+        <main class="app-main">
+            <div class="wrapper">
               @yield('contents')
             </div>
-          </div>
-
-          <div class="overlay toggle-icon"></div>
-          <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
-          @include(adminTheme().'layouts.footer')
+            @include(adminTheme().'layouts.footer')
+        </main>
       </div>
-    
-    <!-- Bootstrap JS -->
-    <script src="{{asset(assetLinkAdmin().'/assets/js/bootstrap.bundle.min.js')}}"></script>
-    <!--plugins-->
-    <script src="{{asset(assetLinkAdmin().'/assets/js/jquery.min.js')}}"></script>
-    <script src="{{asset(assetLinkAdmin().'/assets/plugins/simplebar/js/simplebar.min.js')}}"></script>
-    <script src="{{asset(assetLinkAdmin().'/assets/plugins/metismenu/js/metisMenu.min.js')}}"></script>
-    <script src="{{asset(assetLinkAdmin().'/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js')}}"></script>
+    <!-- BEGIN BASE JS -->
+    <script src="{{asset(assetLinkAdmin().'/assets/vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset(assetLinkAdmin().'/assets/vendor/popper.js/umd/popper.min.js')}}"></script>
+    <script src="{{asset(assetLinkAdmin().'/assets/vendor/bootstrap/js/bootstrap.min.js')}}"></script> <!-- END BASE JS -->
+    <!-- BEGIN PLUGINS JS -->
+    <script src="{{asset(assetLinkAdmin().'/assets/vendor/pace-progress/pace.min.js')}}"></script>
+    <script src="{{asset(assetLinkAdmin().'/assets/vendor/stacked-menu/js/stacked-menu.min.js')}}"></script>
+    <script src="{{asset(assetLinkAdmin().'/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
+    <script src="{{asset(assetLinkAdmin().'/assets/vendor/flatpickr/flatpickr.min.js')}}"></script>
+    <script src="{{asset(assetLinkAdmin().'/assets/vendor/easy-pie-chart/jquery.easypiechart.min.js')}}"></script>
+    <script src="{{asset(assetLinkAdmin().'/assets/vendor/chart.js/Chart.min.js')}}"></script> 
+    <!-- END PLUGINS JS -->
     <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.min.js"></script>
     <script src="{{asset(assetLinkAdmin().'/assets/js/tag-editor.js')}}"></script>
-    <!-- Bootstrap-Select JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
-    <!--app JS-->
-    <script src="{{asset(assetLinkAdmin().'/assets/js/app.js')}}"></script>
-
+    <!-- BEGIN THEME JS -->
+    <script src="{{asset(assetLinkAdmin().'/assets/javascript/theme.min.js')}}"></script> <!-- END THEME JS -->
+    <!-- BEGIN PAGE LEVEL JS -->
+    <script src="{{asset(assetLinkAdmin().'/assets/javascript/pages/dashboard-demo.js')}}"></script> 
+    <!-- END PAGE LEVEL JS -->
     <script src="{{asset('tinymce/tinymce.min.js')}}"></script>
     
      <script>
