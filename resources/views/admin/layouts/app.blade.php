@@ -31,9 +31,8 @@
       .card-title {
           margin: 0;
       }
-      .card-header {
-          background-color: rgb(0 0 0);
-          color: white;
+      .metric{
+        background: #ffffff;
       }
       table tr td {
           vertical-align: middle;
