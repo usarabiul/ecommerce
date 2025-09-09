@@ -1,268 +1,215 @@
 <aside class="app-aside app-aside-expand-md app-aside-light">
-    <!-- .aside-content -->
     <div class="aside-content">
-      <!-- .aside-header -->
-      <header class="aside-header d-block d-md-none">
-        <!-- .btn-account -->
-        <button class="btn-account" type="button" data-toggle="collapse" data-target="#dropdown-aside"><span class="user-avatar user-avatar-lg"><img src="assets/images/avatars/profile.jpg" alt=""></span> <span class="account-icon"><span class="fa fa-caret-down fa-lg"></span></span> <span class="account-summary"><span class="account-name">Beni Arisandi</span> <span class="account-description">Marketing Manager</span></span></button> <!-- /.btn-account -->
-        <!-- .dropdown-aside -->
-        <div id="dropdown-aside" class="dropdown-aside collapse">
-          <!-- dropdown-items -->
-          <div class="pb-3">
-            <a class="dropdown-item" href="user-profile.html"><span class="dropdown-icon oi oi-person"></span> Profile</a> <a class="dropdown-item" href="auth-signin-v1.html"><span class="dropdown-icon oi oi-account-logout"></span> Logout</a>
-            <div class="dropdown-divider"></div><a class="dropdown-item" href="#">Help Center</a> <a class="dropdown-item" href="#">Ask Forum</a> <a class="dropdown-item" href="#">Keyboard Shortcuts</a>
-          </div><!-- /dropdown-items -->
-        </div><!-- /.dropdown-aside -->
-      </header><!-- /.aside-header -->
-      <!-- .aside-menu -->
-      <div class="aside-menu overflow-hidden">
-        <!-- .stacked-menu -->
-        <nav id="stacked-menu" class="stacked-menu">
-          <!-- .menu -->
-          <ul class="menu">
-            <!-- .menu-item -->
-            <li class="menu-item has-active">
-              <a href="index.html" class="menu-link"><span class="menu-icon fas fa-home"></span> <span class="menu-text">Dashboard</span></a>
-            </li><!-- /.menu-item -->
-            <!-- .menu-item -->
-            <li class="menu-item has-child">
-              <a href="#" class="menu-link"><span class="menu-icon far fa-file"></span> <span class="menu-text">App Pages</span> <span class="badge badge-warning">New</span></a> <!-- child menu -->
-              <ul class="menu">
-                <li class="menu-item">
-                  <a href="page-clients.html" class="menu-link">Clients</a>
-                </li>
-                <li class="menu-item">
-                  <a href="page-teams.html" class="menu-link">Teams</a>
-                </li>
-                <li class="menu-item has-child">
-                  <a href="#" class="menu-link">Team</a> <!-- grand child menu -->
-                  <ul class="menu">
-                    <li class="menu-item">
-                      <a href="page-team.html" class="menu-link">Overview</a>
+        <!-- Sidebar Menu -->
+        <div class="aside-menu overflow-hidden">
+            <nav id="stacked-menu" class="stacked-menu">
+                <ul class="menu">
+
+                    <!-- Dashboard -->
+                    <li class="menu-item {{ Request::is('admin/dashboard') ? 'has-active' : '' }}">
+                        <a href="{{ route('admin.dashboard') }}" class="menu-link">
+                            <span class="menu-icon fas fa-home"></span>
+                            <span class="menu-text">Dashboard</span>
+                        </a>
                     </li>
-                    <li class="menu-item">
-                      <a href="page-team-feeds.html" class="menu-link">Feeds</a>
+                    <li class="menu-item {{ Request::is('admin/my-profile') ? 'has-active' : '' }}">
+                        <a href="{{route('admin.myProfile')}}" class="menu-link">
+                            <span class="menu-icon fas fa-home"></span>
+                            <span class="menu-text">My Profile</span>
+                        </a>
                     </li>
-                    <li class="menu-item">
-                      <a href="page-team-projects.html" class="menu-link">Projects</a>
+
+                    <!-- Blog Posts -->
+                    <li class="menu-item has-child {{ Request::is('admin/posts*') ? 'open' : '' }}">
+                        <a href="javascript:;" class="menu-link">
+                            <span class="menu-icon far fa-file"></span>
+                            <span class="menu-text">Blog Posts</span>
+                        </a>
+                        <ul class="menu">
+                            <li class="menu-item {{ Request::is('admin/posts') ? 'has-active' : '' }}">
+                                <a href="{{ route('admin.posts') }}" class="menu-link">Blogs List</a>
+                            </li>
+                            <li class="menu-item {{ Request::is('admin/posts/create') ? 'has-active' : '' }}">
+                                <a href="{{ route('admin.postsAction',['create']) }}" class="menu-link">New Blog</a>
+                            </li>
+                            <li class="menu-item {{ Request::is('admin/posts/categories*') ? 'has-active' : '' }}">
+                                <a href="{{ route('admin.postsCategories') }}" class="menu-link">Categories</a>
+                            </li>
+                            <li class="menu-item {{ Request::is('admin/posts/comments*') ? 'has-active' : '' }}">
+                                <a href="{{ route('admin.postsCommentsAll') }}" class="menu-link">Comments</a>
+                            </li>
+                        </ul>
                     </li>
-                    <li class="menu-item">
-                      <a href="page-team-members.html" class="menu-link">Members</a>
+
+                    <!-- Pages -->
+                    <li class="menu-item {{ Request::is('admin/pages*') ? 'has-active' : '' }}">
+                        <a href="{{ route('admin.pages') }}" class="menu-link">
+                            <span class="menu-icon fas fa-edit"></span>
+                            <span class="menu-text">Pages</span>
+                        </a>
                     </li>
-                  </ul><!-- /grand child menu -->
-                </li>
-              <ul>
-            </li>
-          </ul>
-        </nav>
-      </div>
+
+                    <!-- Media Assets -->
+                    <li class="menu-item {{ Request::is('admin/medies*') ? 'has-active' : '' }}">
+                        <a href="{{ route('admin.medies') }}" class="menu-link">
+                            <span class="menu-icon fas fa-images"></span>
+                            <span class="menu-text">Media Assets</span>
+                        </a>
+                    </li>
+
+                    <li class="menu-header">Ecommerce Unit</li>
+
+                    <!-- Order Management -->
+                    <li class="menu-item">
+                        <a href="javascript:;" class="menu-link">
+                            <span class="menu-icon fas fa-briefcase"></span>
+                            <span class="menu-text">Order Management</span>
+                        </a>
+                    </li>
+
+                    <!-- Products -->
+                    <li class="menu-item has-child">
+                        <a href="javascript:;" class="menu-link">
+                            <span class="menu-icon fas fa-shopping-cart"></span>
+                            <span class="menu-text">Products Lists</span>
+                        </a>
+                        <ul class="menu">
+                            <li class="menu-item"><a href="ecommerce-products.html" class="menu-link">All Products</a></li>
+                            <li class="menu-item"><a href="ecommerce-products-details.html" class="menu-link">New Products</a></li>
+                            <li class="menu-item"><a href="ecommerce-add-new-products.html" class="menu-link">Categories</a></li>
+                            <li class="menu-item"><a href="ecommerce-orders.html" class="menu-link">Attributes</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Ecommerce Setting (Static for now) -->
+                    <li class="menu-item has-child">
+                        <a href="javascript:;" class="menu-link">
+                            <span class="menu-icon fas fa-store"></span>
+                            <span class="menu-text">Ecommerce Setting</span>
+                        </a>
+                        <ul class="menu">
+                            <li class="menu-item"><a href="component-alerts.html" class="menu-link">Settings</a></li>
+                            <li class="menu-item"><a href="component-accordions.html" class="menu-link">Coupons</a></li>
+                            <li class="menu-item"><a href="component-badges.html" class="menu-link">Promotion</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="menu-header">General Widgets</li>
+
+                    <!-- Clients -->
+                    <li class="menu-item {{ Request::is('admin/clients*') ? 'has-active' : '' }}">
+                        <a href="{{ route('admin.clients') }}" class="menu-link">
+                            <span class="menu-icon fas fa-users"></span>
+                            <span class="menu-text">Clients</span>
+                        </a>
+                    </li>
+
+                    <!-- Brands -->
+                    <li class="menu-item {{ Request::is('admin/brands*') ? 'has-active' : '' }}">
+                        <a href="{{ route('admin.brands') }}" class="menu-link">
+                            <span class="menu-icon fas fa-copyright"></span>
+                            <span class="menu-text">Brands</span>
+                        </a>
+                    </li>
+
+                    <!-- Sliders -->
+                    <li class="menu-item {{ Request::is('admin/sliders*') ? 'has-active' : '' }}">
+                        <a href="{{ route('admin.sliders') }}" class="menu-link">
+                            <span class="menu-icon fas fa-image"></span>
+                            <span class="menu-text">Sliders</span>
+                        </a>
+                    </li>
+
+                    <!-- Galleries -->
+                    <li class="menu-item {{ Request::is('admin/galleries*') ? 'has-active' : '' }}">
+                        <a href="{{ route('admin.galleries') }}" class="menu-link">
+                            <span class="menu-icon fas fa-images"></span>
+                            <span class="menu-text">Galleries</span>
+                        </a>
+                    </li>
+
+                    <!-- Menus -->
+                    <li class="menu-item {{ Request::is('admin/menus*') ? 'has-active' : '' }}">
+                        <a href="{{ route('admin.menus') }}" class="menu-link">
+                            <span class="menu-icon fas fa-bars"></span>
+                            <span class="menu-text">Menus List</span>
+                        </a>
+                    </li>
+
+                    <li class="menu-header">User Management</li>
+
+                    <!-- Admin Users -->
+                    <li class="menu-item has-child {{ Request::is('admin/usersAdmin*') ? 'open' : '' }}">
+                        <a href="javascript:;" class="menu-link">
+                            <span class="menu-icon fas fa-user-shield"></span>
+                            <span class="menu-text">Admin Users</span>
+                        </a>
+                        <ul class="menu">
+                            <li class="menu-item {{ Request::is('admin/usersAdmin') ? 'has-active' : '' }}">
+                                <a href="{{ route('admin.usersAdmin') }}" class="menu-link">Admin List</a>
+                            </li>
+                            <li class="menu-item"><a href="charts-chartjs.html" class="menu-link">Roles Permission</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- All Users -->
+                    <li class="menu-item {{ Request::is('admin/usersCustomer*') ? 'has-active' : '' }}">
+                        <a href="{{ route('admin.usersCustomer') }}" class="menu-link">
+                            <span class="menu-icon fas fa-user-circle"></span>
+                            <span class="menu-text">All Users</span>
+                        </a>
+                    </li>
+
+                    <li class="menu-header">Report Management</li>
+
+                    <!-- Reports -->
+                    <li class="menu-item has-child">
+                        <a href="javascript:;" class="menu-link">
+                            <span class="menu-icon fas fa-chart-bar"></span>
+                            <span class="menu-text">Reports List</span>
+                        </a>
+                        <ul class="menu">
+                            <li class="menu-item"><a href="component-alerts.html" class="menu-link">Summary Reports</a></li>
+                            <li class="menu-item"><a href="component-accordions.html" class="menu-link">Product Reports</a></li>
+                            <li class="menu-item"><a href="component-badges.html" class="menu-link">Order Reports</a></li>
+                            <li class="menu-item"><a href="component-badges.html" class="menu-link">User Reports</a></li>
+                            <li class="menu-item"><a href="component-badges.html" class="menu-link">Blog Reports</a></li>
+                        </ul>
+                    </li>
+					<li class="menu-header">Apps Setting</li>
+                    <!-- App Settings -->
+                    <li class="menu-item has-child {{ Request::is('admin/setting*') ? 'open' : '' }}">
+                        <a href="javascript:;" class="menu-link">
+                            <span class="menu-icon fas fa-cogs"></span>
+                            <span class="menu-text">Settings</span>
+                        </a>
+                        <ul class="menu">
+                            <li class="menu-item {{ Request::is('admin/setting/general') ? 'has-active' : '' }}">
+                                <a href="{{ route('admin.setting','general') }}" class="menu-link">General Settings</a>
+                            </li>
+                            <li class="menu-item {{ Request::is('admin/setting/mail') ? 'has-active' : '' }}">
+                                <a href="{{ route('admin.setting','mail') }}" class="menu-link">Mail Setting</a>
+                            </li>
+                            <li class="menu-item {{ Request::is('admin/setting/sms') ? 'has-active' : '' }}">
+                                <a href="{{ route('admin.setting','sms') }}" class="menu-link">SMS Setting</a>
+                            </li>
+                            <li class="menu-item {{ Request::is('admin/setting/social') ? 'has-active' : '' }}">
+                                <a href="{{ route('admin.setting','social') }}" class="menu-link">Social Setting</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Support -->
+                    <li class="menu-item">
+                        <a href="{{ route('admin.setting','document') }}" target="_blank" class="menu-link">
+                            <span class="menu-icon fas fa-headset"></span>
+                            <span class="menu-text">Support</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
     </div>
 </aside>
 
-{{--
-  
-  
-<div class="sidebar-wrapper" data-simplebar="true">
-			<div class="sidebar-header">
-				<div>
-					<img src="{{asset(general()->favicon())}}" class="logo-icon" alt="logo icon">
-				</div>
-				<div>
-					<h4 class="logo-text">Ecommerce</h4>
-				</div>
-				<div class="toggle-icon ms-auto"><i class='bx bx-first-page'></i>
-				</div>
-			</div>
-			<!--navigation-->
-			<ul class="metismenu" id="menu">
-				<li>
-					<a href="{{route('admin.dashboard')}}">
-						<div class="parent-icon"><i class='bx bx-home'></i>
-						</div>
-						<div class="menu-title">Dashboard</div>
-					</a>
-				</li>
-				<li class="{{Request::is('admin/posts*')? 'mm-active' : ''}}">
-					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class='bx bx-spa' ></i>
-						</div>
-						<div class="menu-title">Blog Posts</div>
-					</a>
-					<ul class="mm-collapse {{Request::is('admin/posts*')? 'mm-show' : ''}}">
-						<li class="
-            @if( Request::is('admin/posts/categories*') || Request::is('admin/posts/comments*') )
-            @else
-            {{Request::is('admin/posts*')? 'mm-active' : ''}}
-            @endif 
-            "> <a href="{{route('admin.posts')}}"><i class="bx bx-right-arrow-alt"></i>Blogs List</a>
-						</li>
-						<li> <a href="{{route('admin.postsAction',['create'])}}"><i class="bx bx-right-arrow-alt"></i>New Blog</a>
-						</li>
-						<li class="{{Request::is('admin/posts/categories*')? 'mm-active' : ''}}" > <a href="{{route('admin.postsCategories')}}"><i class="bx bx-right-arrow-alt"></i>Categories</a>
-						</li>
-						<li class="{{Request::is('admin/posts/comments*')? 'mm-active' : ''}}"> <a href="{{route('admin.postsCommentsAll')}}"><i class="bx bx-right-arrow-alt"></i>Comments</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="{{route('admin.pages')}}">
-						<div class="parent-icon"><i class='bx bx-edit'></i>
-						</div>
-						<div class="menu-title">Pages</div>
-					</a>
-				</li>
-				<li>
-					<a href="{{route('admin.medies')}}">
-						<div class="parent-icon"><i class='bx bx-images'></i>
-						</div>
-						<div class="menu-title">Media Assets</div>
-					</a>
-				</li>
-				<li class="menu-label">Ecommerce Unit</li>
-				<li>
-					<a href="widgets.html">
-						<div class="parent-icon"><i class='bx bx-briefcase-alt-2'></i>
-						</div>
-						<div class="menu-title">Order Management</div>
-					</a>
-				</li>
-				<li>
-					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class='bx bx-cart-alt' ></i>
-						</div>
-						<div class="menu-title">Products Lists</div>
-					</a>
-					<ul>
-						<li> <a href="ecommerce-products.html"><i class="bx bx-right-arrow-alt"></i>All Products</a>
-						</li>
-						<li> <a href="ecommerce-products-details.html"><i class="bx bx-right-arrow-alt"></i>New Products</a>
-						</li>
-						<li> <a href="ecommerce-add-new-products.html"><i class="bx bx-right-arrow-alt"></i>Categories</a>
-						</li>
-						<li> <a href="ecommerce-orders.html"><i class="bx bx-right-arrow-alt"></i>Attributes</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a class="has-arrow" href="javascript:;">
-						<div class="parent-icon"><i class='bx bx-list-minus'></i>
-						</div>
-						<div class="menu-title">Ecommerce Setting</div>
-					</a>
-					<ul>
-						<li> <a href="component-alerts.html"><i class="bx bx-right-arrow-alt"></i>Settings</a>
-						</li>
-						<li> <a href="component-accordions.html"><i class="bx bx-right-arrow-alt"></i>Coupons</a>
-						</li>
-						<li> <a href="component-badges.html"><i class="bx bx-right-arrow-alt"></i>Promotion</a>
-						</li>
-					</ul>
-				</li>
-				<li class="menu-label">General widgets</li>
-				<li>
-					<a href="{{route('admin.clients')}}">
-						<div class="parent-icon"><i class='bx bx-grid-alt'></i>
-						</div>
-						<div class="menu-title">Clients</div>
-					</a>
-				</li>
-				<li>
-					<a href="{{route('admin.brands')}}">
-						<div class="parent-icon"><i class='bx bx-grid-alt'></i>
-						</div>
-						<div class="menu-title">Brands</div>
-					</a>
-				</li>
-				<li>
-					<a href="{{route('admin.sliders')}}">
-						<div class="parent-icon"><i class='bx bx-image'></i>
-						</div>
-						<div class="menu-title">Sliders</div>
-					</a>
-				</li>
-				<li>
-					<a href="{{route('admin.galleries')}}">
-						<div class="parent-icon"><i class='bx bx-images'></i>
-						</div>
-						<div class="menu-title">Galleries</div>
-					</a>
-				</li>
-				<li>
-					<a href="{{route('admin.menus')}}">
-						<div class="parent-icon"><i class='bx bx-menu'></i>
-						</div>
-						<div class="menu-title">Menus List</div>
-					</a>
-				</li>
-				
-				<li class="menu-label">User Management</li>
-				<li>
-					<a class="has-arrow" href="javascript:;">
-						<div class="parent-icon"><i class="bx bx-user"></i>
-						</div>
-						<div class="menu-title">Admin Users</div>
-					</a>
-					<ul>
-						<li> <a href="{{route('admin.usersAdmin')}}"><i class="bx bx-right-arrow-alt"></i>Admin list</a>
-						</li>
-						<li> <a href="charts-chartjs.html"><i class="bx bx-right-arrow-alt"></i>Roles Permission</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="{{route('admin.usersCustomer')}}">
-						<div class="parent-icon"><i class='bx bx-user-circle'></i>
-						</div>
-						<div class="menu-title">All Users</div>
-					</a>
-				</li>
-				<li class="menu-label">Report Management</li>
-				<li>
-					<a class="has-arrow" href="javascript:;">
-						<div class="parent-icon"><i class="bx bx-bar-chart-alt-2"></i>
-						</div>
-						<div class="menu-title">Reports List </div>
-					</a>
-					<ul>
-						<li> <a href="component-alerts.html"><i class="bx bx-right-arrow-alt"></i>Summery Reports</a>
-						</li>
-						<li> <a href="component-accordions.html"><i class="bx bx-right-arrow-alt"></i>Product Reports</a>
-						</li>
-						<li> <a href="component-badges.html"><i class="bx bx-right-arrow-alt"></i>Order Reports</a>
-						</li>
-						<li> <a href="component-badges.html"><i class="bx bx-right-arrow-alt"></i>User Reports</a>
-						</li>
-						<li> <a href="component-badges.html"><i class="bx bx-right-arrow-alt"></i>Blog Reports</a>
-						</li>
-					</ul>
-				</li>
-				<li class="menu-label">Apps Setting</li>
-				<li>
-					<a class="has-arrow" href="javascript:;">
-						<div class="parent-icon"><i class="bx bx-cog"></i>
-						</div>
-						<div class="menu-title">Setting </div>
-					</a>
-					<ul>
-						<li> <a href="{{route('admin.setting','general')}}"><i class="bx bx-right-arrow-alt"></i>General Settings</a>
-						</li>
-						<li> <a href="{{route('admin.setting','mail')}}"><i class="bx bx-right-arrow-alt"></i>Mail Setting</a>
-						</li>
-						<li> <a href="{{route('admin.setting','sms')}}"><i class="bx bx-right-arrow-alt"></i>SMS Setting</a>
-						</li>
-						<li> <a href="{{route('admin.setting','social')}}"><i class="bx bx-right-arrow-alt"></i>Social Setting</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="{{route('admin.setting','document')}}" target="_blank">
-						<div class="parent-icon"><i class='bx bx-headphone' ></i>
-						</div>
-						<div class="menu-title">Support</div>
-					</a>
-				</li>
-			</ul>
-			<!--end navigation-->
-		</div>
---}}
-\

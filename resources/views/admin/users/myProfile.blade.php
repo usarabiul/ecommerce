@@ -8,22 +8,24 @@
         max-height: 64px;
     }
 </style>
-@endpush @section('contents')
-
-    <!--breadcrumb-->
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">My Profile</div>
-        <div class="ps-3">
+@endpush 
+@section('contents')
+<header class="page-title-bar">
+    <div class="d-md-flex align-items-md-start">
+        <div class="mr-sm-auto">
             <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-0 p-0">
-                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}"><i class="bx bx-home-alt"></i></a>
+                <ol class="breadcrumb mt-1 p-0 mb-0">
+                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">My Profile</li>
                 </ol>
             </nav>
         </div>
+        <div class="btn-toolbar">
+            <button type="button" class="btn btn-primary">Add invoice </button>
+        </div>
     </div>
-    <!--end breadcrumb-->
+</header>
 
     @include(adminTheme().'alerts')
     <div class="row">

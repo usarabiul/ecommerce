@@ -34,6 +34,13 @@
       .metric{
         background: #ffffff;
       }
+      .breadcrumb, .breadcrumb-item {
+          display: flex;
+          font-size: 18px;
+      }
+      .page-title-bar .btn-toolbar{
+          margin-left: 0 !important;
+      }
       table tr td {
           vertical-align: middle;
       }
@@ -82,7 +89,11 @@
         
         <main class="app-main">
             <div class="wrapper">
-              @yield('contents')
+              <div class="page">
+                <div class="page-inner">
+                  @yield('contents')
+                </div>
+              </div>
             </div>
             @include(adminTheme().'layouts.footer')
         </main>
