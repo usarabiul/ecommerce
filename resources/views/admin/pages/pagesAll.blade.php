@@ -6,30 +6,29 @@
 <style type="text/css"></style>
 @endpush 
 @section('contents')
-
-
-
-    <!--breadcrumb-->
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">Pages List</div>
-        <div class="ps-3">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-0 p-0">
-                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}"><i class="bx bx-home-alt"></i></a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">Pages List</li>
-                </ol>
-            </nav>
-        </div>
-        <div class="ms-auto">
-            <div class="btn-group">
-                <a class="btn btn-outline-primary" href="{{route('admin.pagesAction','create')}}">Add Page</a>
-                <a href="{{route('admin.pages')}}" class="btn btn-primary"><i class="bx bx-refresh"></i></a>
+    <header class="page-title-bar">
+        <div class="d-md-flex align-items-md-start">
+            <div class="mr-sm-auto">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mt-1 p-0 mb-0">
+                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Pages List</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="btn-toolbar">
+                <div class="dropdown">
+                    <button type="button" class="btn btn-info btn-ico" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                    <div class="dropdown-arrow"></div>
+                        <a href="{{route('admin.pagesAction','create')}}" class="dropdown-item"><i class="fa fa-plus"></i> Add Page </a>
+                        <a href="{{route('admin.pages')}}" class="dropdown-item"><i class="fas fa-spinner"></i> Refresh </a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <!--end breadcrumb-->
-
+    </header>
     @include(adminTheme().'alerts')
 
     <div class="card">
@@ -43,7 +42,7 @@
                         <form action="{{route('admin.pages')}}">
                             <div class="input-group mb-3">
                                 <input type="text" name="search" value="{{request()->search?request()->search:''}}" placeholder="Page Name" class="form-control {{$errors->has('search')?'error':''}}" />
-                                <button type="submit" class="btn btn-success btn-sm rounded-0">Search</button>
+                                <button type="submit" class="btn btn-success rounded-0">Search</button>
                             </div>
                         </form>
                     </div>
@@ -57,8 +56,8 @@
                     </div>
                 </div>
                 <div class="table-responsive" style="min-height:300px;">
-                    <table class="table">
-                        <thead class="table-light">
+                    <table class="table table-hover">
+                        <thead class="thead-light">
                             <tr>
                                 <th style="min-width: 60px;width: 60px;text-align: center;">SL</th>
                                 <th style="min-width: 300px;">Name</th>
@@ -104,12 +103,11 @@
                                 </td>
                                 <td style="text-align:center;">
                                     <div class="dropdown">
-                                        <button type="button" class="btn btn-success light sharp" data-bs-toggle="dropdown">
-                                            <i class="fa fa-ellipsis-v"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="{{route('admin.pagesAction',['edit',$page->id])}}"><i class="fa fa-edit"></i> Edit </a>
-                                            <a class="dropdown-item" href="{{route('admin.pagesAction',['delete',$page->id])}}" onclick="return confirm('Are You Want To Delete')" ><i class="fa fa-trash"></i> Delete </a>
+                                        <button type="button" class="btn btn-success btn-ico" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                        <div class="dropdown-arrow"></div>
+                                            <a href="{{route('admin.pagesAction',['edit',$page->id])}}" class="dropdown-item"><i class="fa fa-edit"></i> Edit </a>
+                                            <a href="{{route('admin.pagesAction',['delete',$page->id])}}" onclick="return confirm('Are You Want To Delete')" class="dropdown-item"><i class="fa fa-trash"></i> Delete </a>
                                         </div>
                                     </div>
                                 </td>
