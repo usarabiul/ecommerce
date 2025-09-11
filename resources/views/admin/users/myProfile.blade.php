@@ -22,7 +22,7 @@
             </nav>
         </div>
         <div class="btn-toolbar">
-            <button type="button" class="btn btn-primary">Add invoice </button>
+            <a href="{{route('admin.myProfile')}}" type="button" class="btn btn-primary"><i class="fas fa-spinner"></i></a>
         </div>
     </div>
 </header>

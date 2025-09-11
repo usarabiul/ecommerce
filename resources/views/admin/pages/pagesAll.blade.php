@@ -94,11 +94,11 @@
                                 </td>
                                 <td>
                                     @if($page->status=='active')
-                                    <span class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3">Active </span>
+                                    <span class="badge badge-success">Active </span>
                                     @elseif($page->status=='inactive')
-                                    <span class="badge rounded-pill text-warning bg-light-danger p-2 text-uppercase px-3">Inactive </span>
+                                    <span class="badge badge-danger">Inactive </span>
                                     @else
-                                    <span class="badge rounded-pill text-warning bg-light-danger p-2 text-uppercase px-3">Draft </span>
+                                    <span class="badge badge-danger">Draft </span>
                                     @endif
                                 </td>
                                 <td style="text-align:center;">
