@@ -81,7 +81,9 @@
                         <thead class="thead-light">
                             <tr>
                                 <th style="min-width: 60px;">
-                                    <label style="cursor: pointer; margin-bottom: 0;"> <input class="checkbox" type="checkbox" class="form-control" id="checkall" /> All <span class="checkCounter"></span> </label>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input checkbox"  id="checkall" >  <label class="custom-control-label" for="checkall">All <span class="checkCounter"></span> </label>
+                                    </div>
                                 </th>
                                 <th style="min-width: 300px;">Post Name</th>
                                 <th style="min-width: 80px;width:80px;">Image</th>
@@ -93,7 +95,9 @@
                             @foreach($posts as $i=>$post)
                             <tr>
                                 <td>
-                                    <input class="checkbox" type="checkbox" name="checkid[]" value="{{$post->id}}" /><br />
+                                    <div class="custom-control custom-control-nolabel custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input checkbox" name="checkid[]" value="{{$post->id}}" id="ckb1">  <label class="custom-control-label" for="ckb1">ID </label>
+                                    </div>
                                     {{$posts->currentpage()==1?$i+1:$i+($posts->perpage()*($posts->currentpage() - 1))+1}}
                                 </td>
                                 <td>
