@@ -18,33 +18,27 @@
 @endpush
 @section('contents')
 
-<!--breadcrumb-->
-<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-    <div class="breadcrumb-title pe-3">Comments List</div>
-    <div class="ps-3">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb mb-0 p-0">
-                <li class="breadcrumb-item">
-                    <a href="{{route('admin.dashboard')}}"><i class="bx bx-home-alt"></i></a>
-                </li>
-                <li class="breadcrumb-item active">Comments List</li>
-            </ol>
-        </nav>
-    </div>
-    <div class="ms-auto">
-        <div class="btn-group">
-            <a href="{{route('admin.postsCommentsAll')}}" class="btn btn-primary"><i class="bx bx-refresh"></i></a>
+<header class="page-title-bar">
+    <div class="d-md-flex align-items-md-start">
+        <div class="mr-sm-auto">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mt-1 p-0 mb-0">
+                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Comments List</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="btn-toolbar">
+            <a href="{{route('admin.postsCommentsAll')}}" type="button" class="btn btn-primary"><i class="fas fa-spinner"></i></a>
         </div>
     </div>
-</div>
-<!--end breadcrumb-->
-	
+</header>
 
 @include(general()->adminTheme.'.alerts')
 <div class="card">
-<div class="card-header " style="border-bottom: 1px solid #e3ebf3;">
-	<h4 class="card-title">Comments List</h4>
-</div>
+	<div class="card-header " style="border-bottom: 1px solid #e3ebf3;">
+		<h4 class="card-title">Comments List</h4>
+	</div>
 	<div class="card-content">
 		<div class="card-body">
 		<form action="{{route('admin.postsCommentsAll')}}">
@@ -52,7 +46,7 @@
 				<div class="col-md-12 mb-0">
 					<div class="input-group">
 						<input type="text" name="search" value="{{request()->search?request()->search:''}}" placeholder="Comments Title, email, website" class="form-control {{$errors->has('search')?'error':''}}">
-						<button type="submit" class="btn btn-success btn-sm rounded-0">Search</button>
+						<button type="submit" class="btn btn-success rounded-0">Search</button>
 					</div>
 				</div>
 			</div>
@@ -69,15 +63,15 @@
 						<option value="4">Un-feature</option>
 						<option value="5">Delete</option>
 					</select>
-					<button class="btn btn-sm btn-primary rounded-0" onclick="return confirm('Are You Want To Action?')">Action</button>
+					<button class="btn btn-primary rounded-0" onclick="return confirm('Are You Want To Action?')">Action</button>
 				</div>
 			</div>
 		</div>
 			<div class="table-responsive" style="min-height:300px;" >
 
 
-			<table class="table" >
-				<thead class="table-light">
+			<table class="table table-hover" >
+				<thead class="thead-light">
 					<tr>
 						<th width="5%"></th>
 						<th width="20%">Author</th>

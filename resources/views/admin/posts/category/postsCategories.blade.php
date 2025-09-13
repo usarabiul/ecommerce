@@ -4,27 +4,23 @@
 <style type="text/css"></style>
 @endpush @section('contents')
 
-<!--breadcrumb-->
-<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-    <div class="breadcrumb-title pe-3">Categories List</div>
-    <div class="ps-3">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb mb-0 p-0">
-                <li class="breadcrumb-item">
-                    <a href="{{route('admin.dashboard')}}"><i class="bx bx-home-alt"></i></a>
-                </li>
-                <li class="breadcrumb-item active">Categories List</li>
-            </ol>
-        </nav>
-    </div>
-    <div class="ms-auto">
-        <div class="btn-group">
-            <a class="btn btn-outline-primary" href="{{route('admin.postsCategoriesAction','create')}}">Add Category</a>
-            <a href="{{route('admin.postsCategories')}}" class="btn btn-primary"><i class="bx bx-refresh"></i></a>
+<header class="page-title-bar">
+    <div class="d-md-flex align-items-md-start">
+        <div class="mr-sm-auto">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mt-1 p-0 mb-0">
+                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Categories List</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="btn-toolbar">
+            <a href="{{route('admin.postsCategoriesAction','create')}}" type="button" class="btn btn-outline-success mr-2"><i class="fas fa-plus"></i> Add Category</a>
+            <a href="{{route('admin.postsCategories')}}" type="button" class="btn btn-primary"><i class="fas fa-spinner"></i></a>
         </div>
     </div>
-</div>
-<!--end breadcrumb-->
+</header>
 
 @include(adminTheme().'alerts')
 
@@ -39,7 +35,7 @@
                     <div class="col-md-12 mb-0">
                         <div class="input-group">
                             <input type="text" name="search" value="{{request()->search?request()->search:''}}" placeholder="Category Name" class="form-control {{$errors->has('search')?'error':''}}" />
-                            <button type="submit" class="btn btn-success btn-sm rounded-0">Search</button>
+                            <button type="submit" class="btn btn-success rounded-0">Search</button>
                         </div>
                     </div>
                 </div>
@@ -57,18 +53,18 @@
                                 <option value="4">Un-featured</option>
                                 <option value="5">Deleted</option>
                             </select>
-                            <button class="btn btn-sm btn-primary rounded-0" onclick="return confirm('Are You Want To Action?')">Action</button>
+                            <button class="btn btn-primary rounded-0" onclick="return confirm('Are You Want To Action?')">Action</button>
                         </div>
                     </div>
                 </div>
                 <div class="table-responsive" style="min-height:300px;" >
-                    <table class="table">
-                        <thead class="table-light" >
+                    <table class="table table-hover">
+                        <thead class="thead-light" >
                             <tr>
                                 <th style="min-width: 100px;width:100px;">
-                                    <label>
-                                        <input type="checkbox" class="form-check-input" id="checkall" > All <span class="checkCounter"></span> 
-                                    </label>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input checkbox"  id="checkall" >  <label class="custom-control-label" for="checkall">All <span class="checkCounter"></span> </label>
+                                    </div>
                                 </th>
                                 <th style="min-width: 300px;">Category Name</th>
                                 <th style="min-width: 200px;">Parent CTG</th>
@@ -80,19 +76,19 @@
                             @foreach($categories as $i=>$category)
                             <tr>
                                 <td>
-                                    <input class="form-check-input" type="checkbox" name="checkid[]" value="{{$category->id}}" />
-                                    <br>
-                                    <b>SL:</b> 
+                                    <div class="custom-control custom-control-inline custom-control-nolabel custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input checkbox" name="checkid[]" value="{{$category->id}}" id="ckb1">  <label class="custom-control-label" for="ckb1">ID </label>
+                                    </div>
                                     {{$categories->currentpage()==1?$i+1:$i+($categories->perpage()*($categories->currentpage() - 1))+1}}
                                 </td>
                                 <td>
                                     <a href="{{route('blogCategory',$category->slug?:'no-title')}}" target="_blank">{{$category->name}}</a><br />
                                     @if($category->status=='active')
-                                    <span class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3">Active </span>
+                                    <span class="badge badge-success">Active </span>
                                     @elseif($category->status=='inactive')
-                                    <span class="badge rounded-pill text-warning bg-light-danger p-2 text-uppercase px-3">Inactive </span>
+                                    <span class="badge badge-danger">Inactive </span>
                                     @else
-                                    <span class="badge rounded-pill text-warning bg-light-danger p-2 text-uppercase px-3">Draft </span>
+                                    <span class="badge badge-danger">Draft </span>
                                     @endif
 
                                     @if($category->featured==true)
@@ -116,12 +112,11 @@
                                 </td>
                                 <td style="text-align:center;">
                                     <div class="dropdown">
-                                        <button type="button" class="btn btn-success light sharp" data-bs-toggle="dropdown">
-                                            <i class="fa fa-ellipsis-v"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="{{route('admin.postsCategoriesAction',['edit',$category->id])}}"><i class="fa fa-edit"></i> Edit </a>
-                                            <a class="dropdown-item" href="{{route('admin.postsCategoriesAction',['delete',$category->id])}}" onclick="return confirm('Are You Want To Delete')" ><i class="fa fa-trash"></i> Delete </a>
+                                        <button type="button" class="btn btn-success btn-ico" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                        <div class="dropdown-arrow"></div>
+                                            <a href="{{route('admin.postsCategoriesAction',['edit',$category->id])}}" class="dropdown-item"><i class="fa fa-edit"></i> Edit </a>
+                                            <a href="{{route('admin.postsCategoriesAction',['delete',$category->id])}}" onclick="return confirm('Are You Want To Delete')" class="dropdown-item"><i class="fa fa-trash"></i> Delete </a>
                                         </div>
                                     </div>
                                 </td>

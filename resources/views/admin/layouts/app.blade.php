@@ -72,6 +72,9 @@
         .bootstrap-select .dropdown-toggle:focus, .bootstrap-select>select.mobile-device:focus+.dropdown-toggle{
           outline: 5px auto #ebe3e3 !important;
         }
+        .app-aside-light {
+          background-color: #ffffff;
+        }
     </style>
 
      @stack('css')

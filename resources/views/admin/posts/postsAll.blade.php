@@ -80,7 +80,7 @@
                     <table class="table table-hover">
                         <thead class="thead-light">
                             <tr>
-                                <th style="min-width: 60px;">
+                                <th style="min-width: 100px;width:100px;">
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input checkbox"  id="checkall" >  <label class="custom-control-label" for="checkall">All <span class="checkCounter"></span> </label>
                                     </div>
@@ -95,7 +95,7 @@
                             @foreach($posts as $i=>$post)
                             <tr>
                                 <td>
-                                    <div class="custom-control custom-control-nolabel custom-checkbox">
+                                    <div class="custom-control custom-control-inline custom-control-nolabel custom-checkbox">
                                         <input type="checkbox" class="custom-control-input checkbox" name="checkid[]" value="{{$post->id}}" id="ckb1">  <label class="custom-control-label" for="ckb1">ID </label>
                                     </div>
                                     {{$posts->currentpage()==1?$i+1:$i+($posts->perpage()*($posts->currentpage() - 1))+1}}
