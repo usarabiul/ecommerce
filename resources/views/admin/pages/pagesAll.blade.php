@@ -6,30 +6,27 @@
 <style type="text/css"></style>
 @endpush 
 @section('contents')
-    <header class="page-title-bar">
-        <div class="d-md-flex align-items-md-start">
-            <div class="mr-sm-auto">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb mt-1 p-0 mb-0">
-                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a>
-                        </li>
-                        <li class="breadcrumb-item active" aria-current="page">Pages List</li>
-                    </ol>
-                </nav>
-            </div>
-            <div class="btn-toolbar">
-                <div class="dropdown">
-                    <button type="button" class="btn btn-info btn-ico" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                    <div class="dropdown-arrow"></div>
-                        <a href="{{route('admin.pagesAction','create')}}" class="dropdown-item"><i class="fa fa-plus"></i> Add Page </a>
-                        <a href="{{route('admin.pages')}}" class="dropdown-item"><i class="fas fa-spinner"></i> Refresh </a>
-                    </div>
-                </div>
-            </div>
+
+<header class="page-title-bar">
+    <div class="d-md-flex align-items-md-start">
+        <div class="mr-sm-auto">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mt-1 p-0 mb-0">
+                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Pages List</li>
+                </ol>
+            </nav>
         </div>
-    </header>
-    @include(adminTheme().'alerts')
+        <div class="btn-toolbar">
+            <a href="{{route('admin.pagesAction','create')}}" type="button" class="btn btn-outline-success mr-2"><i class="fas fa-plus"></i> Add Page</a>
+            <a href="{{route('admin.pages')}}" type="button" class="btn btn-primary"><i class="fas fa-spinner"></i></a>
+        </div>
+    </div>
+</header>
+
+
+@include(adminTheme().'alerts')
 
     <div class="card">
         <div class="card-header" style="border-bottom: 1px solid #e3ebf3;">
