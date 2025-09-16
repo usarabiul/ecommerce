@@ -3,26 +3,24 @@
 @endsection @push('css')
 <style type="text/css"></style>
 @endpush @section('contents')
-<!--breadcrumb-->
-<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-    <div class="breadcrumb-title pe-3">Menus List</div>
-    <div class="ps-3">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb mb-0 p-0">
-                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}"><i class="bx bx-home-alt"></i></a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">Menus List</li>
-            </ol>
-        </nav>
-    </div>
-    <div class="ms-auto">
-        <div class="btn-group">
-            <a class="btn btn-success" href="{{route('admin.menusAction','create')}}">Add Menu</a>
-            <a href="{{route('admin.menus')}}" class="btn btn-primary"><i class="bx bx-refresh"></i></a>
+
+<header class="page-title-bar">
+    <div class="d-md-flex align-items-md-start">
+        <div class="mr-sm-auto">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mt-1 p-0 mb-0">
+                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Menus List</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="btn-toolbar">
+            <a href="{{route('admin.menusAction','create')}}" type="button" class="btn btn-outline-success mr-2"><i class="fas fa-plus"></i> Add Menu</a>
+            <a href="{{route('admin.menus')}}" type="button" class="btn btn-primary"><i class="fas fa-spinner"></i></a>
         </div>
     </div>
-</div>
-<!--end breadcrumb-->
+</header>
 
 
 @include(adminTheme().'alerts')
@@ -52,11 +50,11 @@
                             <td>
                                 <span>{{$menu->name}}</span><br />
                                 @if($menu->status=='active')
-                                <span class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3">Active </span>
+                                <span class="badge badge-success">Active </span>
                                 @elseif($menu->status=='inactive')
-                                <span class="badge rounded-pill text-warning bg-light-danger p-2 text-uppercase px-3">Inactive </span>
+                                <span class="badge badge-danger">Inactive </span>
                                 @else
-                                <span class="badge rounded-pill text-warning bg-light-danger p-2 text-uppercase px-3">Draft </span>
+                                <span class="badge badge-danger">Draft </span>
                                 @endif
                                 @if($menu->featured==true)
                                 <span><i class="fa fa-star" style="color: #1ab394;"></i></span>
@@ -74,12 +72,11 @@
                             </td>
                             <td style="text-align:center;">
                                 <div class="dropdown">
-                                    <button type="button" class="btn btn-success light sharp" data-bs-toggle="dropdown">
-                                        <i class="fa fa-ellipsis-v"></i>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="{{route('admin.menusAction',['edit',$menu->id])}}"><i class="fa fa-edit"></i> Edit </a>
-                                        <a class="dropdown-item" href="{{route('admin.menusAction',['delete',$menu->id])}}" onclick="return confirm('Are You Want To Delete')" ><i class="fa fa-trash"></i> Delete </a>
+                                    <button type="button" class="btn btn-success btn-ico" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                    <div class="dropdown-arrow"></div>
+                                        <a href="{{route('admin.menusAction',['edit',$menu->id])}}" class="dropdown-item"><i class="fa fa-edit"></i> Manage </a>
+                                        <a href="{{route('admin.menusAction',['delete',$menu->id])}}" onclick="return confirm('Are You Want To Delete')" class="dropdown-item"><i class="fa fa-trash"></i> Delete </a>
                                     </div>
                                 </div>
                             </td>

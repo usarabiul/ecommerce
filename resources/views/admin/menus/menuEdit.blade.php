@@ -24,35 +24,28 @@
 </style>
 @endpush 
 @section('contents')
-<!--breadcrumb-->
-<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-    <div class="breadcrumb-title pe-3">Menus Update</div>
-    <div class="ps-3">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb mb-0 p-0">
-                <li class="breadcrumb-item">
-                    <a href="{{route('admin.dashboard')}}"><i class="bx bx-home-alt"></i></a>
-                </li>
-                <li class="breadcrumb-item">
-                    <a href="{{route('admin.menus')}}">Menus List</a>
-                </li>
-                <li class="breadcrumb-item active">Menu Update</li>
-            </ol>
-        </nav>
-    </div>
-    <div class="ms-auto">
-        <div class="btn-group">
+
+<header class="page-title-bar">
+    <div class="d-md-flex align-items-md-start">
+        <div class="mr-sm-auto">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mt-1 p-0 mb-0">
+                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Menu Update</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="btn-toolbar">
             @if($menu->parent_id)
-            <a class="btn btn-success" href="{{route('admin.menusAction',['edit',$menu->parent_id])}}">BACK</a>
+            <a href="{{route('admin.menusAction',['edit',$menu->parent_id])}}" type="button" class="btn btn-outline-success mr-2"><i class="fas fa-arrow-left"></i> BACK</a>
             @else
-            <a class="btn btn-success" href="{{route('admin.menus')}}">BACK</a>
+            <a href="{{route('admin.menus')}}" type="button" class="btn btn-outline-success mr-2"><i class="fas fa-arrow-left"></i> BACK</a>
             @endif
-            <a href="{{route('admin.menusAction',['edit',$menu->id])}}" class="btn btn-primary"><i class="bx bx-refresh"></i></a>
+            <a href="{{route('admin.menusAction',['edit',$menu->id])}}" type="button" class="btn btn-primary"><i class="fas fa-spinner"></i></a>
         </div>
     </div>
-</div>
-<!--end breadcrumb-->
-
+</header>
 
 
 @include(adminTheme().'alerts')
