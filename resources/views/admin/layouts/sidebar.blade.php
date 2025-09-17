@@ -20,7 +20,7 @@
                     </li>
 
                     <!-- Blog Posts -->
-                    <li class="menu-item has-child {{ Request::is('admin/posts*') ? 'open' : '' }}">
+                    <li class="menu-item has-child {{ Request::is('admin/posts*') ? 'has-open has-active' : '' }}">
                         <a href="javascript:;" class="menu-link">
                             <span class="menu-icon far fa-file"></span>
                             <span class="menu-text">Blog Posts</span>
@@ -139,13 +139,13 @@
                     <li class="menu-header">User Management</li>
 
                     <!-- Admin Users -->
-                    <li class="menu-item has-child {{ Request::is('admin/usersAdmin*') ? 'open' : '' }}">
+                    <li class="menu-item has-child {{ Request::is('admin/users/admin*') ? 'has-open has-active' : '' }}">
                         <a href="javascript:;" class="menu-link">
                             <span class="menu-icon fas fa-user-shield"></span>
                             <span class="menu-text">Admin Users</span>
                         </a>
                         <ul class="menu">
-                            <li class="menu-item {{ Request::is('admin/usersAdmin') ? 'has-active' : '' }}">
+                            <li class="menu-item {{ Request::is('admin/users/admin') ? 'has-active' : '' }}">
                                 <a href="{{ route('admin.usersAdmin') }}" class="menu-link">Admin List</a>
                             </li>
                             <li class="menu-item"><a href="charts-chartjs.html" class="menu-link">Roles Permission</a></li>
@@ -153,7 +153,7 @@
                     </li>
 
                     <!-- All Users -->
-                    <li class="menu-item {{ Request::is('admin/usersCustomer*') ? 'has-active' : '' }}">
+                    <li class="menu-item {{ Request::is('admin/users/customer*') ? 'has-active' : '' }}">
                         <a href="{{ route('admin.usersCustomer') }}" class="menu-link">
                             <span class="menu-icon fas fa-user-circle"></span>
                             <span class="menu-text">All Users</span>
@@ -178,7 +178,7 @@
                     </li>
 					<li class="menu-header">Apps Setting</li>
                     <!-- App Settings -->
-                    <li class="menu-item has-child {{ Request::is('admin/setting*') ? 'open' : '' }}">
+                    <li class="menu-item has-child {{ Request::is('admin/setting*') ? 'has-open has-active' : '' }}">
                         <a href="javascript:;" class="menu-link">
                             <span class="menu-icon fas fa-cogs"></span>
                             <span class="menu-text">Settings</span>

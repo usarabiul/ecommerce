@@ -22,29 +22,23 @@
 @endpush 
 @section('contents')
 
-
-<!--breadcrumb-->
-<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-    <div class="breadcrumb-title pe-3">Post Edit</div>
-    <div class="ps-3">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb mb-0 p-0">
-                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}"><i class="bx bx-home-alt"></i></a>
-                </li>
-                <li class="breadcrumb-item"><a href="{{route('admin.posts')}}">Post list</a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">Post Edit</li>
-            </ol>
-        </nav>
-    </div>
-    <div class="ms-auto">
-        <div class="btn-group">
-            <a class="btn btn-outline-primary" href="{{route('admin.postsAction','create')}}">Add Post</a>
-            <a href="{{route('admin.postsAction',['edit',$post->id])}}" class="btn btn-primary"><i class="bx bx-refresh"></i></a>
+<header class="page-title-bar">
+    <div class="d-md-flex align-items-md-start">
+        <div class="mr-sm-auto">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mt-1 p-0 mb-0">
+                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Post Edit</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="btn-toolbar">
+            <a href="{{route('admin.postsAction','create')}}" type="button" class="btn btn-outline-success mr-2"><i class="fas fa-plus"></i> Add Post</a>
+            <a href="{{route('admin.postsAction',['edit',$post->id])}}" type="button" class="btn btn-primary"><i class="fas fa-spinner"></i></a>
         </div>
     </div>
-</div>
-<!--end breadcrumb-->
+</header>
 
 
 @include(adminTheme().'alerts')
@@ -66,11 +60,12 @@
                             @endif
                         </div>
                         <div class="mb-3 input-group">
-                            <label class="slugEdit" style="color: #3F51B5;cursor: pointer;width: 130px;padding: 3px;"><span>{{$post->auto_slug?'Custom Slug':'Auto Slug'}} </span> <i class="fa fa-edit"></i></label>
+                            <label class="slugEdit" style="cursor: pointer;width: 130px;padding: 6px;margin:0;background: #c6c9d5;"><span>{{$post->auto_slug?'Custom Slug':'Auto Slug'}} </span> <i class="fa fa-edit"></i></label>
                             <input type="text" class="slugEditData form-control {{$errors->has('slug')?'error':''}}"
                                 @if($post->auto_slug) 
                                     name="slug"
                                     style="display:block;"
+                                    disabled=""
                                 @endif
                             placeholder="Post Slug" value="{{$post->slug?:old('slug')}}" />
                         </div>
@@ -171,7 +166,7 @@
                         <div class="invalid-feedback">The Category Must Be a Number</div>
                         @endif
                         <div class="catagorydiv">
-                            <ul style="padding: 0;">
+                            <ul >
                                 @foreach($categories as $ctg)
                                 <li>
                                     <label>

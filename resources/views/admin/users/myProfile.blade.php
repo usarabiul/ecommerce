@@ -44,11 +44,11 @@
                                     <img src="{{asset($user->image())}}" class="ProfileImage" alt="profile image" />
                                 </a>
                                 <div class="media-body mt-75">
-                                    <div class="col-12 px-0 d-flex flex-sm-row flex-column justify-content-start">
+                                    <div class="px-0 d-flex flex-sm-row flex-column justify-content-start">
                                         <label class="btn btn-info btn-xs mx-2" for="account-upload">Upload new photo </label>
                                         <input type="file" name="image" id="account-upload" hidden="" />
                                         @if($user->imageFile)
-                                        <a href="{{route('admin.mediesDelete',$user->imageFile->id)}}" class="mediaDelete btn btn-xs btn-danger mx-2">Reset </a>
+                                        <a href="{{route('admin.mediesDelete',$user->imageFile->id)}}" class="mediaDelete btn btn-xs btn-danger mx-2" style="height: fit-content;">Reset </a>
                                         @endif
                                     </div>
                                     @if ($errors->has('image'))

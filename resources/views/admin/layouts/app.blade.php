@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/vendor/open-iconic/font/css/open-iconic-bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}">
     <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/vendor/flatpickr/flatpickr.min.css')}}">
+    <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/vendor/select2/css/select2.min.css')}}">
     <!-- END PLUGINS STYLES -->
     <!-- BEGIN THEME STYLES -->
     <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/stylesheets/theme.min.css')}}" data-skin="default">
@@ -33,6 +34,10 @@
       }
       .metric{
         background: #ffffff;
+      }
+      .stacked-menu .menu-item.has-active.has-child>.menu-link {
+          color: #f7c46c;
+          font-weight: bold;
       }
       .breadcrumb, .breadcrumb-item {
           display: flex;
@@ -75,6 +80,9 @@
         .app-aside-light {
           background-color: #ffffff;
         }
+        input[type="file"]{
+          padding:3px;
+        }
     </style>
 
      @stack('css')
@@ -115,6 +123,7 @@
     <!-- END PLUGINS JS -->
     <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.min.js"></script>
     <script src="{{asset(assetLinkAdmin().'/assets/js/tag-editor.js')}}"></script>
+    <script src="{{asset(assetLinkAdmin().'/assets/vendor/select2/js/select2.min.js')}}"></script> 
     <!-- BEGIN THEME JS -->
     <script src="{{asset(assetLinkAdmin().'/assets/javascript/theme.min.js')}}"></script> <!-- END THEME JS -->
     <!-- BEGIN PAGE LEVEL JS -->
@@ -125,8 +134,6 @@
      <script>
       $(document).ready(function(){
 
-        $('.selectpicker').selectpicker();
-
         $('.slugEdit').click(function(){
             $('.slugEditData').toggle();
              var span = $(this).find('span');
@@ -135,8 +142,10 @@
             var input = $('.slugEditData');
             if (isCustom) {
                 input.attr('name', 'slug');
+                input.attr('disabled', true);
             } else {
                 input.removeAttr('name');
+                input.attr('disabled', false);
             }
         });
 
