@@ -15,9 +15,6 @@
     .catagorydiv ul li {
         list-style: none;
     }
-    .slugEditData{
-        display:none;
-    }
 </style>
 @endpush 
 @section('contents')
@@ -40,7 +37,6 @@
     </div>
 </header>
 
-
 @include(adminTheme().'alerts')
 <form action="{{route('admin.postsAction',['update',$post->id])}}" method="post" enctype="multipart/form-data">
     @csrf
@@ -54,7 +50,7 @@
                     <div class="card-body">
                         <div class="mb-1">
                             <label class="form-label">Post Name </label>
-                            <input type="text" class="form-control {{$errors->has('name')?'error':''}}" name="name" placeholder="Enter Post Name" value="{{$post->name?:old('name')}}" required="" />
+                            <input type="text" class="form-control titleForSlug {{$errors->has('name')?'error':''}}" name="name" placeholder="Enter Post Name" value="{{$post->name?:old('name')}}" required="" />
                             @if ($errors->has('name'))
                             <div class="invalid-feedback">{{ $errors->first('name') }}</div>
                             @endif
@@ -64,8 +60,8 @@
                             <input type="text" class="slugEditData form-control {{$errors->has('slug')?'error':''}}"
                                 @if($post->auto_slug) 
                                     name="slug"
-                                    style="display:block;"
-                                    disabled=""
+                                @else
+                                disabled
                                 @endif
                             placeholder="Post Slug" value="{{$post->slug?:old('slug')}}" />
                         </div>
@@ -238,7 +234,6 @@
         </div>
     </div>
 </form>
-
 
 @endsection 
 @push('js')

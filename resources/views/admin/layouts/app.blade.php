@@ -26,7 +26,7 @@
     <!-- BEGIN THEME STYLES -->
     <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/stylesheets/theme.min.css')}}" data-skin="default">
     <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/stylesheets/custom.css')}}">
-    <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/css/tag-editor.css')}}" >
+    <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/stylesheets/tag-editor.css')}}" >
 
     <style type="text/css">
       .card-title {
@@ -67,7 +67,6 @@
         }
 
          .slugEditData{
-            display:none;
             height: 30px;
             padding: 4px 10px;
         }
@@ -82,6 +81,15 @@
         }
         input[type="file"]{
           padding:3px;
+        }
+        
+        input:disabled{
+          background: #e5e5e5 !important;
+        }
+        .invalid-feedback {
+            display: block;
+            font-size: 100%;
+            color: #c20c0c;
         }
     </style>
 
@@ -129,23 +137,39 @@
     <!-- BEGIN PAGE LEVEL JS -->
     <script src="{{asset(assetLinkAdmin().'/assets/javascript/pages/dashboard-demo.js')}}"></script> 
     <!-- END PAGE LEVEL JS -->
+      <script src="{{asset(assetLinkAdmin().'/assets/javascript/tag-editor.js')}}"></script>
     <script src="{{asset('tinymce/tinymce.min.js')}}"></script>
     
      <script>
       $(document).ready(function(){
 
         $('.slugEdit').click(function(){
-            $('.slugEditData').toggle();
-             var span = $(this).find('span');
+            var span = $(this).find('span');
             var isCustom = span.text().trim() === 'Auto Slug';
             span.text(isCustom ? 'Custom Slug' : 'Auto Slug');
             var input = $('.slugEditData');
             if (isCustom) {
                 input.attr('name', 'slug');
-                input.attr('disabled', true);
+                input.attr('disabled', false);
             } else {
                 input.removeAttr('name');
-                input.attr('disabled', false);
+                input.attr('disabled', true);
+            }
+        });
+
+        $(document).on("keyup", ".titleForSlug", function () {
+            let title = $(this).val();
+            let slug = title
+                .toLowerCase()
+                // .replace(/[^a-z0-9]+/g, '-')
+                // .replace(/^-+|-+$/g, '');
+                .replace(/[^a-z0-9\u0980-\u09FF]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+
+            let $slugInput = $(".slugEditData");
+
+            if ($slugInput.is(":disabled")) {
+                $slugInput.val(slug);
             }
         });
 

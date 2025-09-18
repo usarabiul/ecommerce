@@ -155,7 +155,7 @@ class PostsController extends Controller
       if($action=='update'){
 
         $check = $r->validate([
-            'name' => 'required|max:191',
+            'name' => 'required|max:200',
             'seo_title' => 'nullable|max:200',
             'seo_description' => 'nullable|max:250',
             'catagoryid.*' => 'nullable|numeric',
@@ -869,4 +869,6 @@ class PostsController extends Controller
     }
 
     //Post Tags Function End
+
+
 }
