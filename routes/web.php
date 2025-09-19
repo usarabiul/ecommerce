@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\MenusController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\EcommerceController;
 
 
 Route::get('/',[WelcomeController::class,'index'])->name('index');
@@ -94,16 +95,37 @@ Route::any('/posts/{action}/{id?}',[PostsController::class,'postsAction'])->name
 // Posts Route End
 
 
+// Products Categories Route
+Route::get('/products/categories',[EcommerceController::class,'productsCategories'])->name('productsCategories');
+Route::any('/products/categories/{action}/{id?}',[EcommerceController::class,'productsCategoriesAction'])->name('productsCategoriesAction');
+// Products Categories Route End
 
-// Services Categories Route
-Route::get('/services/categories',[AdminController::class,'servicesCategories'])->name('servicesCategories');
-Route::any('/services/categories/{action}/{id?}',[AdminController::class,'servicesCategoriesAction'])->name('servicesCategoriesAction');
-// Services Categories Route End
+// Brands Route
+Route::get('products/brands',[EcommerceController::class,'productsBrands'])->name('productsBrands');
+Route::any('products/brands/{action}/{id?}',[EcommerceController::class,'productsBrandsAction'])->name('productsBrandsAction');
+// Brands Route End
 
-//Services Management
-Route::get('/services',[AdminController::class,'services'])->name('services');
-Route::any('/services/{action}/{id?}',[AdminController::class,'servicesAction'])->name('servicesAction');
-//Services Management End
+// Products Tags Route
+Route::get('/products/tags',[EcommerceController::class,'productsTags'])->name('productsTags');
+Route::any('/products/tags/{action}/{id?}',[EcommerceController::class,'productsTagsAction'])->name('productsTagsAction');
+// Products Tags Route End
+
+// Products Attributes Route
+Route::get('/products/attributes',[EcommerceController::class,'productsAttributes'])->name('productsAttributes');
+Route::any('/products/attributes/{action}/{id?}',[EcommerceController::class,'productsAttributesAction'])->name('productsAttributesAction');
+Route::any('/products/attributes/item/{action}/{id}',[EcommerceController::class,'productsAttributesItemAction'])->name('productsAttributesItemAction');
+// Products Attributes Route End
+
+// Products Tags Route
+Route::get('/products/reviews',[EcommerceController::class,'productsReview'])->name('productsReview');
+Route::any('/products/reviews/{action}/{id?}',[EcommerceController::class,'productsReviewAction'])->name('productsReviewAction');
+// Products Tags Route End
+
+//Products Management
+Route::get('/products',[EcommerceController::class,'products'])->name('products');
+Route::any('/products/{action}/{id?}',[EcommerceController::class,'productsAction'])->name('productsAction');
+Route::any('/products/update/ajax/{column}/{id}',[EcommerceController::class,'productsUpdateAjax'])->name('productsUpdateAjax');
+//Products Management End
 
 // Posts Route
 Route::get('/clients',[AdminController::class,'clients'])->name('clients');

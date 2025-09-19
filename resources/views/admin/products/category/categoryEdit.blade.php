@@ -1,10 +1,12 @@
-@extends(adminTheme().'layouts.app') @section('title')
+@extends(general()->adminTheme.'.layouts.app')
+@section('title')
 <title>{{websiteTitle('Category Edit')}}</title>
-@endsection @push('css')
-
-<style type="text/css"></style>
-@endpush @section('contents')
-
+@endsection
+@push('css')
+<style type="text/css">
+</style>
+@endpush
+@section('contents')
 <div class="content-header row">
     <div class="content-header-left col-md-6 col-12 mb-2">
         <h3 class="content-header-title mb-0">Category Edit</h3>
@@ -19,20 +21,19 @@
     </div>
     <div class="content-header-right col-md-6 col-12 mb-md-0 mb-2">
         <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
-            <a class="btn btn-outline-primary" href="{{route('admin.servicesCategories')}}">BACK</a>
-            <a class="btn btn-outline-primary" href="{{route('admin.servicesCategoriesAction','create')}}">Add Category</a>
-            <a class="btn btn-outline-primary" href="{{route('admin.servicesCategoriesAction',['edit',$category->id])}}">
+            <a class="btn btn-outline-primary" href="{{route('admin.productsCategories')}}">BACK</a>
+            <a class="btn btn-outline-primary" href="{{route('admin.productsCategoriesAction','create')}}">Add Category</a>
+            <a class="btn btn-outline-primary" href="{{route('admin.productsCategoriesAction',['edit',$category->id])}}">
                 <i class="fa-solid fa-rotate"></i>
             </a>
         </div>
     </div>
 </div>
-
 <div class="content-body">
     <!-- Basic Elements start -->
     <section class="basic-elements">
         @include('admin.alerts')
-        <form action="{{route('admin.servicesCategoriesAction',['update',$category->id])}}" method="post" enctype="multipart/form-data">
+        <form action="{{route('admin.productsCategoriesAction',['update',$category->id])}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-md-8">
@@ -56,7 +57,7 @@
 
                                         @foreach($parents as $parent) @if($parent->id==$category->id) @else
                                         <option value="{{$parent->id}}" {{$parent->id==$category->parent_id?'selected':''}}>{{$parent->name}}</option>
-                                        @if($parent->subctgs->count() > 0) @include('admin.services.includes.editSubcategory',['subcategories' =>$parent->subctgs, 'i'=>1]) @endif @endif @endforeach
+                                        @if($parent->subctgs->count() > 0) @include('admin.products.includes.editSubcategory',['subcategories' =>$parent->subctgs, 'i'=>1]) @endif @endif @endforeach
                                     </select>
                                     @if ($errors->has('parent_id'))
                                     <p style="color: red; margin: 0; font-size: 10px;">{{ $errors->first('parent_id') }}</p>
@@ -64,7 +65,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Description </label>
-                                    <textarea name="description" class="{{$errors->has('description')?'error':''}} summernote" placeholder="Enter Description">{!!$category->description!!}</textarea>
+                                    <textarea name="description" class="{{$errors->has('description')?'error':''}} tinyEditor" placeholder="Enter Description">{!!$category->description!!}</textarea>
                                     @if ($errors->has('description'))
                                     <p style="color: red; margin: 0; font-size: 10px;">{{ $errors->first('description') }}</p>
                                     @endif
@@ -104,7 +105,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-header" style="border-bottom: 1px solid #e3ebf3;">
@@ -156,14 +156,20 @@
                                         </div>
                                     </div>
                                     <div class="form-group col-6">
-                                        <label for="Featured">Category Featured</label>
+                                        <label for="fetured">Featured</label>
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="Featured" name="featured" {{$category->featured?'checked':''}}/>
-                                            <label class="custom-control-label" for="Featured">Active</label>
+                                            <input type="checkbox" class="custom-control-input" id="featured" name="featured" {{$category->featured?'checked':''}}/>
+                                            <label class="custom-control-label" for="featured">Active</label>
                                         </div>
                                     </div>
                                 </div>
-                                
+                                <div class="form-group">
+                                    <label>Published Date</label>
+                                    <input type="date" class="form-control form-control-sm" name="created_at" value="{{$category->created_at->format('Y-m-d')}}">
+                                    @if ($errors->has('created_at'))
+                                    <p style="color: red; margin: 0; font-size: 10px;">{{ $errors->first('created_at') }}</p>
+                                    @endif
+                                </div>
                                 <button type="submit" class="btn btn-primary mr-sm-1 mb-1 mb-sm-0">Save changes</button>
                             </div>
                         </div>
@@ -171,37 +177,9 @@
                 </div>
             </div>
         </form>
-        <div class="card">
-            <div class="card-header" style="border-bottom: 1px solid #e3ebf3;">
-                <h4 class="card-title">Add Menu</h4>
-            </div>
-            <div class="card-content">
-                <div class="card-body">
-                    @include(adminTheme().'menus.includes.menuSetting',['item_id'=>$category->id,'menu_type'=>3])
-                </div>
-            </div>
-        </div>
     </section>
-    <!-- Basic Inputs end -->
 </div>
-
-@endsection @push('js')
-
-<script>
-    $(".summernote").summernote({
-        placeholder: "Hello stand alone ui",
-        tabsize: 2,
-        height: 120,
-        toolbar: [
-            ["style", ["style"]],
-            ["font", ["bold", "underline"]],
-            ["color", ["color"]],
-            ["para", ["ul", "ol", "paragraph"]],
-            ["table", ["table"]],
-            ["insert", ["link", "picture"]],
-            ["view", ["fullscreen", "codeview"]],
-        ],
-    });
-</script>
+@endsection 
+@push('js')
 
 @endpush

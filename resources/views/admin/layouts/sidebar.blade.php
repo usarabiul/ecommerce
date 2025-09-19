@@ -68,16 +68,27 @@
                     </li>
 
                     <!-- Products -->
-                    <li class="menu-item has-child">
+                    <li class="menu-item has-child {{ Request::is('admin/products*') ? 'has-open has-active' : '' }}">
                         <a href="javascript:;" class="menu-link">
                             <span class="menu-icon fas fa-shopping-cart"></span>
                             <span class="menu-text">Products Lists</span>
                         </a>
                         <ul class="menu">
-                            <li class="menu-item"><a href="ecommerce-products.html" class="menu-link">All Products</a></li>
-                            <li class="menu-item"><a href="ecommerce-products-details.html" class="menu-link">New Products</a></li>
-                            <li class="menu-item"><a href="ecommerce-add-new-products.html" class="menu-link">Categories</a></li>
-                            <li class="menu-item"><a href="ecommerce-orders.html" class="menu-link">Attributes</a></li>
+                            <li class="menu-item
+                            {{ 
+                                (Request::is('admin/products*') 
+                                    && !Request::is('admin/products/categories*') 
+                                    && !Request::is('admin/products/brands*') 
+                                    && !Request::is('admin/products/tags*') 
+                                    && !Request::is('admin/products/attributes*') 
+                                    && !Request::is('admin/products/reviews*') 
+                                ) ? 'has-active' : '' 
+                            }}
+                            "><a href="{{route('admin.products')}}" class="menu-link">All Products</a></li>
+                            <li class="menu-item"><a href="{{route('admin.productsAction','create')}}" class="menu-link">New Products</a></li>
+                            <li class="menu-item"><a href="{{route('admin.productsCategories')}}" class="menu-link">Categories</a></li>
+                            <li class="menu-item"><a href="{{route('admin.productsAttributes')}}" class="menu-link">Attributes</a></li>
+                            <li class="menu-item"><a href="{{route('admin.productsReview')}}" class="menu-link">Reviews</a></li>
                         </ul>
                     </li>
 
