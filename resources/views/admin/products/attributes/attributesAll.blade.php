@@ -1,4 +1,5 @@
-@extends(general()->adminTheme.'.layouts.app') @section('title')
+@extends(adminTheme().'layouts.app') 
+@section('title')
 <title>{{websiteTitle('Attributes List')}}</title>
 @endsection @push('css')
 <style type="text/css">
@@ -10,31 +11,28 @@
 	}
 
 </style>
-@endpush @section('contents')
+@endpush 
+@section('contents')
 
-<div class="content-header row">
-    <div class="content-header-left col-md-6 col-12 mb-2">
-        <h3 class="content-header-title mb-0">Attributes List</h3>
-        <div class="row breadcrumbs-top">
-            <div class="breadcrumb-wrapper col-12">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard </a></li>
-                    <li class="breadcrumb-item active">Attributes List</li>
+<header class="page-title-bar">
+    <div class="d-md-flex align-items-md-start">
+        <div class="mr-sm-auto">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mt-1 p-0 mb-0">
+                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item active" >Attributes List</li>
                 </ol>
-            </div>
+            </nav>
+        </div>
+        <div class="btn-toolbar">
+            <a href="{{route('admin.productsAttributesAction','create')}}" type="button" class="btn btn-outline-success mr-2"><i class="fas fa-plus"></i> Add Attribute</a>
+            <a href="{{route('admin.productsAttributes')}}" type="button" class="btn btn-primary"><i class="fas fa-spinner"></i></a>
         </div>
     </div>
-    <div class="content-header-right col-md-6 col-12 mb-md-0 mb-2">
-        <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
-        <a class="btn btn-outline-primary" href="{{route('admin.productsAttributesAction','create')}}">Add Attribute</a>
-            <a class="btn btn-outline-primary reloadPage1" href="{{route('admin.productsAttributes')}}">
-                <i class="fa-solid fa-rotate"></i>
-            </a>
-        </div>
-    </div>
-</div>
+</header>
 
-@include('admin.alerts')
+@include(adminTheme().'alerts')
 
 <div class="card">
     <div class="card-header" style="border-bottom: 1px solid #e3ebf3;">
@@ -42,9 +40,9 @@
     </div>
     <div class="card-content">
         <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-striped table-bordered table-hover">
-                    <thead>
+            <div class="table-responsive" style="min-height:300px;" >
+                <table class="table table-hover">
+                    <thead class="thead-light">
                         <tr>
                             <th style="width: 250px;min-width: 250px;">Attributes</th>
                             <th style="min-width: 350px;">Items</th>

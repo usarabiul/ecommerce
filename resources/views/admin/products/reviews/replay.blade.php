@@ -1,4 +1,4 @@
-@extends(general()->adminTheme.'.layouts.app')
+@extends(adminTheme().'layouts.app') 
 @section('title')
 <title>{{websiteTitle('Review Replay')}}</title>
 @endsection
@@ -42,65 +42,57 @@
    </div>
 </div>
  
-	
-
- <div class="content-body">
- 	<!-- Basic Elements start -->
-	 <section class="basic-elements">
-	 	@include(general()->adminTheme.'.alerts')
-	     <div class="row">
-	        <div class="col-md-6">
-	         		
-	            <div class="card">
-	             	<div class="card-header " style="border-bottom: 1px solid #e3ebf3;">
-					 	<h4 class="card-title">Review Replay</h4>
-				 	</div>
-	                 <div class="card-content">
-	                     <div class="card-body">
-	                     	<table class="table table-bordered">
-	                     		<tr>
-	                     			<td class="commentauthor">
-							            <span><img src="{{asset($review->image())}}"></span>
-                                        {{$review->name}}
-							            <br>     
-							            {{$review->email}}
-							            </td>
-	                     		</tr>
-	                     		<tr>
-	                     			<td>
-                                        <b>Rating:</b> {{$review->rating}} Star
-                                        <br>
-                                        <b>Review:</b> {!!$review->content!!}
-                                    </td>
-	                     		</tr>
-	                     	</table>
-                        	<form action="{{route('admin.productsReviewAction',['replay',$review->id])}}" method="post">
-				                  @csrf
-				                <div class="form-group">
-				                  <label>Replay Content</label>
-				                  @if ($errors->has('replay'))
-				                    <p style="color: red;margin: 0;">{{ $errors->first('replay') }}</p>
-				                  @endif
-				                  <textarea name="replay" rows="5" class="form-control" placeholder="Write replay">{!!$replay->content!!}</textarea>
-				                </div>
-				                <div class="row">
-				                    <div class="form-group col-lg-6">
-				                        <label>Status</label>
-				                        <div class="i-checks"><label style="cursor: pointer;"> <input name="status"  type="checkbox" {{$replay->status=='active'?'checked':''}} > <i></i> Active</label></div>
-				                    </div>
-				                </div>
-				                
-				                <div class="form-group">
-				                  <button type="submit" class="btn btn-success">Replay</button>
-				                </div>
-				            </form>
-		                 </div>
-		             </div>
-		        </div>
+@include(adminTheme().'alerts')
+<div class="row">
+	<div class="col-md-6">
+			
+		<div class="card">
+			<div class="card-header " style="border-bottom: 1px solid #e3ebf3;">
+				<h4 class="card-title">Review Replay</h4>
 			</div>
+				<div class="card-content">
+					<div class="card-body">
+					<table class="table table-bordered">
+						<tr>
+							<td class="commentauthor">
+								<span><img src="{{asset($review->image())}}"></span>
+								{{$review->name}}
+								<br>     
+								{{$review->email}}
+								</td>
+						</tr>
+						<tr>
+							<td>
+								<b>Rating:</b> {{$review->rating}} Star
+								<br>
+								<b>Review:</b> {!!$review->content!!}
+							</td>
+						</tr>
+					</table>
+					<form action="{{route('admin.productsReviewAction',['replay',$review->id])}}" method="post">
+							@csrf
+						<div class="form-group">
+							<label>Replay Content</label>
+							@if ($errors->has('replay'))
+							<p style="color: red;margin: 0;">{{ $errors->first('replay') }}</p>
+							@endif
+							<textarea name="replay" rows="5" class="form-control" placeholder="Write replay">{!!$replay->content!!}</textarea>
+						</div>
+						<div class="row">
+							<div class="form-group col-lg-6">
+								<label>Status</label>
+								<div class="i-checks"><label style="cursor: pointer;"> <input name="status"  type="checkbox" {{$replay->status=='active'?'checked':''}} > <i></i> Active</label></div>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<button type="submit" class="btn btn-success">Replay</button>
+						</div>
+					</form>
+					</div>
+				</div>
 		</div>
-	 </section>
-	 <!-- Basic Inputs end -->
+	</div>
 </div>
 
 

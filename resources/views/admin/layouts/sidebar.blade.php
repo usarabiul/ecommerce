@@ -61,7 +61,7 @@
 
                     <!-- Order Management -->
                     <li class="menu-item">
-                        <a href="javascript:;" class="menu-link">
+                        <a href="{{route('admin.orders')}}" class="menu-link">
                             <span class="menu-icon fas fa-briefcase"></span>
                             <span class="menu-text">Order Management</span>
                         </a>
@@ -85,10 +85,10 @@
                                 ) ? 'has-active' : '' 
                             }}
                             "><a href="{{route('admin.products')}}" class="menu-link">All Products</a></li>
-                            <li class="menu-item"><a href="{{route('admin.productsAction','create')}}" class="menu-link">New Products</a></li>
-                            <li class="menu-item"><a href="{{route('admin.productsCategories')}}" class="menu-link">Categories</a></li>
-                            <li class="menu-item"><a href="{{route('admin.productsAttributes')}}" class="menu-link">Attributes</a></li>
-                            <li class="menu-item"><a href="{{route('admin.productsReview')}}" class="menu-link">Reviews</a></li>
+                            <li class="menu-item "><a href="{{route('admin.productsAction','create')}}" class="menu-link">New Products</a></li>
+                            <li class="menu-item {{ Request::is('admin/products/categories*') ? 'has-active' : '' }}"><a href="{{route('admin.productsCategories')}}" class="menu-link">Categories</a></li>
+                            <li class="menu-item {{ Request::is('admin/products/attributes*') ? 'has-active' : '' }}"><a href="{{route('admin.productsAttributes')}}" class="menu-link">Attributes</a></li>
+                            <li class="menu-item {{ Request::is('admin/products/reviews*') ? 'has-active' : '' }}"><a href="{{route('admin.productsReview')}}" class="menu-link">Reviews</a></li>
                         </ul>
                     </li>
 

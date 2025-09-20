@@ -49,6 +49,46 @@ class PostAttribute extends Model
         return $this->belongsTo(Attribute::class,'reff_id');
     }
 
+    public function product(){
+        return $this->belongsTo(Post::class,'reff_id');
+    }
+
+    public function attributeItem(){
+        return $this->belongsTo(Attribute::class,'parent_id');
+    }
+
+    public function attributeItemValue(){
+        $value ='unknown';
+        
+        if($this->attributeItem && $this->attributeItem->parent){
+            $parent =$this->attributeItem->parent;
+            if($parent->view==2){
+                $value = $this->value_1 ?: ($this->attributeItem->icon ?: 'black');
+        	}elseif($parent->view==3){
+        	$value =$this->imageFile?$this->image():$this->attributeItem->image();
+        	}else{
+        	$value =$this->attributeItem->name;
+            }
+        }
+        return $value;
+    }
+
+    public function attribute(){
+        return $this->belongsTo(Attribute::class,'reff_id');
+    }
+    
+    public function branch(){
+        return $this->belongsTo(Attribute::class,'reff_id')->where('type',13);
+    }
+
+    public function attributeCheck(){
+        return $this->belongsTo(PostAttribute::class,'reff_id','reff_id')->where('type',4);
+    }
+
+
+    public function attributeVatiationItems(){
+        return $this->hasMany(PostAttributeVariation::class,'src_id');
+    }
     
 
 

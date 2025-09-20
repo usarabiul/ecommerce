@@ -98,24 +98,20 @@ function en2bnMonth($month){
 function priceFormat($amount=0)
 {
   $formatAmount ='';
-
-  $formatAmount = number_format($amount,0);
-
+  $formatAmount = number_format($amount,general()->currency_decimal);
   return $formatAmount;
-
 }
-
 
 function priceFullFormat($amount=0)
 {
   $formatAmount ='';
-
-  $amountFormet = number_format($amount,0);
-  
-  $formatAmount = general()->currency.' '.$amountFormet;
- 
+  $amountFormat = number_format($amount,general()->currency_decimal);
+  if(general()->currency_position==0){
+    $formatAmount = general()->currency.' '.$amountFormat;
+  }else{
+     $formatAmount = $amountFormat.' '.general()->currency;
+  }
   return $formatAmount;
-
 }
 
 function sendMail($toEmail,$toName,$subject,$datas,$template,$attachments=null){

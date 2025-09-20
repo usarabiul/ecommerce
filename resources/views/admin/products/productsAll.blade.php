@@ -28,7 +28,7 @@
 </header>
 
 
-@include('admin.alerts')
+@include(adminTheme().'alerts')
 
 
 <div class="card">
@@ -39,13 +39,23 @@
         <div class="card-body">
             <form action="{{route('admin.products')}}">
                 <div class="row">
-                    <div class="col-md-6 mb-1">
+                    <div class="col-md-4 mb-1">
                         <div class="input-group">
                             <input type="date" name="startDate" value="{{request()->startDate?Carbon\Carbon::parse(request()->startDate)->format('Y-m-d') :''}}" class="form-control {{$errors->has('startDate')?'error':''}}" />
                             <input type="date" value="{{request()->endDate?Carbon\Carbon::parse(request()->endDate)->format('Y-m-d') :''}}" name="endDate" class="form-control {{$errors->has('endDate')?'error':''}}" />
                         </div>
                     </div>
-                    <div class="col-md-6 mb-1">
+                    <div class="col-md-2 mb-1">
+                        <select class="form-control" name="category">
+                            <option value="">Select Category</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 mb-1">
+                        <select class="form-control" name="brand">
+                            <option value="">Select Brand</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-1"> 
                         <div class="input-group">
                             <input type="text" name="search" value="{{request()->search?request()->search:''}}" placeholder="Product Name, Category Name" class="form-control {{$errors->has('search')?'error':''}}" />
                             <button type="submit" class="btn btn-success rounded-0"><i class="fa fa-search"></i> Search</button>
@@ -79,9 +89,9 @@
                         </ul>
                     </div>
                 </div>
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover">
-                        <thead>
+                <div class="table-responsive" style="min-height:300px;">
+                    <table class="table table-hover">
+                        <thead class="thead-light">
                             <tr>
                                 <th style="min-width: 100px;width:100px;">
                                     <div class="custom-control custom-checkbox">
@@ -89,10 +99,10 @@
                                     </div>
                                 </th>
                                 <th style="min-width: 350px;">Product Name</th>
-                                <th style="min-width: 80px;">Image</th>
-                                <th style="min-width: 200px;">Catagory</th>
-                                <th style="min-width: 80px;">Status</th>
-                                <th style="min-width: 160px;">Action/Author</th>
+                                <th style="min-width: 80px;width: 80px;text-align:center;">Image</th>
+                                <th style="min-width: 200px;">Catagory/Brand</th>
+                                <th style="min-width: 80px;width:80px;">Status</th>
+                                <th style="min-width: 60px;width:60px;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -100,33 +110,39 @@
                             @foreach($products as $i=>$product)
                             <tr>
                                 <td>
-                                    <input class="checkbox" type="checkbox" name="checkid[]" value="{{$product->id}}" /><br />
+                                    <div class="custom-control custom-control-inline custom-control-nolabel custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input checkbox" name="checkid[]" value="{{$product->id}}" id="ckb1">  <label class="custom-control-label" for="ckb1">ID </label>
+                                    </div>
                                     {{$products->currentpage()==1?$i+1:$i+($products->perpage()*($products->currentpage() - 1))+1}}
+                                    <br>
+                                    <a href="{{route('admin.productsReview',['product_id'=>$product->id])}}" style="color: #ccc;"><i class="fa fa-star" style="color: #ffc107;"></i> {{number_format($product->totalReviewer())}}</a>
                                 </td>
                                 <td>
                                     <span><a href="{{route('productView',$product->slug?:'no-slug')}}" target="_blank">{{$product->name}}</a></span>
                                     <br/>
-                                    <span style="color: #ccc;"><b style="color: #1ab394;">{{general()->currency}}</b> {{priceFormat($product->final_price)}}</span>
-
                                     @if($product->featured==true)
-                                    <span><i class="fa fa-bolt" style="color: #ff425c;"></i></span>
+                                    <span><i class="fa fa-bolt" style="color: #ea6759;"></i></span>
                                     @endif
-
-                                    @if($product->brand)
-                                    <span style="color: #ccc;"><b style="color: #1ab394;">Brand:</b> {{$product->brand->name}}</span>
-                                    @endif
+                                    <span style="color: #ccc;">{{priceFullFormat($product->final_price)}}</span>
+                                    
                                     <span style="color: #ccc;"><i class="fa fa-calendar" style="color: #1ab394;"></i> {{$product->created_at->format('d-m-Y')}}</span>
-                                    <a href="{{route('admin.productsReview',['product_id'=>$product->id])}}" style="color: #ccc;"><i class="fa fa-star" style="color: #ffc107;"></i> {{number_format($product->totalReviewer())}}</a>
+                                    
+                                    <span style="color: #ccc;">
+                                        <i class="fa fa-user" style="color: #1ab394;"></i>
+                                        {{Str::limit($product->user?$product->user->name:'No Author',15)}}
+                                    </span>
+
                                 </td>
                                 <td style="padding: 5px; text-align: center;">
                                     <img src="{{asset($product->image())}}" style="max-width: 70px; max-height: 50px;" />
                                 </td>
                                 <td>
-                                    @foreach($product->productCategories as $i=>$ctg)
+                                    {{ $product->productCategories->pluck('name')->implode(' - ') }}
 
-                                     {{$i==0?'':'-'}} {{$ctg->name}} 
-
-                                     @endforeach
+                                    @if($product->brand)
+                                    <br>
+                                    <span style="color: #ccc;"><b style="color: #1ab394;">Brand:</b> {{$product->brand->name}}</span>
+                                    @endif
                                 </td>
                                 <td>
                                     @if($product->status=='active')
@@ -136,18 +152,18 @@
                                     @else
                                     <span class="badge badge-danger">Draft </span>
                                     @endif 
+                                    
                                 </td>
-                                <td style="padding: 5px;">
-                                    <a href="{{route('admin.productsAction',['edit',$product->id])}}" class="btn btn-sm btn-info">Edit</a>
-                                    <a href="{{route('admin.productsAction',['view',$product->id])}}" class="btn btn-sm btn-success">View</a>
-                                    @isset(json_decode(Auth::user()->permission->permission, true)['products']['delete'])
-                                    <a href="{{route('admin.productsAction',['delete',$product->id])}}" class="btn btn-sm btn-danger" onclick="return confirm('Are You Want To Delete?')">Delete</a>
-                                    @endisset
-                                    <br />
-                                    <span style="color: #ccc;">
-                                        <i class="fa fa-user" style="color: #1ab394;"></i>
-                                        {{Str::limit($product->user?$product->user->name:'No Author',15)}}
-                                    </span>
+                                <td style="text-align:center;">
+                                    <div class="dropdown">
+                                        <button type="button" class="btn btn-success btn-ico" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                        <div class="dropdown-arrow"></div>
+                                            <a href="{{route('admin.productsAction',['edit',$product->id])}}" class="dropdown-item"><i class="fa fa-edit"></i> Edit </a>
+                                            <a href="{{route('admin.productsAction',['view',$product->id])}}" class="dropdown-item"><i class="fa fa-eye"></i> View </a>
+                                            <a href="{{route('admin.productsAction',['delete',$product->id])}}" onclick="return confirm('Are You Want To Delete')" class="dropdown-item"><i class="fa fa-trash"></i> Delete </a>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                             @endforeach

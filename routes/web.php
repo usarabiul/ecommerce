@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\MenusController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\EcommerceController;
+use App\Http\Controllers\Admin\OrdersController;
 
 
 Route::get('/',[WelcomeController::class,'index'])->name('index');
@@ -20,8 +21,8 @@ Route::post('/subscribe',[WelcomeController::class,'subscribe'])->name('subscrib
 Route::get('/switch/{lang?}',[WelcomeController::class,'language'])->name('language');
 Route::get('/geo/filter/{id}',[WelcomeController::class,'geo_filter'])->name('geo_filter');
 
-Route::get('/service/category/{slug}',[WelcomeController::class,'serviceCategory'])->name('serviceCategory');
-Route::get('/service/{slug}',[WelcomeController::class,'serviceView'])->name('serviceView');
+Route::get('/product/category/{slug}',[WelcomeController::class,'productCategory'])->name('productCategory');
+Route::get('/product/{slug}',[WelcomeController::class,'productView'])->name('productView');
 
 Route::get('/blog/category/{slug}',[WelcomeController::class,'blogCategory'])->name('blogCategory');
 Route::get('/blog/author/{id}/{slug}',[WelcomeController::class,'blogAuthor'])->name('blogAuthor');
@@ -126,6 +127,17 @@ Route::get('/products',[EcommerceController::class,'products'])->name('products'
 Route::any('/products/{action}/{id?}',[EcommerceController::class,'productsAction'])->name('productsAction');
 Route::any('/products/update/ajax/{column}/{id}',[EcommerceController::class,'productsUpdateAjax'])->name('productsUpdateAjax');
 //Products Management End
+
+
+// Order Management Route End
+Route::get('/invoice/{id}',[OrdersController::class,'invoice'])->name('invoice');
+Route::get('/orders/{status?}',[OrdersController::class,'orders'])->name('orders');
+Route::any('/orders-manage/{action}/{id}',[OrdersController::class,'ordersAction'])->name('ordersAction');
+Route::get('/orders/manage/{id}',[OrdersController::class,'ordersManage'])->name('ordersManage');
+Route::post('/orders/update/{id}',[OrdersController::class,'ordersManageUpdate'])->name('ordersManageUpdate');
+Route::post('/orders/payments/{id}',[OrdersController::class,'ordersPaymentsUpdate'])->name('ordersPaymentsUpdate');
+Route::post('/orders/return/{id}',[OrdersController::class,'ordersReturnUpdate'])->name('ordersReturnUpdate');
+// Order Management Route End
 
 // Posts Route
 Route::get('/clients',[AdminController::class,'clients'])->name('clients');
