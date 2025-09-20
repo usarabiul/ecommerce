@@ -4,66 +4,27 @@
 <style type="text/css"></style>
 @endpush @section('contents')
 
-<div class="content-header row">
-    <div class="content-header-left col-md-6 col-12 mb-2">
-        <h3 class="content-header-title mb-0">Order List</h3>
-        <div class="row breadcrumbs-top">
-            <div class="breadcrumb-wrapper col-12">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard </a></li>
-                    <li class="breadcrumb-item active">Order List</li>
+<header class="page-title-bar">
+    <div class="d-md-flex align-items-md-start">
+        <div class="mr-sm-auto">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mt-1 p-0 mb-0">
+                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Orders List</li>
                 </ol>
-            </div>
+            </nav>
+        </div>
+        <div class="btn-toolbar">
+            <a href="{{route('admin.pagesAction','create')}}" type="button" class="btn btn-outline-success mr-2"><i class="fas fa-plus"></i> Add Order</a>
+            <a href="{{route('admin.orders')}}" type="button" class="btn btn-primary"><i class="fas fa-spinner"></i></a>
         </div>
     </div>
-    <div class="content-header-right col-md-6 col-12 mb-md-0 mb-2">
-        <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
-            <a class="btn btn-outline-primary" href="{{route('admin.orders')}}">
-                <i class="fa-solid fa-rotate"></i>
-            </a>
-        </div>
-    </div>
-</div>
+</header>
 
 
 @include('admin.alerts')
-<div class="card">
-    <div class="card-content">
-        <div id="accordion">
-                <div
-                    class="card-header collapsed"
-                    data-toggle="collapse"
-                    data-target="#collapseTwo"
-                    aria-expanded="false"
-                    aria-controls="collapseTwo"
-                    id="headingTwo"
-                    style="background:#009688;padding: 15px 20px; cursor: pointer;"
-                >
-                   <i class="fa fa-filter"></i> Search click Here..
-                </div>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion" style="border: 1px solid #00b5b8; border-top: 0;">
-                    <div class="card-body">
-                        <form action="{{route('admin.orders',$status)}}">
-                            <div class="row">
-                                <div class="col-md-6 mb-1">
-                                    <div class="input-group">
-                                        <input type="date" name="startDate" value="{{request()->startDate?Carbon\Carbon::parse(request()->startDate)->format('Y-m-d') :''}}" class="form-control {{$errors->has('startDate')?'error':''}}" />
-                                        <input type="date" value="{{request()->endDate?Carbon\Carbon::parse(request()->endDate)->format('Y-m-d') :''}}" name="endDate" class="form-control {{$errors->has('endDate')?'error':''}}" />
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-1">
-                                    <div class="input-group">
-                                        <input type="text" name="search" value="{{request()->search?:''}}" placeholder="Order Invoice, Customer Mobile, email" class="form-control {{$errors->has('search')?'error':''}}" />
-                                        <button type="submit" class="btn btn-success rounded-0"><i class="fa fa-search"></i> Search</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-    </div>
-</div>
+
 
 <div class="card">
     <div class="card-header" style="border-bottom: 1px solid #e3ebf3;">
@@ -71,6 +32,23 @@
     </div>
     <div class="card-content">
         <div class="card-body">
+            <form action="{{route('admin.orders',$status)}}">
+                <div class="row">
+                    <div class="col-md-6 mb-1">
+                        <div class="input-group">
+                            <input type="date" name="startDate" value="{{request()->startDate?Carbon\Carbon::parse(request()->startDate)->format('Y-m-d') :''}}" class="form-control {{$errors->has('startDate')?'error':''}}" />
+                            <input type="date" value="{{request()->endDate?Carbon\Carbon::parse(request()->endDate)->format('Y-m-d') :''}}" name="endDate" class="form-control {{$errors->has('endDate')?'error':''}}" />
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-1">
+                        <div class="input-group">
+                            <input type="text" name="search" value="{{request()->search?:''}}" placeholder="Order Invoice, Customer Mobile, email" class="form-control {{$errors->has('search')?'error':''}}" />
+                            <button type="submit" class="btn btn-success rounded-0"><i class="fa fa-search"></i> Search</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <hr>
             <form action="{{route('admin.orders',$status)}}">
                 <div class="row">
                     <div class="col-md-4">
@@ -84,7 +62,7 @@
                                 <option value="5">Cancelled</option>
                                 <option value="6">Delete</option>
                             </select>
-                            <button class="btn btn-sm btn-primary rounded-0" onclick="return confirm('Are You Want To Action?')">Action</button>
+                            <button class="btn btn-primary rounded-0" onclick="return confirm('Are You Want To Action?')">Action</button>
                         </div>
                     </div>
                     <div class="col-md-8">
@@ -118,7 +96,7 @@
                             @foreach($orders as $i=>$order)
                             <tr>
                                 <td><input class="checkbox" type="checkbox" name="checkid[]" value="{{$order->id}}" /> {{$i+1}}</td>
-                                <td><a href="{{route('admin.invoice',$order->id)}}">{{$order->invoice}}</a></td>
+                                <td><a href="{{route('admin.ordersAction',['invoice',$order->id])}}">{{$order->invoice}}</a></td>
                                 <td>{{$order->name}} - {{$order->mobile}}</td>
                                 <td>
                                     {{App\Models\General::first()->currency}}
@@ -133,9 +111,7 @@
                                 </td>
                                 <td>{{$order->created_at->format('Y-m-d h:i A')}}</td>
                                 <td>
-                                @if($order->payment_method==null)
-                                <span class="badge badge-success" style="background:#ff5722;">Pending Payment</span>
-                                @else
+
                                 @if($order->order_status=='confirmed')
                                 <span class="badge badge-success" style="background:#e91e63;">{{ucfirst($order->order_status)}}</span>
                                 @elseif($order->order_status=='shipped')
@@ -147,11 +123,9 @@
                                 @else
                                 <span class="badge badge-success" style="background:#ff9800;">{{ucfirst($order->order_status)}}</span>
                                 @endif
-                                @endif
-                                    
                                 </td>
                                 <td>
-                                    <a href="{{route('admin.ordersAction',['view',$order->id])}}" class="btn btn-sm btn-success">Manage</a>
+                                    <a href="{{route('admin.ordersAction',['edit',$order->id])}}" class="btn btn-sm btn-success">Manage</a>
                                 </td>
                             </tr>
                             

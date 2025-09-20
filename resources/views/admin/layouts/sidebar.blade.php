@@ -60,7 +60,7 @@
                     <li class="menu-header">Ecommerce Unit</li>
 
                     <!-- Order Management -->
-                    <li class="menu-item">
+                    <li class="menu-item {{ Request::is('admin/orders*') ? 'has-active' : '' }}">
                         <a href="{{route('admin.orders')}}" class="menu-link">
                             <span class="menu-icon fas fa-briefcase"></span>
                             <span class="menu-text">Order Management</span>
@@ -68,7 +68,7 @@
                     </li>
 
                     <!-- Products -->
-                    <li class="menu-item has-child {{ Request::is('admin/products*') ? 'has-open has-active' : '' }}">
+                    <li class="menu-item has-child {{ Request::is('admin/products*') ? 'has-open' : '' }}">
                         <a href="javascript:;" class="menu-link">
                             <span class="menu-icon fas fa-shopping-cart"></span>
                             <span class="menu-text">Products Lists</span>
@@ -87,6 +87,8 @@
                             "><a href="{{route('admin.products')}}" class="menu-link">All Products</a></li>
                             <li class="menu-item "><a href="{{route('admin.productsAction','create')}}" class="menu-link">New Products</a></li>
                             <li class="menu-item {{ Request::is('admin/products/categories*') ? 'has-active' : '' }}"><a href="{{route('admin.productsCategories')}}" class="menu-link">Categories</a></li>
+                            <li class="menu-item {{ Request::is('admin/products/brands*') ? 'has-active' : '' }}"><a href="{{route('admin.productsBrands')}}" class="menu-link">Brands</a></li>
+                            <li class="menu-item {{ Request::is('admin/products/tags*') ? 'has-active' : '' }}"><a href="{{route('admin.productsTags')}}" class="menu-link">Tags</a></li>
                             <li class="menu-item {{ Request::is('admin/products/attributes*') ? 'has-active' : '' }}"><a href="{{route('admin.productsAttributes')}}" class="menu-link">Attributes</a></li>
                             <li class="menu-item {{ Request::is('admin/products/reviews*') ? 'has-active' : '' }}"><a href="{{route('admin.productsReview')}}" class="menu-link">Reviews</a></li>
                         </ul>
@@ -112,14 +114,6 @@
                         <a href="{{ route('admin.clients') }}" class="menu-link">
                             <span class="menu-icon fas fa-users"></span>
                             <span class="menu-text">Clients</span>
-                        </a>
-                    </li>
-
-                    <!-- Brands -->
-                    <li class="menu-item {{ Request::is('admin/brands*') ? 'has-active' : '' }}">
-                        <a href="{{ route('admin.brands') }}" class="menu-link">
-                            <span class="menu-icon fas fa-copyright"></span>
-                            <span class="menu-text">Brands</span>
                         </a>
                     </li>
 

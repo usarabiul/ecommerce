@@ -129,6 +129,11 @@ class OrdersController extends Controller
             return redirect()->route('admin.orders');
         }
 
+        if($action=='invoice'){
+
+            return view(adminTheme().'orders.invoice',compact('order'));
+        }
+
         if($action=='update'){
             $check = $r->validate([
                 'order_status' => 'required',
@@ -272,69 +277,8 @@ class OrdersController extends Controller
         }
 
         $methods =Attribute::where('type',11)->where('status','active')->where('parent_id',null)->orderBy('view','asc')->get();
-        return view(adminTheme().'orders.ordersManage',compact('order','methods')); 
+        return view(adminTheme().'orders.ordersManage',compact('order','methods'));
     }
-
-    public function invoice($id){
-        $order =Order::find($id);
-        if(!$order){
-            Session()->flash('error','Order Are Not Found');
-            return redirect()->route('admin.orders');
-        }
-        
-        $gram =0;
-        $ml =0;
-        
-        foreach($order->items as $item){
-            
-            if($item->product){
-                if($item->product->weight_unit){
-                    $gram+= $item->quantity*$item->product->weight_amount;   
-                }
-            }
-        }
-        
-        //return $gram;
-        
-        return view(adminTheme().'orders.invoice',compact('order'));
-    }
-
-
-    public function returnOrders(Request $r,$status=null){
-        
-        if($status==null || $status=='pending' || $status=='confirmed' || $status=='delivered' || $status=='refunded' || $status=='cancelled'){
-            $returnItems =OrderReturnItem::latest()->where('return_type',true)
-            ->where(function($qq)  use ($status,$r)  {
-
-                if($status==null){
-                    $qq->where('status','<>','temp');
-                }else{
-                    $qq->where('status',$status);
-                }
-            })
-            ->paginate(25);
-
-            return view(adminTheme().'orders.returnOrders',compact('returnItems','status','r'));
-        }else{
-            Session()->flash('error','Order Status Un-known Type');
-            return redirect()->route('admin.returnOrders');
-        }
-        
-    }
-
-     public function returnOrdersManage($id){
-        
-        $order =Order::find($id);
-        
-        if(!$order){
-            Session()->flash('error','Order Return Are Not Found');
-            return redirect()->route('admin.returnOrders');
-        }
-
-        return view(adminTheme().'orders.returnOrderManage',compact('order'));
-    }
-
-
 
 
 

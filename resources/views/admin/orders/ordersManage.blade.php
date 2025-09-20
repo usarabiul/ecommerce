@@ -4,32 +4,24 @@
 <style type="text/css"></style>
 @endpush @section('contents')
 
-
-<div class="content-header row">
-    <div class="content-header-left col-md-6 col-12 mb-2">
-        <h3 class="content-header-title mb-0">Order Manage</h3>
-        <div class="row breadcrumbs-top">
-            <div class="breadcrumb-wrapper col-12">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard </a></li>
-                    <li class="breadcrumb-item active">Order Manage</li>
+<header class="page-title-bar">
+    <div class="d-md-flex align-items-md-start">
+        <div class="mr-sm-auto">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mt-1 p-0 mb-0">
+                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Order Manage</li>
                 </ol>
-            </div>
+            </nav>
+        </div>
+        <div class="btn-toolbar">
+            <a href="{{route('admin.orders')}}" type="button" class="btn btn-outline-success mr-2">Back</a>
+            <a href="{{route('admin.ordersAction',['invoice',$order->id])}}" type="button" class="btn btn-outline-success mr-2"><i class="fas fa-view"></i> Invoice</a>
+            <a href="{{route('admin.ordersAction',['edit',$order->id])}}" type="button" class="btn btn-primary"><i class="fas fa-spinner"></i></a>
         </div>
     </div>
-    <div class="content-header-right col-md-6 col-12 mb-md-0 mb-2">
-        <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
-            <a class="btn btn-outline-primary" href="{{route('admin.orders')}}"><i class="fa fa-list"></i> Back</a>
-            
-            <a class="btn btn-success" href="{{route('admin.invoice',$order->id)}}"><i class="fa fa-print"></i> Invoice</a>
-            
-            <a class="btn btn-outline-primary" href="{{route('admin.ordersManage',$order->id)}}">
-                <i class="fa-solid fa-rotate"></i>
-            </a>
-        </div>
-    </div>
-</div>
-
+</header>
 
 <div class="content-body">
     <!-- Basic Elements start -->
@@ -217,13 +209,7 @@
 					                                    , Size: {{ $item->size }}
 					                                    @endif
 					                                    </small>
-					                                    @if($item->returnItems->count() > 0)
-					                                    @if($item->return_type)
-					                                    <span class="badge badge-info" style="background: #ff9800;">Return</span>
-					                                    @else
-					                                    <span class="badge badge-primary" style="background: #ff5722;">Cancel</span>
-					                                    @endif
-					                                    @endif
+					                                    
 					                                </td>
 					                                <td>{{ $item->quantity }} X {{priceFormat($item->price)}}</td>
 					                                 <td>
@@ -243,7 +229,7 @@
 
 					                            <div class="input-group input-group-sm">
 
-					                              <select class="form-control" name="order_status" id="order_status" style="width: 250px;border: 2px solid #009688;height: 35px;">
+					                              <select class="form-control" name="order_status" id="order_status" >
 												  	<option	option {{ $order->order_status == 'pending' ? 'selected' : '' }} value="pending">Pending</option>
 					                                <option {{ $order->order_status == 'confirmed' ? 'selected' : '' }} value="confirmed">Confirmed</option>
 					                                <option {{ $order->order_status == 'shipped' ? 'selected' : '' }} value="shipped">Shipped</option>
@@ -283,7 +269,7 @@
                         	</div>
                         	<div class="col-md-6">
                         		<div class="left-tools" style="text-align: right;">
-                        			<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#payment" style="padding: 8px 15px;border-radius: 0;"> <i class="fas fa-money"></i> payment</button>
+                        			<button class="btn btn-primary" data-toggle="modal" data-target="#payment" style="padding: 8px 15px;border-radius: 0;"> <i class="fas fa-money"></i> payment</button>
                         		</div>
                         	</div>
                         </div>

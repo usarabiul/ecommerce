@@ -22,6 +22,7 @@ Route::get('/switch/{lang?}',[WelcomeController::class,'language'])->name('langu
 Route::get('/geo/filter/{id}',[WelcomeController::class,'geo_filter'])->name('geo_filter');
 
 Route::get('/product/category/{slug}',[WelcomeController::class,'productCategory'])->name('productCategory');
+Route::get('/product/brand/{slug}',[WelcomeController::class,'productBrand'])->name('productBrand');
 Route::get('/product/{slug}',[WelcomeController::class,'productView'])->name('productView');
 
 Route::get('/blog/category/{slug}',[WelcomeController::class,'blogCategory'])->name('blogCategory');
@@ -80,6 +81,8 @@ Route::get('/posts/comments/post/{id}',[PostsController::class,'postsComments'])
 Route::any('/posts/comments/{action}/{id}',[PostsController::class,'postsCommentsAction'])->name('postsCommentsAction');
 // Posts Comments Route End
 
+
+
 // Posts Categories Route
 Route::get('/posts/categories',[PostsController::class,'postsCategories'])->name('postsCategories');
 Route::any('/posts/categories/{action}/{id?}',[PostsController::class,'postsCategoriesAction'])->name('postsCategoriesAction');
@@ -130,24 +133,14 @@ Route::any('/products/update/ajax/{column}/{id}',[EcommerceController::class,'pr
 
 
 // Order Management Route End
-Route::get('/invoice/{id}',[OrdersController::class,'invoice'])->name('invoice');
 Route::get('/orders/{status?}',[OrdersController::class,'orders'])->name('orders');
 Route::any('/orders-manage/{action}/{id}',[OrdersController::class,'ordersAction'])->name('ordersAction');
-Route::get('/orders/manage/{id}',[OrdersController::class,'ordersManage'])->name('ordersManage');
-Route::post('/orders/update/{id}',[OrdersController::class,'ordersManageUpdate'])->name('ordersManageUpdate');
-Route::post('/orders/payments/{id}',[OrdersController::class,'ordersPaymentsUpdate'])->name('ordersPaymentsUpdate');
-Route::post('/orders/return/{id}',[OrdersController::class,'ordersReturnUpdate'])->name('ordersReturnUpdate');
 // Order Management Route End
 
-// Posts Route
+// Posts Routes
 Route::get('/clients',[AdminController::class,'clients'])->name('clients');
 Route::any('/clients/{action}/{id?}',[AdminController::class,'clientsAction'])->name('clientsAction');
 // Posts Route End
-
-// Brands Route
-Route::get('/brands',[AdminController::class,'brands'])->name('brands');
-Route::any('/brands/{action}/{id?}',[AdminController::class,'brandsAction'])->name('brandsAction');
-// Brands Route End
 
 // Slider Route
 Route::get('/sliders',[AdminController::class,'sliders'])->name('sliders');

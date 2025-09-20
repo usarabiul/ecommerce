@@ -108,36 +108,29 @@
     }
 </style>
 
-@endpush @section('contents')
+@endpush 
+@section('contents')
 
-
-<div class="content-header row">
-    <div class="content-header-left col-md-6 col-12 mb-2">
-        <h3 class="content-header-title mb-0">Invoice</h3>
-        <div class="row breadcrumbs-top">
-            <div class="breadcrumb-wrapper col-12">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard </a></li>
-                    <li class="breadcrumb-item active">Invoice</li>
+<header class="page-title-bar">
+    <div class="d-md-flex align-items-md-start">
+        <div class="mr-sm-auto">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mt-1 p-0 mb-0">
+                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Invoice</li>
                 </ol>
-            </div>
+            </nav>
+        </div>
+        <div class="btn-toolbar">
+            <a href="{{route('admin.orders')}}" type="button" class="btn btn-outline-success mr-2">Back</a>
+            <a href="{{route('admin.ordersAction',['edit',$order->id])}}" type="button" class="btn btn-outline-success mr-2"><i class="fas fa-edit"></i> Manage</a>
+            <button class="btn btn-success mr-2" id="PrintAction" ><i class="fa fa-print"></i> Print</button>
+			<a href="{{route('admin.ordersAction',['invoice',$order->id])}}" type="button" class="btn btn-primary"><i class="fas fa-spinner"></i></a>
         </div>
     </div>
-    <div class="content-header-right col-md-6 col-12 mb-md-0 mb-2">
-        <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
+</header>
 
-            <a class="btn btn-outline-primary" href="{{route('admin.orders')}}">Back</a>
-            
-            <a class="btn btn-outline-primary" href="{{route('admin.ordersManage',$order->id)}}">Manage</a>
-            
-            <button class="btn btn-success" id="PrintAction" ><i class="fa fa-print"></i> Print</button>
-
-            <a class="btn btn-outline-primary" href="{{route('admin.invoice',$order->id)}}">
-                <i class="fa-solid fa-rotate"></i>
-            </a>
-        </div>
-    </div>
-</div>
 
 <div class="content-body">
     <!-- Basic Elements start -->
@@ -267,7 +260,7 @@
                 			<div class="frozenTable">
                 				<div class="row" style="display:flex;">
                 					<div class="col-md-12" style="">
-                					    @if($order->payment_status!='paid')
+                					    @if($order->payment_status=='paid')
                 					    <div class="paidsStatus" style="text-align:right;">
                 					        <img src="{{asset('public/medies/paid.png')}}" style="max-width:80px;">
                 					    </div>

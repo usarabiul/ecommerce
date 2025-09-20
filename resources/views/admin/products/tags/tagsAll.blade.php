@@ -23,61 +23,27 @@
 @endpush
 @section('contents')
 
-<div class="content-header row">
-    <div class="content-header-left col-md-6 col-12 mb-2">
-        <h3 class="content-header-title mb-0">Tags List</h3>
-        <div class="row breadcrumbs-top">
-            <div class="breadcrumb-wrapper col-12">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard </a></li>
-                    <li class="breadcrumb-item active">Tags List</li>
+
+<header class="page-title-bar">
+    <div class="d-md-flex align-items-md-start">
+        <div class="mr-sm-auto">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mt-1 p-0 mb-0">
+                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Tags List</li>
                 </ol>
-            </div>
+            </nav>
+        </div>
+        <div class="btn-toolbar">
+            <button type="button" class="btn btn-outline-success mr-2"  data-toggle="modal" data-target="#AddTag" ><i class="fas fa-plus"></i> Add Tag</button>
+            <a href="{{route('admin.productsTags')}}" type="button" class="btn btn-primary"><i class="fas fa-spinner"></i></a>
         </div>
     </div>
-    <div class="content-header-right col-md-6 col-12 mb-md-0 mb-2">
-        <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
-            <button class="btn btn-outline-primary" data-toggle="modal" data-target="#AddTag">Add Tag</button>
-            <a class="btn btn-outline-primary" href="{{route('admin.productsTags')}}">
-                <i class="fa-solid fa-rotate"></i>
-            </a>
-        </div>
-    </div>
-</div>
+</header>
 
 
-@include('admin.alerts')
-<div class="card">
-    <div class="card-content">
-            <div id="accordion">
-                <div
-                    class="card-header collapsed"
-                    data-toggle="collapse"
-                    data-target="#collapseTwo"
-                    aria-expanded="false"
-                    aria-controls="collapseTwo"
-                    id="headingTwo"
-                    style="background:#009688;padding: 15px 20px; cursor: pointer;"
-                >
-                   <i class="fa fa-filter"></i> Search click Here..
-                </div>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion" style="border: 1px solid #00b5b8; border-top: 0;">
-                    <div class="card-body">
-                        <form action="{{route('admin.productsTags')}}">
-                            <div class="row">
-                                <div class="col-md-12 mb-0">
-                                    <div class="input-group">
-                                        <input type="text" name="search" value="{{request()->search?request()->search:''}}" placeholder="Tag Name" class="form-control {{$errors->has('search')?'error':''}}" />
-                                        <button type="submit" class="btn btn-success rounded-0"><i class="fa fa-search"></i> Search</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-    </div>
-</div>
+@include(adminTheme().'alerts')
 
 <div class="card">
     <div class="card-header" style="border-bottom: 1px solid #e3ebf3;">
@@ -85,6 +51,17 @@
     </div>
     <div class="card-content">
         <div class="card-body">
+            <form action="{{route('admin.productsTags')}}">
+                <div class="row">
+                    <div class="col-md-12 mb-0">
+                        <div class="input-group">
+                            <input type="text" name="search" value="{{request()->search?request()->search:''}}" placeholder="Tag Name" class="form-control {{$errors->has('search')?'error':''}}" />
+                            <button type="submit" class="btn btn-success rounded-0"><i class="fa fa-search"></i> Search</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <hr>
             <form action="{{route('admin.productsTags')}}">
                 <div class="row">
                     <div class="col-md-4">
@@ -95,7 +72,7 @@
                                 <option value="2">Tags InActive</option>
                                 <option value="5">Tags Delete</option>
                             </select>
-                            <button class="btn btn-sm btn-primary rounded-0" onclick="return confirm('Are You Want To Action?')">Action</button>
+                            <button class="btn btn-primary rounded-0" onclick="return confirm('Are You Want To Action?')">Action</button>
                         </div>
                     </div>
                     <div class="col-md-4"></div>

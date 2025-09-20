@@ -35,7 +35,7 @@
       .metric{
         background: #ffffff;
       }
-      .stacked-menu .menu-item.has-active.has-child>.menu-link {
+      .stacked-menu .menu-item.has-open.has-child>.menu-link {
           color: #f7c46c;
           font-weight: bold;
       }
