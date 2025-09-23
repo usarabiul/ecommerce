@@ -101,8 +101,8 @@
                             <span class="menu-text">Ecommerce Setting</span>
                         </a>
                         <ul class="menu">
-                            <li class="menu-item"><a href="component-alerts.html" class="menu-link">Settings</a></li>
-                            <li class="menu-item"><a href="component-accordions.html" class="menu-link">Coupons</a></li>
+                            <li class="menu-item"><a href="{{route('admin.ecommerceSetting')}}" class="menu-link">Settings</a></li>
+                            <li class="menu-item"><a href="{{route('admin.ecommerceCoupons')}}" class="menu-link">Coupons</a></li>
                             <li class="menu-item"><a href="component-badges.html" class="menu-link">Promotion</a></li>
                         </ul>
                     </li>
