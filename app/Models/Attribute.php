@@ -129,6 +129,25 @@ class Attribute extends Model
         return $this->hasMany(PostAttribute::class,'reff_id')->where('type',2);
     }
 
+    public function couponCtgs(){
+        return $this->hasMany(PostAttribute::class,'src_id')->where('type',5)->orderBy('drag','asc');
+    }
+    
+    public function couponProductPosts(){
+        return $this->hasMany(PostAttribute::class,'src_id')->where('type',6)->orderBy('drag','asc');
+    }
+    
+    public function couponDiscountAmount($amount=0){
+        if($this->menu_type==0){
+            if($this->amounts <= 100){
+                $amount =($amount * $this->amounts)/100;
+            }
+        }else{
+           $amount =$amount < $this->amounts?$amount:$this->amounts;
+        }
+        return $amount;
+    }
+
     //Slider Functions Start
     
     public function subSliders(){
@@ -138,6 +157,8 @@ class Attribute extends Model
     public function sliderItems(){
         return $this->hasMany(Attribute::class,'parent_id')->orderBy('view','asc');
     }
+
+
 
     //Slider Functions End
     

@@ -1759,9 +1759,9 @@ public function productsBrandsAction(Request $r,$action,$id=null){
     return view(adminTheme().'products.reviews.reviewEdit',compact('review'));
   }
 
-  public function ecommerceSetting(Request $r,$action){
+  public function ecommerceSetting(Request $r){
         $general =general();
-        if($action=='general'){
+
             
         if($r->isMethod('post')){
             $check = $r->validate([
@@ -1787,15 +1787,8 @@ public function productsBrandsAction(Request $r,$action,$id=null){
             return redirect()->back();
         }
    
-        
 
-        return view(adminTheme().'ecommerce-setting.settings');
-      }else{
-
-        Session()->flash('error','Unknown Type Action Not Allow');
-        return redirect()->route('admin.ecommerceSetting',['type'=>'general']);
-      }
-      
+      return view(adminTheme().'ecommerce-setting.settings');
     }
     
     public function ecommerceCoupons(Request $r){

@@ -101,7 +101,8 @@ Route::any('/posts/{action}/{id?}',[PostsController::class,'postsAction'])->name
 // Ecommerce Setting Route
 Route::get('/ecommerce/coupons',[EcommerceController::class,'ecommerceCoupons'])->name('ecommerceCoupons');
 Route::any('/ecommerce/coupons/{action}/{id?}',[EcommerceController::class,'ecommerceCouponsAction'])->name('ecommerceCouponsAction');
-Route::any('/ecommerce/setting/{action}',[EcommerceController::class,'ecommerceSetting'])->name('ecommerceSetting');
+Route::get('/ecommerce/setting',[EcommerceController::class,'ecommerceSetting'])->name('ecommerceSetting');
+Route::any('/ecommerce/setting/{action}/{id?}',[EcommerceController::class,'ecommerceSettingAction'])->name('ecommerceSettingAction');
 // Ecommerce Setting Route End
 
 // Products Categories Route
