@@ -32,6 +32,7 @@
         </div>
         <div class="btn-toolbar">
             <a href="{{route('admin.postsAction','create')}}" type="button" class="btn btn-outline-success mr-2"><i class="fas fa-plus"></i> Add Post</a>
+            <a href="{{route('admin.posts')}}" type="button" class="btn btn-success mr-2"> Back</a>
             <a href="{{route('admin.postsAction',['edit',$post->id])}}" type="button" class="btn btn-primary"><i class="fas fa-spinner"></i></a>
         </div>
     </div>

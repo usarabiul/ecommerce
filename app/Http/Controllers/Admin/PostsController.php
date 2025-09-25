@@ -156,8 +156,8 @@ class PostsController extends Controller
 
         $check = $r->validate([
             'name' => 'required|max:200',
-            'seo_title' => 'nullable|max:200',
-            'seo_description' => 'nullable|max:250',
+            'seo_title' => 'nullable|max:300',
+            'seo_description' => 'nullable|max:500',
             'catagoryid.*' => 'nullable|numeric',
             'tagskey' => 'nullable|max:500',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',

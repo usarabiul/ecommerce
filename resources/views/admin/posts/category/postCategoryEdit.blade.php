@@ -5,28 +5,24 @@
 <style type="text/css"></style>
 @endpush @section('contents')
 
-<!--breadcrumb-->
-<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-    <div class="breadcrumb-title pe-3">Category Edit</div>
-    <div class="ps-3">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb mb-0 p-0">
-                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}"><i class="bx bx-home-alt"></i></a>
-                </li>
-                <li class="breadcrumb-item"><a href="{{route('admin.postsCategories')}}">Categories list</a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">Category Edit</li>
-            </ol>
-        </nav>
-    </div>
-    <div class="ms-auto">
-        <div class="btn-group">
-            <a class="btn btn-outline-primary" href="{{route('admin.postsCategoriesAction','create')}}">Add Category</a>
-            <a href="{{route('admin.postsCategoriesAction',['edit',$category->id])}}" class="btn btn-primary"><i class="bx bx-refresh"></i></a>
+<header class="page-title-bar">
+    <div class="d-md-flex align-items-md-start">
+        <div class="mr-sm-auto">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mt-1 p-0 mb-0">
+                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Category Edit</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="btn-toolbar">
+            <a href="{{route('admin.postsCategoriesAction','create')}}" type="button" class="btn btn-outline-success mr-2"><i class="fas fa-plus"></i> Add Category</a>
+            <a href="{{route('admin.postsCategories')}}" type="button" class="btn btn-success mr-2"> Back</a>
+            <a href="{{route('admin.postsCategoriesAction',['edit',$category->id])}}" type="button" class="btn btn-primary"><i class="fas fa-spinner"></i></a>
         </div>
     </div>
-</div>
-<!--end breadcrumb-->
+</header>
 
 
 @include(adminTheme().'alerts')
