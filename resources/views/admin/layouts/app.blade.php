@@ -146,7 +146,7 @@
         $('.slugEdit').click(function(){
             var span = $(this).find('span');
             var isCustom = span.text().trim() === 'Auto Slug';
-            span.text(isCustom ? 'Custom Slug' : 'Auto Slug');
+            span.html(isCustom ? 'Custom Slug <i class="fa fa-edit"></i>' : 'Auto Slug');
             var input = $('.slugEditData');
             if (isCustom) {
                 input.attr('name', 'slug');

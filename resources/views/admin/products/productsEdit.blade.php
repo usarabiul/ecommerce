@@ -94,6 +94,22 @@
                             <p style="color: red; margin: 0; font-size: 10px;">{{ $errors->first('name') }}</p>
                             @endif
                         </div>
+                        <div class="mb-3 input-group">
+                            <label class="slugEdit" style="cursor: pointer;width: 130px;padding: 6px;margin:0;background: #c6c9d5;"><span>
+                                @if($product->auto_slug)
+                                Custom Slug <i class="fa fa-edit"></i>
+                                @else    
+                                Auto Slug
+                                @endif
+                            </span></label>
+                            <input type="text" class="slugEditData form-control {{$errors->has('slug')?'error':''}}"
+                                @if($product->auto_slug) 
+                                    name="slug"
+                                @else
+                                disabled
+                                @endif
+                            placeholder="Product Slug" value="{{$product->slug?:old('slug')}}" />
+                        </div>
                         <div class="form-group">
                             <label for="short_description">Short Description </label>
                             <textarea name="short_description" class="form-control {{$errors->has('short_description')?'error':''}}" placeholder="Enter Short Description">{!!$product->short_description!!}</textarea>

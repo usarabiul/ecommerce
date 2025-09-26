@@ -50,19 +50,26 @@
                                 <span style="color: #ccc;">({{$page->template}})</span>
                                 @endif
                             </label>
-                            <input type="text" class="form-control {{$errors->has('name')?'is-invalid':''}}" name="name" placeholder="Enter Name" value="{{old('name')?:$page->name}}" required="" />
+                            <input type="text" class="form-control titleForSlug {{$errors->has('name')?'is-invalid':''}}" name="name" placeholder="Enter Name" value="{{old('name')?:$page->name}}" required="" />
                             @if ($errors->has('name'))
                             <div class="invalid-feedback">{{ $errors->first('name') }}</div>
                             @endif
                         </div>
                         <div class="mb-3 input-group">
-                            <label class="slugEdit" for="slug" style="color: #3F51B5;cursor: pointer;width: 130px;padding: 3px;"><span>{{$page->auto_slug?'Custom Slug':'Auto Slug'}} </span> <i class="fa fa-edit"></i></label>
+                            <label class="slugEdit" style="cursor: pointer;width: 130px;padding: 6px;margin:0;background: #c6c9d5;"><span>
+                                @if($page->auto_slug)
+                                Custom Slug <i class="fa fa-edit"></i>
+                                @else    
+                                Auto Slug
+                                @endif
+                            </span></label>
                             <input type="text" class="slugEditData form-control {{$errors->has('slug')?'error':''}}"
                                 @if($page->auto_slug) 
                                     name="slug"
-                                    style="display:block;"
+                                @else
+                                disabled
                                 @endif
-                            placeholder="Page Slug" value="{{$page->slug?:old('slug')}}" />
+                            placeholder="Post Slug" value="{{$page->slug?:old('slug')}}" />
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Short Description </label>

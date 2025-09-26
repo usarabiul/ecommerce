@@ -57,7 +57,13 @@
                             @endif
                         </div>
                         <div class="mb-3 input-group">
-                            <label class="slugEdit" style="cursor: pointer;width: 130px;padding: 6px;margin:0;background: #c6c9d5;"><span>{{$post->auto_slug?'Custom Slug':'Auto Slug'}} </span> <i class="fa fa-edit"></i></label>
+                            <label class="slugEdit" style="cursor: pointer;width: 130px;padding: 6px;margin:0;background: #c6c9d5;"><span>
+                                @if($post->auto_slug)
+                                Custom Slug <i class="fa fa-edit"></i>
+                                @else    
+                                Auto Slug
+                                @endif
+                            </span></label>
                             <input type="text" class="slugEditData form-control {{$errors->has('slug')?'error':''}}"
                                 @if($post->auto_slug) 
                                     name="slug"
