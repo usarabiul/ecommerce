@@ -65,14 +65,14 @@
                             <div class="form-group col-md-6">
                                 <label for="status">Attribute Status</label>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="status" name="status" {{$attribute- />status=='active'?'checked':''}}/>
+                                    <input type="checkbox" class="custom-control-input" id="status" name="status" {{$attribute->status=='active'?'checked':''}}/>
                                     <label class="custom-control-label" for="status">Active</label>
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="featured">Variation Status</label>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="featured" name="featured" {{$attribute- />featured?'checked':''}}/>
+                                    <input type="checkbox" class="custom-control-input" id="featured" name="featured" {{$attribute->featured?'checked':''}}/>
                                     <label class="custom-control-label" for="featured">Active</label>
                                 </div>
                             </div>

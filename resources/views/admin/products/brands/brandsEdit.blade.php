@@ -3,32 +3,29 @@
 @endsection @push('css')
 
 <style type="text/css"></style>
-@endpush @section('contents')
+@endpush 
+@section('contents')
 
-<div class="content-header row">
-    <div class="content-header-left col-md-6 col-12 mb-2">
-        <h3 class="content-header-title mb-0">Brand Edit</h3>
-        <div class="row breadcrumbs-top">
-            <div class="breadcrumb-wrapper col-12">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard </a></li>
-                    <li class="breadcrumb-item active">Brand Edit</li>
+
+<header class="page-title-bar">
+    <div class="d-md-flex align-items-md-start">
+        <div class="mr-sm-auto">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mt-1 p-0 mb-0">
+                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Brand Edit</li>
                 </ol>
-            </div>
+            </nav>
+        </div>
+        <div class="btn-toolbar">
+            <a href="{{route('admin.productsBrands')}}" class="btn btn-outline-primary mr-2" >BACK</a>
+            <a href="{{route('admin.productsBrandsAction','create')}}" type="button" class="btn btn-outline-success mr-2"><i class="fas fa-plus"></i> Add Brand</a>
+            <a href="{{route('admin.productsBrandsAction',['edit',$brand->id])}}" type="button" class="btn btn-primary"><i class="fas fa-spinner"></i></a>
         </div>
     </div>
-    <div class="content-header-right col-md-6 col-12 mb-md-0 mb-2">
-        <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
-            <a class="btn btn-outline-primary" href="{{route('admin.productsBrands')}}">BACK</a>
-            @isset(json_decode(Auth::user()->permission->permission, true)['brands']['add'])
-            <a class="btn btn-outline-primary" href="{{route('admin.productsBrandsAction',['create'])}}">Add Brand</a>
-            @endisset
-            <a class="btn btn-outline-primary" href="{{route('admin.productsBrandsAction',['edit',$brand->id])}}">
-                <i class="fa-solid fa-rotate"></i>
-            </a>
-        </div>
-    </div>
-</div>
+</header>
+
 
 <div class="content-body">
     <!-- Basic Elements start -->

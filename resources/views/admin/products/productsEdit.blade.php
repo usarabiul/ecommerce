@@ -89,7 +89,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="name">Product Name </label>
-                            <input type="text" class="form-control {{$errors->has('name')?'error':''}}" name="name" placeholder="Enter Product Name" value="{{$product->name?:old('name')}}" required="" />
+                            <input type="text" class="form-control titleForSlug {{$errors->has('name')?'error':''}}" name="name" placeholder="Enter Product Name" value="{{$product->name?:old('name')}}" required="" />
                             @if ($errors->has('name'))
                             <p style="color: red; margin: 0; font-size: 10px;">{{ $errors->first('name') }}</p>
                             @endif
