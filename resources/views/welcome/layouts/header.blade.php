@@ -99,14 +99,6 @@
                 <div class="col-xl-3 col-lg-4">
                     <div class="header-info header-info-right">
                         <ul>
-                            <li>
-                                <a class="language-dropdown-active" href="#"> <i class="fi-rs-world"></i> English <i class="fi-rs-angle-small-down"></i></a>
-                                <ul class="language-dropdown">
-                                    <li><a href="#"><img src="assets/imgs/theme/flag-fr.png" alt="">Français</a></li>
-                                    <li><a href="#"><img src="assets/imgs/theme/flag-dt.png" alt="">Deutsch</a></li>
-                                    <li><a href="#"><img src="assets/imgs/theme/flag-ru.png" alt="">Pусский</a></li>
-                                </ul>
-                            </li>
                             <li><i class="fi-rs-user"></i><a href="page-login-register.html">Log In / Sign Up</a></li>
                         </ul>
                     </div>
@@ -200,7 +192,9 @@
         <div class="container">
             <div class="header-wrap header-space-between position-relative  main-nav">
                 <div class="logo logo-width-1 d-block d-lg-none">
-                    <a href="{{route('index')}}"><img src="{{asset(general()->logo())}}" alt="{{general()->title}}"></a>
+                    <a href="{{route('index')}}">
+                        <img src="{{asset(general()->logo())}}" alt="{{general()->title}}">
+                    </a>
                 </div>
                 <div class="header-nav d-none d-lg-flex">
                     <div class="main-categori-wrap d-none d-lg-block">
@@ -387,40 +381,20 @@
                     <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
                         <nav>
                             <ul>
-                                <li><a class="active" href="index.html">Home <i class="fi-rs-angle-down"></i></a>
-                                    <ul class="sub-menu">
-                                        <li><a href="index.html">Home 1</a></li>
-                                        <li><a href="index-2.html">Home 2</a></li>
-                                        <li><a href="index-3.html">Home 3</a></li>
-                                        <li><a href="index-4.html">Home 4</a></li>
-                                    </ul>
+                                <li>
+                                    <a class="active" href="index.html">Home</a>
                                 </li>
                                 <li>
                                     <a href="page-about.html">About</a>
                                 </li>
-                                <li><a href="shop-grid-right.html">Shop <i class="fi-rs-angle-down"></i></a>
-                                    <ul class="sub-menu">
-                                        <li><a href="shop-grid-right.html">Shop Grid – Right Sidebar</a></li>
-                                        <li><a href="shop-grid-left.html">Shop Grid – Left Sidebar</a></li>
-                                        <li><a href="shop-list-right.html">Shop List – Right Sidebar</a></li>
-                                        <li><a href="shop-list-left.html">Shop List – Left Sidebar</a></li>
-                                        <li><a href="shop-fullwidth.html">Shop - Wide</a></li>
-                                        <li><a href="#">Single Product <i class="fi-rs-angle-right"></i></a>
-                                            <ul class="level-menu">
-                                                <li><a href="shop-product-right.html">Product – Right Sidebar</a></li>
-                                                <li><a href="shop-product-left.html">Product – Left Sidebar</a></li>
-                                                <li><a href="shop-product-full.html">Product – No sidebar</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="shop-filter.html">Shop – Filter</a></li>
-                                        <li><a href="shop-wishlist.html">Shop – Wishlist</a></li>
-                                        <li><a href="shop-cart.html">Shop – Cart</a></li>
-                                        <li><a href="shop-checkout.html">Shop – Checkout</a></li>
-                                        <li><a href="shop-compare.html">Shop – Compare</a></li>
-                                    </ul>
+                                <li>
+                                    <a href="shop-grid-right.html">Shop</a>
                                 </li>
-                                <li><a href="blog-category-grid.html">Blog <i class="fi-rs-angle-down"></i></a>
-                                    <ul class="sub-menu">
+                                <li>
+                                    <a href="blog-category-grid.html">Blog 
+                                        <!-- <i class="fi-rs-angle-down"></i> -->
+                                    </a>
+                                    <!-- <ul class="sub-menu">
                                         <li><a href="blog-category-grid.html">Blog Category Grid</a></li>
                                         <li><a href="blog-category-list.html">Blog Category List</a></li>
                                         <li><a href="blog-category-big.html">Blog Category Big</a></li>
@@ -432,19 +406,10 @@
                                                 <li><a href="blog-post-fullwidth.html">No Sidebar</a></li>
                                             </ul>
                                         </li>
-                                    </ul>
+                                    </ul> -->
                                 </li>
-                                <li><a href="#">Pages <i class="fi-rs-angle-down"></i></a>
-                                    <ul class="sub-menu">
-                                        <li><a href="page-about.html">About Us</a></li>
-                                        <li><a href="page-contact.html">Contact</a></li>
-                                        <li><a href="page-account.html">My Account</a></li>
-                                        <li><a href="page-login-register.html">login/register</a></li>
-                                        <li><a href="page-purchase-guide.html">Purchase Guide</a></li>
-                                        <li><a href="page-privacy-policy.html">Privacy Policy</a></li>
-                                        <li><a href="page-terms.html">Terms of Service</a></li>
-                                        <li><a href="page-404.html">404 Page</a></li>
-                                    </ul>
+                                <li>
+                                    <a href="#">Pages</a>
                                 </li>
                                 <li>
                                     <a href="page-contact.html">Contact</a>

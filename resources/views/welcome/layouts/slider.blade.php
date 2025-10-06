@@ -1,31 +1,28 @@
 @if($slider =slider('Front Page Slider'))
+<div class="position-relative">
+    <div class="hero-slider-1 style-3 dot-style-1 dot-style-1-position-1">
 
-<div id="homeSlider" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-  	@foreach($slider->subSliders as $i=>$slider)
-    <div class="carousel-item {{$i==0?'active':''}}">
-	      <img style="width:100%;" src="{{asset($slider->image())}}" alt="{{$slider->name}}" title="{{$slider->name}}" />
-        <div class="carousel-caption d-none d-md-block">
-         @if($slider->name)  
-          <h1>{!!$slider->name!!}</h1>
-          @endif
-          @if($slider->description)
-          <p>{!!$slider->description!!}</p>
-          @endif
-          @if($slider->seo_title && $slider->seo_description)
-          <a href="{{$slider->seo_description}}" class="btn btn-sm btn-success">{!!$slider->seo_title!!}</a>
-          @endif
+        @foreach($slider->subSliders as $i=>$slider)
+        <div class="single-hero-slider single-animation-wrap">
+            <div class="container">
+                <div class="slider-1-height-3 slider-animated-1">
+                    <div class="hero-slider-content-2">
+                        <h4 class="animated">Trade-In Offer</h4>
+                        <h2 class="animated fw-900">Supper Value Deals</h2>
+                        <h1 class="animated fw-900 text-brand">On All Products</h1>
+                        <p class="animated">Save more with coupons & up to 70% off</p>
+                        @if($slider->seo_title && $slider->seo_description)
+                        <a class="animated btn btn-brush btn-brush-3" href="{{$slider->seo_description}}"> {!!$slider->seo_title!!} </a>
+                        @endif
+                    </div>
+                    <div class="slider-img">
+                        <img src="{{asset($slider->image())}}" alt="{{$slider->name}}">
+                    </div>
+                </div>
+            </div>
         </div>
+        @endforeach
     </div>
-	@endforeach
-  </div>
-  <a class="carousel-control-prev" href="#homeSlider" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#homeSlider" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
+    <div class="slider-arrow hero-slider-1-arrow style-3"></div>
 </div>
 @endif

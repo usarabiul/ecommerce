@@ -28,8 +28,36 @@
 
 @section('contents')
 
+<section class="home-slider position-relative pt-25 pb-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                @include(welcomeTheme().'layouts.slider')
+            </div>
+            <div class="col-lg-3 d-md-none d-lg-block">
+                <div class="banner-img banner-1 wow fadeIn  animated home-3">
+                    <img class="border-radius-10" src="assets/imgs/banner/banner-5.jpg" alt="">
+                    <div class="banner-text">
+                        <span>Accessories</span>
+                        <h4>Save 17% on <br>Autumn Hat</h4>
+                        <a href="shop-grid-right.html">Shop Now <i class="fi-rs-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="banner-img banner-2 wow fadeIn  animated mb-0">
+                    <img class="border-radius-10" src="assets/imgs/banner/banner-7.jpg" alt="">
+                    <div class="banner-text">
+                        <span>Smart Offer</span>
+                        <h4>Save 20% on <br>Eardrop</h4>
+                        <a href="shop-grid-right.html">Shop Now <i class="fi-rs-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!--Slider Part Include Start-->
-@include(welcomeTheme().'layouts.slider')
+
 <div class="serviceFeatured">
     <div class="container">
         <div class="row" style="margin:0 -10px;">

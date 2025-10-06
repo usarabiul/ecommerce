@@ -3,9 +3,9 @@
         <table class="table">
             <thead class="table-light">
                 <tr>
-                    <th>Drag</th>
-                    <th>Image</th>
-                    <th width="60%">Info</th>
+                    <th style="width: 60px;max-width: 60px;">Drag</th>
+                    <th style="width: 200px;max-width: 200px;">Image</th>
+                    <th style="max-width: 300px;">Info</th>
                 </tr>
             </thead>
             <tbody class="sortable">
@@ -22,7 +22,7 @@
                             <img src="{{asset($slide->banner())}}" style="max-width: 100px;margin-left:5px;margin-bottom:5px;">
                             @endif
                             <br>
-                            <a href="{{route('admin.slideAction',['edit',$slide->id])}}" class="btn btn-sm btn-success">Edit</a>
+                            <a href="{{route('admin.slideAction',['edit',$slide->id])}}" class="btn btn-sm btn-success mr-3">Edit</a>
                             <a href="{{route('admin.slideAction',['delete',$slide->id])}}" class="btn btn-sm btn-danger" onclick="return confirm('Are Your Want To Delete?')">Delete</a>
                         </td>
                         <td>
@@ -33,11 +33,11 @@
                             @endif
                             <br>
                             @if($slide->status=='active')
-                            <span class="btn btn-sm btn-success">Active </span>
+                            <span class="badge badge-success">Active </span>
                             @elseif($slide->status=='inactive')
-                            <span class="btn btn-sm btn-danger">Inactive </span>
+                            <span class="badge badge-danger">Inactive </span>
                             @else
-                            <span class="btn btn-sm btn-danger">Draft </span>
+                            <span class="badge badge-danger">Draft </span>
                             @endif
                         </td>
                     </tr>
