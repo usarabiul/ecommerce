@@ -1,4 +1,15 @@
 @if($slider =slider('Front Page Slider'))
+<style>
+
+    .slider-img img {
+        width: 100%;
+    }
+
+    .slider-img {
+        width: 100%;
+    }
+
+</style>
 <div class="position-relative">
     <div class="hero-slider-1 style-3 dot-style-1 dot-style-1-position-1">
 
