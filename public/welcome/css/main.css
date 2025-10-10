@@ -7265,11 +7265,11 @@ span.fi-rs-apps {
   margin: 0;
   margin-top: 0px;
   border: 1px solid #eef0ee;
-  min-width: 800px;
+  /* min-width: 800px; */
   width: 100%;
   right: 0;
   border-radius: 0;
-  padding: 20px;
+  padding: 10px;
 }
 
 .categori-dropdown-wrap ul li.has-children .dropdown-menu .submenu-title {

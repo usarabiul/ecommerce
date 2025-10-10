@@ -1,9 +1,18 @@
-<div class="card-header" style="padding: 8px 15px; border: 1px solid #000; margin: 2px 0;" data-bs-toggle="collapse" href="#accordion4" aria-expanded="false" aria-controls="accordion4">
-    <a class="card-title lead collapsed" href="#" style="font-size: 14px;">Service Categories</a>
-</div>
-<div id="accordion4" style="border: 1px solid #000;"  class="collapse" >
-    <div class="card-content">
-        <div class="card-body" style="padding:10px;">
+<div class="card card-expansion-item mt-0 mb-2">
+    <div class="card-header border-0" id="productList">
+        <button
+            class="btn btn-reset collapsed"
+            data-toggle="collapse"
+            data-target="#collapseProductList"
+            aria-expanded="false"
+            aria-controls="collapseProductList"
+        >
+            <span class="collapse-indicator mr-2"><i class="fa fa-fw fa-caret-right"></i></span>
+            <span>Service Categories</span>
+        </button>
+    </div>
+    <div id="collapseProductList" class="collapse" aria-labelledby="productList" data-parent="#accordion">
+        <div class="card-body pt-0">
             <form action="{{route('admin.menusItemsPost',$menu->id)}}" method="post">
                 @csrf
                 <input type="hidden" name="parent" value="{{$parent->id}}" />
@@ -18,9 +27,7 @@
                         @endforeach
                     </select>
                 </div>
-                @isset(json_decode(Auth::user()->permission->permission, true)['menus']['add'])
-                <button type="submit" class="btn btn-sm btn-block btn-primary" style="padding:10px;" onclick="return confirm('Are You Want To Add?')"><i class="fa fa-plus"></i> Add</button>
-                @endisset
+                <button type="submit" class="btn btn-sm btn-block btn-primary" onclick="return confirm('Are You Want To Add?')"><i class="fa fa-plus"></i> Add</button>
             </form>
         </div>
     </div>

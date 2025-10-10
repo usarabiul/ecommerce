@@ -58,26 +58,19 @@
             </div>
             <div class="card-content">
                 <div class="card-body">
-                    <div id="accordionWrapa1" role="tablist" aria-multiselectable="true">
-                        <div class="card accordion">
+                    <div id="accordion" class="card-expansion">
+                        <!--Custom menus Items -->
+                        @include(adminTheme().'menus.includes.customLink')
 
-                            <!--Custom menus Items -->
-                            @include(adminTheme().'menus.includes.customLink')
-                            
+                        <!--Page menus Items -->
+                        @include(adminTheme().'menus.includes.pagesList')
 
-                            <!--Page menus Items -->
-                            @include(adminTheme().'menus.includes.pagesList')
+                        <!--Post Category Items -->
+                        @include(adminTheme().'menus.includes.postCategoryList')
 
+                        <!--Service Category Items -->
+                        @include(adminTheme().'menus.includes.serviceCategoryList')
 
-                            <!--Post Category Items -->
-                            @include(adminTheme().'menus.includes.postCategoryList')
-                            
-
-                            <!--Service Category Items -->
-                            @include(adminTheme().'menus.includes.serviceCategoryList')
-                            
-
-                        </div>
                     </div>
                 </div>
             </div>
@@ -110,6 +103,7 @@
                                         <select class="form-control" name="location">
                                             <option value="">Select Location</option>
                                             <option value="Header Menus" {{$parent->location=='Header Menus'?'selected':''}}>Header Menus</option>
+                                            <option value="Categories Menu" {{$parent->location=='Categories Menu'?'selected':''}}>Categories Menu</option>
                                             <option value="Footer Two" {{$parent->location=='Footer Two'?'selected':''}}>Footer Two</option>
                                             <option value="Footer Three" {{$parent->location=='Footer Three'?'selected':''}}>Footer Three</option>
                                         </select>
@@ -124,7 +118,7 @@
                             Label
 
                             <span style="float: right;">
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you Want To Delete?')">Delete</button>
+                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you Want To Delete?')">Delete</button>
                                 <label style="cursor: pointer; margin-bottom: 0;"> <input class="checkbox" type="checkbox" class="form-control" id="checkall" /> All <span class="checkCounter"></span> </label>
                             </span>
                         </p>
@@ -165,10 +159,8 @@
                         <hr />
                         <div class="row">
                             <div class="form-group col-6">
-                                <div class="form-check form-check-inline">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" class="form-check-input" name="status" {{$parent->status=='active'?'checked':''}} >Active
-                                    </label>
+                                <div class="custom-control custom-control-inline custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input checkbox" name="status" {{$parent->status=='active'?'checked':''}} id="ckb1">  <label class="custom-control-label" for="ckb1">Active </label>
                                 </div>
                             </div>
                             <div class="form-group col-6">

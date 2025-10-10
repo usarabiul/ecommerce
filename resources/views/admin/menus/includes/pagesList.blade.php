@@ -1,9 +1,18 @@
-<div class="card-header" style="padding: 8px 15px; border: 1px solid #000;margin-top: 3px;" data-bs-toggle="collapse" href="#accordion2" aria-expanded="false" aria-controls="accordion2">
-    <a class="card-title lead collapsed" href="#" style="font-size: 14px;">Pages</a>
-</div>
-<div id="accordion2" style="border: 1px solid #000;border-top: none;"  class="collapse" >
-    <div class="card-content">
-        <div class="card-body" style="padding:10px;">
+<div class="card card-expansion-item mt-0 mb-2">
+    <div class="card-header border-0" id="pageList">
+        <button
+            class="btn btn-reset collapsed"
+            data-toggle="collapse"
+            data-target="#collapsePageList"
+            aria-expanded="false"
+            aria-controls="collapsePageList"
+        >
+            <span class="collapse-indicator mr-2"><i class="fa fa-fw fa-caret-right"></i></span>
+            <span>Pages</span>
+        </button>
+    </div>
+    <div id="collapsePageList" class="collapse" aria-labelledby="pageList" data-parent="#accordion">
+        <div class="card-body pt-0">
             <form action="{{route('admin.menusItemsPost',$menu->id)}}" method="post">
                 @csrf
                 <input type="hidden" name="parent" value="{{$parent->id}}" />
@@ -24,7 +33,7 @@
                     <p style="color: red; margin: 0; font-size: 10px;">The Page Must Be a Number</p>
                     @endif
                 </div>
-                <button type="submit" class="btn btn-sm btn-block btn-primary" style="padding:10px;"><i class="fa fa-plus"></i> Add</button>
+                <button type="submit" class="btn btn-sm btn-block btn-primary" ><i class="fa fa-plus"></i> Add</button>
             </form>
         </div>
     </div>
