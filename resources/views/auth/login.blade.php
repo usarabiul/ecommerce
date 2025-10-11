@@ -24,16 +24,39 @@
 </style>
 @endpush 
 @section('contents')
-<br>
-<div class="authSection">
-	<div class="lostpassheader">
-		<h3>My Account</h3>
-		<p>Log-In</p>
-	</div>
+
+<section class="pt-150 pb-150">
 	<div class="container">
 	    <div class="row">
 	        <div class="col-md-3"></div>
 	        <div class="col-md-6">
+				<div class="login_wrap widget-taber-content p-30 background-white border-radius-10 mb-md-5 mb-lg-0 mb-sm-5">
+					<div class="padding_eight_all bg-white">
+						<div class="heading_s1">
+							<h3 class="mb-30">Login</h3>
+						</div>
+						<form method="post">
+							<div class="form-group">
+								<input type="text" required="" name="email" placeholder="Your Email">
+							</div>
+							<div class="form-group">
+								<input required="" type="password" name="password" placeholder="Password">
+							</div>
+							<div class="login_footer form-group">
+								<div class="chek-form">
+									<div class="custome-checkbox">
+										<input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1" value="">
+										<label class="form-check-label" for="exampleCheckbox1"><span>Remember me</span></label>
+									</div>
+								</div>
+								<a class="text-muted" href="#">Forgot password?</a>
+							</div>
+							<div class="form-group">
+								<button type="submit" class="btn btn-fill-out btn-block hover-up" name="login">Log in</button>
+							</div>
+						</form>
+					</div>
+				</div>
 	            <div class="login-part">
             		<h4>LOGIN</h4>
             		<form class="form-horizontal form-simple" action="{{route('login')}}" method="post">
@@ -94,6 +117,6 @@
 	    </div>
 
 	</div>
-</div>
-<br>
+</section>
+
 @endsection @push('js') @endpush

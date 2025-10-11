@@ -131,7 +131,8 @@
     <!-- END PLUGINS JS -->
     <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.min.js"></script>
     <script src="{{asset(assetLinkAdmin().'/assets/js/tag-editor.js')}}"></script>
-    <script src="{{asset(assetLinkAdmin().'/assets/vendor/select2/js/select2.min.js')}}"></script> 
+    <script src="{{asset(assetLinkAdmin().'/assets/vendor/select2/js/select2.min.js')}}"></script>
+    <script src="{{asset(assetLinkAdmin().'/assets/javascript/pages/select2-demo.js')}}"></script>
     <!-- BEGIN THEME JS -->
     <script src="{{asset(assetLinkAdmin().'/assets/javascript/theme.min.js')}}"></script> <!-- END THEME JS -->
     <!-- BEGIN PAGE LEVEL JS -->

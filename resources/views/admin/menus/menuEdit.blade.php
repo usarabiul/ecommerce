@@ -21,6 +21,16 @@
     .select2-container--default .select2-search--inline .select2-search__field {
         width: 100% !important;
     }
+    .collapse {
+        border-top: 1px solid #e9e9ea;
+        padding-top: 10px;
+    }
+    .menuItemList ul{
+        list-style: none;
+        padding-left: 25px;
+        max-height: 300px;
+        overflow: auto;
+    }
 </style>
 @endpush 
 @section('contents')
@@ -58,7 +68,7 @@
             </div>
             <div class="card-content">
                 <div class="card-body">
-                    <div id="accordion" class="card-expansion">
+                    <div id="accordion" class="card-expansion menuItemList">
                         <!--Custom menus Items -->
                         @include(adminTheme().'menus.includes.customLink')
 

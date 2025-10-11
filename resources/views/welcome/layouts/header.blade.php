@@ -99,7 +99,21 @@
                 <div class="col-xl-3 col-lg-4">
                     <div class="header-info header-info-right">
                         <ul>
-                            <li><i class="fi-rs-user"></i><a href="page-login-register.html">Log In / Sign Up</a></li>
+                            @if(Auth::check())
+                            <li>
+                                <i class="fi-rs-user"></i>
+                                <a href="{{route('customer.dashboard')}}">My Account</a>
+                            </li>
+                            @else
+                            <li>
+                                <i class="fi-rs-user"></i>
+                                <a href="{{route('login')}}">Log In</a>
+                            </li>
+                            <li>
+                                <i class="fi-rs-user"></i>
+                                <a href="{{route('register')}}">Sign Up</a>
+                            </li>
+                            @endif
                         </ul>
                     </div>
                 </div>
