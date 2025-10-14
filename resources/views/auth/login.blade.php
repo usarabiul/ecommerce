@@ -25,7 +25,7 @@
 @endpush 
 @section('contents')
 
-<section class="pt-150 pb-150">
+<section class="pt-100 pb-100">
 	<div class="container">
 	    <div class="row">
 	        <div class="col-md-3"></div>
@@ -35,9 +35,11 @@
 						<div class="heading_s1">
 							<h3 class="mb-30">Login</h3>
 						</div>
-						<form method="post">
+						@include(welcomeTheme().'alerts');
+						<form action="{{route('login')}}" method="post">
+							@csrf
 							<div class="form-group">
-								<input type="text" required="" name="email" placeholder="Your Email">
+								<input type="text" required="" value="{{old('username')}}" name="username" placeholder="Your Email">
 							</div>
 							<div class="form-group">
 								<input required="" type="password" name="password" placeholder="Password">
@@ -45,11 +47,11 @@
 							<div class="login_footer form-group">
 								<div class="chek-form">
 									<div class="custome-checkbox">
-										<input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1" value="">
+										<input class="form-check-input" type="checkbox" name="remember" id="exampleCheckbox1" value="">
 										<label class="form-check-label" for="exampleCheckbox1"><span>Remember me</span></label>
 									</div>
 								</div>
-								<a class="text-muted" href="#">Forgot password?</a>
+								<a class="text-muted" href="{{route('forgotPassword')}}">Forgot password?</a>
 							</div>
 							<div class="form-group">
 								<button type="submit" class="btn btn-fill-out btn-block hover-up" name="login">Log in</button>
@@ -57,61 +59,6 @@
 						</form>
 					</div>
 				</div>
-	            <div class="login-part">
-            		<h4>LOGIN</h4>
-            		<form class="form-horizontal form-simple" action="{{route('login')}}" method="post">
-                        @csrf
-                        <div>
-                            @if($errors->has('username'))
-                                <span style="color:red;display: block;">{{ $errors->first('username') }}</span>
-                            @endif
-                            @if($errors->has('password'))
-                                <span style="color:red;display: block;">{{ $errors->first('password') }}</span>
-                            @endif
-                            @if (session('error'))
-                            <span style="color:red;display: block;">{{ session('error') }}</span>
-                            @endif
-                        </div>
-                        
-            			<label for="email">Username or email address *</label>
-            			<div class="form-group form-group-section">
-            			    <input type="text" value="{{old('username')}}" name="username" class="form-control control-section" placeholder="Email Address" required="" />
-            			</div>
-            
-            			<label for="password">Password *</label>
-            			<div class="form-group form-group-section">
-            				<div class="input-group">
-								<input type="password" class="form-control control-section password" id="password" name="password" placeholder="Enter Password" required="" />
-								<div class="input-group-append">
-								<span class="input-group-text showPassword" style="cursor: pointer;"><i class="fa fa-eye-slash"></i></span>
-								</div>
-							</div>    
-            			</div>
-            			
-                        {{--
-            			<div class="media">
-            				<input type="checkbox">
-            				<div class="media-body">
-            					<p>Remember Me</p>
-            				</div>
-            			</div>
-            			--}}
-            			
-            			<div>
-            				<button type="submit" class="btn btn-success submitbutton">LOG IN</button>
-            			</div>
-            		</form>
-            		
-                    <div class="row">
-                        <div class="col-6">
-                            <a href="{{route('forgotPassword')}}">Lost your password?</a>
-                        </div>
-                        <div class="col-6" style="text-align: end;">
-                            <a href="{{route('register')}}">Not Any Account? <span>Sign-Up</span></a>
-                        </div>
-                    </div>
-            		
-        		</div>
 	        </div>
 	        <div class="col-md-3"></div>
 	    </div>

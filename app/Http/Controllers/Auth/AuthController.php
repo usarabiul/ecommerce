@@ -80,11 +80,11 @@ class AuthController extends Controller
                     return Redirect()->route('admin.dashboard');
                     
                 }else{
-                    Session::flash('loginfailP','Your Acounts Password Are Incorrect');
+                    Session::flash('error','Your Acounts Password Are Incorrect');
                     return back();
                 }
             }else{
-                Session::flash('loginfail','Your No Accounts Have With Us');
+                Session::flash('error','Your No Accounts Have With Us');
                 return back();
             }
 
