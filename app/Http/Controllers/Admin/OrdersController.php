@@ -280,6 +280,14 @@ class OrdersController extends Controller
         return view(adminTheme().'orders.ordersManage',compact('order','methods'));
     }
 
+    public function posOrdersAction(Request $r,$action,$id=null){
 
+
+        if($action=='sale'){
+
+            $order=null;
+            return view(adminTheme().'orders-pos.posSale',compact('order'));
+        }
+    }
 
 }

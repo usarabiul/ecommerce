@@ -35,11 +35,11 @@
 						<div class="heading_s1">
 							<h3 class="mb-30">Login</h3>
 						</div>
-						@include(welcomeTheme().'alerts');
+						@include(welcomeTheme().'alerts')
 						<form action="{{route('login')}}" method="post">
 							@csrf
 							<div class="form-group">
-								<input type="text" required="" value="{{old('username')}}" name="username" placeholder="Your Email">
+								<input type="text" required="" value="{{old('username')}}" name="username" placeholder="Your Email / Mobile">
 							</div>
 							<div class="form-group">
 								<input required="" type="password" name="password" placeholder="Password">

@@ -69,6 +69,17 @@ class ApiWelcomeController extends Controller
         return Response()->json($sliders);
     }
     
+    public function products(){
+        $datas=[];
+
+        $datas[]=['id'=>1,'name'=>'Laptop','price'=>55000];
+        $datas[]=['id'=>2,'name'=>'Mouse','price'=>500];
+        $datas[]=['id'=>3,'name'=>'Keyboard','price'=>12000];
+        $datas[]=['id'=>4,'name'=>'Monitor','price'=>800];
+        $datas[]=['id'=>5,'name'=>'Pen Drive','price'=>900];
+
+        return Response()->json($datas);
+    }
     
     
 

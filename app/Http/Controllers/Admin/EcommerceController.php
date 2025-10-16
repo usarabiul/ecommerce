@@ -216,7 +216,7 @@ class EcommerceController extends Controller
               }
           }
           ///////Gallery Uploard End////////////
-          $page->auto_slug=$r->slug?true:false;
+          $product->auto_slug=$r->slug?true:false;
           $slug =Str::slug($r->slug?:$r->name);
           if($slug==null){
           $product->slug=$product->id;

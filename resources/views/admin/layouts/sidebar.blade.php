@@ -94,6 +94,13 @@
                         </ul>
                     </li>
 
+                    <li class="menu-item {{ Request::is('admin/pos-orders*') ? 'has-active' : '' }}">
+                        <a href="{{ route('admin.posOrdersAction','sale') }}" class="menu-link">
+                            <span class="menu-icon fas fa-shopping-cart"></span>
+                            <span class="menu-text">POS Sale</span>
+                        </a>
+                    </li>
+
                     <!-- Ecommerce Setting (Static for now) -->
                     <li class="menu-item has-child">
                         <a href="javascript:;" class="menu-link">

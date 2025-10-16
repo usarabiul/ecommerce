@@ -141,6 +141,10 @@ Route::any('/products/update/ajax/{column}/{id}',[EcommerceController::class,'pr
 // Order Management Route End
 Route::get('/orders/{status?}',[OrdersController::class,'orders'])->name('orders');
 Route::any('/orders-manage/{action}/{id}',[OrdersController::class,'ordersAction'])->name('ordersAction');
+
+Route::get('/pos-orders',[OrdersController::class,'posOrders'])->name('posOrders');
+Route::any('/pos-orders/{action}/{id?}',[OrdersController::class,'posOrdersAction'])->name('posOrdersAction');
+
 // Order Management Route End
 
 // Posts Routes
