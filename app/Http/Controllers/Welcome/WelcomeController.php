@@ -114,19 +114,19 @@ class WelcomeController extends Controller
     //   Artisan::call('clear-compiled');
     // create new image instance
 
-      $latestServices =Post::where('type',3)
+      $latestProducts =Post::where('type',2)
       ->where('status','active')
       ->whereDate('created_at','<=',Carbon::now())
-      ->limit(3)
-      ->get(['id','name','slug','short_description']);
+      ->limit(8)
+      ->get();
 
       $latestPosts =Post::where('type',1)
       ->where('status','active')
       ->whereDate('created_at','<=',Carbon::now())
       ->limit(3)
-      ->get(['id','name','slug','addedby_id','created_at']);
+      ->get();
      
-    	return view(welcomeTheme().'index',compact('latestServices','latestPosts'));
+    	return view(welcomeTheme().'index',compact('latestProducts','latestPosts'));
     }
 
     public function serviceCategory($slug){

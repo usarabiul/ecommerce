@@ -14,7 +14,7 @@
                     </li>
                     <li class="menu-item {{ Request::is('admin/my-profile') ? 'has-active' : '' }}">
                         <a href="{{route('admin.myProfile')}}" class="menu-link">
-                            <span class="menu-icon fas fa-home"></span>
+                            <span class="menu-icon fas fa-user"></span>
                             <span class="menu-text">My Profile</span>
                         </a>
                     </li>

@@ -114,6 +114,7 @@
                                             <option value="">Select Location</option>
                                             <option value="Header Menus" {{$parent->location=='Header Menus'?'selected':''}}>Header Menus</option>
                                             <option value="Categories Menu" {{$parent->location=='Categories Menu'?'selected':''}}>Categories Menu</option>
+                                            <option value="Popular Categories" {{$parent->location=='Popular Categories'?'selected':''}}>Popular Categories</option>
                                             <option value="Footer Two" {{$parent->location=='Footer Two'?'selected':''}}>Footer Two</option>
                                             <option value="Footer Three" {{$parent->location=='Footer Three'?'selected':''}}>Footer Three</option>
                                         </select>

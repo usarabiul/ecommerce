@@ -8,7 +8,7 @@
             aria-controls="collapseProductList"
         >
             <span class="collapse-indicator mr-2"><i class="fa fa-fw fa-caret-right"></i></span>
-            <span>Service Categories</span>
+            <span>Product Categories</span>
         </button>
     </div>
     <div id="collapseProductList" class="collapse" aria-labelledby="productList" data-parent="#accordion">

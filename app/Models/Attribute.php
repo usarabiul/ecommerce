@@ -209,7 +209,7 @@ class Attribute extends Model
             }
         }elseif($this->menu_type==3){
             if($this->serviceCtgLink){
-                return route('serviceCategory',$this->serviceCtgLink->slug);
+                return route('productView',$this->serviceCtgLink->slug);
             }
         }else{
             return $this->slug;
