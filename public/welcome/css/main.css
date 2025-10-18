@@ -3434,15 +3434,17 @@ table .product-thumbnail img {
 
 .product-cart-wrap .product-action-1 {
   position: absolute;
-  left: 50%;
+  left: 0%;
   top: 50%;
-  -webkit-transform: translateX(-50%) translateY(-50%);
-          transform: translateX(-50%) translateY(-50%);
+  /* -webkit-transform: translateX(-50%) translateY(-50%);
+          transform: translateX(-50%) translateY(-50%); */
   opacity: 0;
   visibility: hidden;
   -webkit-transition: all .3s ease 0s;
   transition: all .3s ease 0s;
   z-index: 9;
+  width: 100%;
+  text-align: center;
 }
 
 .product-cart-wrap .product-action-1.show {
@@ -3454,6 +3456,7 @@ table .product-thumbnail img {
   top: unset;
   -webkit-transform: none;
           transform: none;
+  text-align: right;
 }
 
 .product-cart-wrap .product-action-1 button, .product-cart-wrap .product-action-1 a.action-btn {

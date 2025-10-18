@@ -71,7 +71,7 @@
                         <div class="product-img product-img-zoom">
                             <a href="shop-product-right.html">
                                 <img class="default-img" src="{{asset($product->image())}}" alt="{{$product->name}}">
-                                <img class="hover-img" src="{{asset($product->image())}}" alt="{{$product->name}}">
+                                <img class="hover-img" src="{{asset($product->hoverImage())}}" alt="{{$product->name}}">
                             </a>
                         </div>
                         <div class="product-action-1">
@@ -84,13 +84,15 @@
                         </div>
                     </div>
                     <div class="product-content-wrap">
+                        @if($ctg =$product->productCategories()->first())
                         <div class="product-category">
-                            <a href="shop-grid-right.html">Clothing</a>
+                            <a href="shop-grid-right.html">{{$ctg->name}}</a>
                         </div>
+                        @endif
                         <h2><a href="shop-product-right.html">{{$product->name}}</a></h2>
                         <div class="rating-result" title="90%">
                             <span>
-                                <span>90%</span>
+                                <span>{{$product->productRating()}}</span>
                             </span>
                         </div>
                         <div class="product-price">

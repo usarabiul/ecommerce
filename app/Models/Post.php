@@ -96,6 +96,14 @@ class Post extends Model
         return $this->hasMany(Media::class,'src_id')->where('src_type',1)->where('use_Of_file',3);
     }
 
+    public function hoverImage(){
+        if($this->galleryFiles()->first()){
+            return $this->galleryFiles()->first()->file_url;
+        }else{
+            return  $this->image();
+        }
+    }
+
     //Image and Banner Functions End
 
 
