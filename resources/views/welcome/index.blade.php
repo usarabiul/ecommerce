@@ -69,7 +69,7 @@
                 <div class="product-cart-wrap mb-30">
                     <div class="product-img-action-wrap">
                         <div class="product-img product-img-zoom">
-                            <a href="shop-product-right.html">
+                            <a href="{{route('productView',$product->slug?:'')}}">
                                 <img class="default-img" src="{{asset($product->image())}}" alt="{{$product->name}}">
                                 <img class="hover-img" src="{{asset($product->hoverImage())}}" alt="{{$product->name}}">
                             </a>
@@ -86,10 +86,10 @@
                     <div class="product-content-wrap">
                         @if($ctg =$product->productCategories()->first())
                         <div class="product-category">
-                            <a href="shop-grid-right.html">{{$ctg->name}}</a>
+                            <a href="{{route('productCategory',$ctg->slug?:'no-title')}}">{{$ctg->name}}</a>
                         </div>
                         @endif
-                        <h2><a href="shop-product-right.html">{{$product->name}}</a></h2>
+                        <h2><a href="{{route('productView',$product->slug?:'')}}">{{$product->name}}</a></h2>
                         <div class="rating-result" title="90%">
                             <span>
                                 <span>{{$product->productRating()}}</span>
