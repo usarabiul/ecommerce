@@ -114,14 +114,13 @@ class Attribute extends Model
             $qq->where('status','active');
           })
           ->whereDate('created_at','<=',date('Y-m-d'));
- 
     }
 
     public function ctgPosts(){
         return $this->hasMany(PostAttribute::class,'reff_id')->where('type',1);
     }
 
-    public function ctgServices(){
+    public function ctgProducts(){
         return $this->hasMany(PostAttribute::class,'reff_id')->where('type',0);
     }
 
@@ -146,6 +145,16 @@ class Attribute extends Model
            $amount =$amount < $this->amounts?$amount:$this->amounts;
         }
         return $amount;
+    }
+
+    public function activeProducts(){
+        return Post::whereHas('ctgProducts',function($q){
+            $q->where('reff_id',$this->id);
+          })
+          ->where(function($qq){
+            $qq->where('status','active');
+          })
+          ->whereDate('created_at','<=',date('Y-m-d'));
     }
 
     //Slider Functions Start
@@ -209,7 +218,7 @@ class Attribute extends Model
             }
         }elseif($this->menu_type==3){
             if($this->serviceCtgLink){
-                return route('productView',$this->serviceCtgLink->slug);
+                return route('productCategory',$this->serviceCtgLink->slug);
             }
         }else{
             return $this->slug;

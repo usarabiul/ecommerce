@@ -129,18 +129,13 @@ class WelcomeController extends Controller
     	return view(welcomeTheme().'index',compact('latestProducts','latestPosts'));
     }
 
-    public function serviceCategory($slug){
+    public function productCategory($slug){
       $category =Attribute::latest()->where('type',0)->where('slug',$slug)->first();
       if(!$category){
         return abort('404');
       }
 
-      $services = Post::whereHas('ctgServices',function($q) use($category){
-        $q->where('reff_id',$category->id);
-      })
-      ->where(function($qq){
-        $qq->where('status','active');
-      })
+      $services = $category->activeProducts()
       ->select(['id','name','slug','addedby_id','created_at','short_description'])
       ->whereDate('created_at','<=',date('Y-m-d'))
       ->paginate(12);
@@ -148,7 +143,7 @@ class WelcomeController extends Controller
       return view(welcomeTheme().'services.categoryServices',compact('category','services'));
     }
 
-    public function serviceView($slug){
+    public function productView($slug){
       $service =Post::latest()->where('type',3)->where('slug',$slug)->first();
       if(!$service){
         return abort('404');
