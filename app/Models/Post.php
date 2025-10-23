@@ -165,9 +165,9 @@ class Post extends Model
         return $this->belongsToMany(Attribute::class, PostAttribute::class,'src_id','reff_id')->wherePivot('type',0)->orderBy('drag', 'asc');
     }
 
-    // public function ctgProducts(){
-    //     return $this->hasMany(PostAttribute::class,'src_id')->where('type',0);
-    // }
+    public function ctgProducts(){
+        return $this->hasMany(PostAttribute::class,'src_id')->where('type',0);
+    }
 
     public function extraAttribute(){
         return $this->hasMany(PostExtra::class,'src_id')->where('type',2)->orderBy('drag','asc');

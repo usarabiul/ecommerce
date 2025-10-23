@@ -5,8 +5,8 @@
         <meta name="description" property="og:description" content="{!!$category->seo_description?:general()->meta_description!!}" />
         <meta name="keywords" content="{{$category->seo_keyword?:general()->meta_keyword}}" />
         <meta name="image" property="og:image" content="{{asset($category->image())}}" />
-        <meta name="url" property="og:url" content="{{route('serviceCategory',$category->slug?:'no-title')}}" />
-        <link rel="canonical" href="{{route('serviceCategory',$category->slug?:'no-title')}}">
+        <meta name="url" property="og:url" content="{{route('productCategory',$category->slug?:'no-title')}}" />
+        <link rel="canonical" href="{{route('productCategory',$category->slug?:'no-title')}}">
 @endsection 
 @push('css')
 <style>
@@ -16,36 +16,87 @@
 
 @section('contents')
 
-<div class="breadcrumb-area"
-    @if($category->bannerFile)
-    style="background-image:url({{asset($category->banner())}});background-repeat: no-repeat;
-        background-size: cover;padding: 50px 0;"
-    @endif
-    >
+<div class="page-header breadcrumb-wrap">
     <div class="container">
-        <div class="title">
-            <h1>{{$category->name}}</h1>
-            <ul>
-                <li><a href="{{route('index')}}">Home</a></li>
-                <li>{{$category->name}}</li>
-            </ul>
+        <div class="breadcrumb">
+            <a href="{{route('index')}}" rel="nofollow">Home </a>
+            <span></span> {{$category->name}}
         </div>
     </div>
 </div>
-
-<div class="serviceCompany">
+<section class="mt-50 mb-50">
     <div class="container">
         <div class="row">
-            @foreach($services as $service)
-            <div class="col-md-4">
-                @include(welcomeTheme().'services.includes.serviceGrid')
+            <div class="col-lg-12">
+                <div class="shop-product-fillter">
+                    <div class="totall-product">
+                        <p> We found  <strong class="text-brand">688 </strong> items for you! </p>
+                    </div>
+                    <div class="sort-by-product-area">
+                        <div class="sort-by-cover mr-10">
+                            <div class="sort-by-product-wrap">
+                                <div class="sort-by">
+                                    <span><i class="fi-rs-apps"></i>Show: </span>
+                                </div>
+                                <div class="sort-by-dropdown-wrap">
+                                    <span> 50  <i class="fi-rs-angle-small-down"></i></span>
+                                </div>
+                            </div>
+                            <div class="sort-by-dropdown">
+                                <ul>
+                                    <li><a class="active" href="#">50 </a></li>
+                                    <li><a href="#">100 </a></li>
+                                    <li><a href="#">150 </a></li>
+                                    <li><a href="#">200 </a></li>
+                                    <li><a href="#">All </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="sort-by-cover">
+                            <div class="sort-by-product-wrap">
+                                <div class="sort-by">
+                                    <span><i class="fi-rs-apps-sort"></i>Sort by: </span>
+                                </div>
+                                <div class="sort-by-dropdown-wrap">
+                                    <span> Featured  <i class="fi-rs-angle-small-down"></i></span>
+                                </div>
+                            </div>
+                            <div class="sort-by-dropdown">
+                                <ul>
+                                    <li><a class="active" href="#">Featured </a></li>
+                                    <li><a href="#">Price: Low to High </a></li>
+                                    <li><a href="#">Price: High to Low </a></li>
+                                    <li><a href="#">Release Date </a></li>
+                                    <li><a href="#">Avg. Rating </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row product-grid-3">
+            @foreach($products as $product)
+            <div class="col-lg-3 col-md-4">
+                @include(welcomeTheme().'products.includes.productGrid')
             </div>
             @endforeach
         </div>
-        <!-- pagination -->
-        {{$services->links('pagination')}}
+        <!--pagination-->
+        <div class="pagination-area mt-15 mb-sm-5 mb-lg-0">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-start">
+                    <li class="page-item active"><a class="page-link" href="#">01 </a></li>
+                    <li class="page-item"><a class="page-link" href="#">02 </a></li>
+                    <li class="page-item"><a class="page-link" href="#">03 </a></li>
+                    <li class="page-item"><a class="page-link dot" href="#">... </a></li>
+                    <li class="page-item"><a class="page-link" href="#">16 </a></li>
+                    <li class="page-item"><a class="page-link" href="#"><i class="fi-rs-angle-double-small-right"></i></a></li>
+                </ul>
+            </nav>
+        </div>
     </div>
-</div>
+</section>
 
 @endsection 
 

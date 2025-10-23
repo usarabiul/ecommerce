@@ -135,12 +135,12 @@ class WelcomeController extends Controller
         return abort('404');
       }
 
-      $services = $category->activeProducts()
-      ->select(['id','name','slug','addedby_id','created_at','short_description'])
+      $products = $category->activeProducts()
+      // ->select(['id','name','slug','addedby_id','created_at','short_description'])
       ->whereDate('created_at','<=',date('Y-m-d'))
       ->paginate(12);
 
-      return view(welcomeTheme().'services.categoryServices',compact('category','services'));
+      return view(welcomeTheme().'products.categoryProducts',compact('category','products'));
     }
 
     public function productView($slug){
