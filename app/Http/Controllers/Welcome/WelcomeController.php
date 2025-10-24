@@ -144,12 +144,12 @@ class WelcomeController extends Controller
     }
 
     public function productView($slug){
-      $service =Post::latest()->where('type',3)->where('slug',$slug)->first();
-      if(!$service){
+      $product =Post::latest()->where('type',2)->where('slug',$slug)->first();
+      if(!$product){
         return abort('404');
       }
 
-      return view(welcomeTheme().'services.serviceView',compact('service'));
+      return view(welcomeTheme().'products.productView',compact('product'));
     }
 
     public function blogCategory($slug){
