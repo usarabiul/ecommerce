@@ -11,7 +11,7 @@
 		{{$extraAttri->name}}
 		<input type="hidden" name="extraAttributeSerial[]" value="{{$extraAttri->id}}">
 		</th>
-		<td>{{$extraAttri->content}}</td>
+		<td>{{$extraAttri->description}}</td>
 		<td><a href="javascript:void(0)" 
 			data-id="{{$extraAttri->id}}"
 			data-url="{{route('admin.productsUpdateAjax',['extraAttributeDelete',$product->id])}}" 

@@ -731,7 +731,7 @@ class EcommerceController extends Controller
             $extraAttribue->src_id=$product->id;
             $extraAttribue->type=2;
             $extraAttribue->name=Str::limit($r->title,150);
-            $extraAttribue->content=Str::limit($r->value,150);
+            $extraAttribue->description=Str::limit($r->value,150);
             $extraAttribue->save(); 
           }
 

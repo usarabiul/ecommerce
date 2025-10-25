@@ -55,12 +55,15 @@
                             <div class="detail-info">
                                 <h2 class="title-detail">{{$product->name}}</h2>
                                 <div class="product-detail-rating">
+                                    @if($product->brand)
                                     <div class="pro-details-brand">
-                                        <span> Brands: <a href="shop-grid-right.html">Bootstrap</a></span>
+                                        <span> Brands: <a href="shop-grid-right.html">{{$product->brand->name}}</a></span>
                                     </div>
+                                    @endif
                                     <div class="product-rate-cover text-end">
                                         <div class="product-rate d-inline-block">
                                             <div class="product-rating" style="width:90%">
+                                                *****
                                             </div>
                                         </div>
                                         <span class="font-small ml-5 text-muted"> (25 reviews)</span>
@@ -68,15 +71,19 @@
                                 </div>
                                 <div class="clearfix product-price-cover">
                                     <div class="product-price primary-color float-left">
-                                        <ins><span class="text-brand">$120.00</span></ins>
-                                        <ins><span class="old-price font-md ml-15">$200.00</span></ins>
-                                        <span class="save-price  font-md color3 ml-15">25% Off</span>
+                                        <ins><span class="text-brand">{{priceFullFormat($product->offerPrice())}}</span></ins>
+                                        @if($product->regular_price > $product->offerPrice())
+                                        <ins><span class="old-price font-md ml-15">{{priceFullFormat($product->regular_price)}}</span></ins>
+                                        <span class="save-price  font-md color3 ml-15">{{$product->offPercentage()}}% Off</span>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="bt-1 border-color-1 mt-15 mb-15"></div>
+                                @if($product->short_description)
                                 <div class="short-desc mb-30">
-                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam rem officia, corrupti reiciendis minima nisi modi, quasi, odio minus dolore impedit fuga eum eligendi? Officia doloremque facere quia. Voluptatum, accusantium!</p>
+                                    <p>{{$product->short_description}}</p>
                                 </div>
+                                @endif
                                 <div class="product_sort_info font-xs mb-30">
                                     <ul>
                                         <li class="mb-10"><i class="fi-rs-crown mr-5"></i> 1 Year AL Jazeera Brand Warranty</li>
@@ -131,121 +138,29 @@
                     <div class="row">
                         <div class="col-lg-10 m-auto entry-main-content">
                             <h2 class="section-title style-1 mb-30">Description</h2>
+
                             <div class="description mb-50">
-                                <p>Uninhibited carnally hired played in whimpered dear gorilla koala depending and much yikes off far quetzal goodness and from for grimaced goodness unaccountably and meadowlark near unblushingly crucial scallop
-                                    tightly neurotic hungrily some and dear furiously this apart.</p>
-                                <p>Spluttered narrowly yikes left moth in yikes bowed this that grizzly much hello on spoon-fed that alas rethought much decently richly and wow against the frequent fluidly at formidable acceptably flapped
-                                    besides and much circa far over the bucolically hey precarious goldfinch mastodon goodness gnashed a jellyfish and one however because.
-                                </p>
-                                <ul class="product-more-infor mt-30">
-                                    <li><span>Type Of Packing</span> Bottle</li>
-                                    <li><span>Color</span> Green, Pink, Powder Blue, Purple</li>
-                                    <li><span>Quantity Per Case</span> 100ml</li>
-                                    <li><span>Ethyl Alcohol</span> 70%</li>
-                                    <li><span>Piece In One</span> Carton</li>
-                                </ul>
-                                <hr class="wp-block-separator is-style-dots">
-                                <p>Laconic overheard dear woodchuck wow this outrageously taut beaver hey hello far meadowlark imitatively egregiously hugged that yikes minimally unanimous pouted flirtatiously as beaver beheld above forward
-                                    energetic across this jeepers beneficently cockily less a the raucously that magic upheld far so the this where crud then below after jeez enchanting drunkenly more much wow callously irrespective limpet.</p>
-                                <h4 class="mt-30">Packaging & Delivery</h4>
-                                <hr class="wp-block-separator is-style-wide">
-                                <p>Less lion goodness that euphemistically robin expeditiously bluebird smugly scratched far while thus cackled sheepishly rigid after due one assenting regarding censorious while occasional or this more crane
-                                    went more as this less much amid overhung anathematic because much held one exuberantly sheep goodness so where rat wry well concomitantly.
-                                </p>
-                                <p>Scallop or far crud plain remarkably far by thus far iguana lewd precociously and and less rattlesnake contrary caustic wow this near alas and next and pled the yikes articulate about as less cackled dalmatian
-                                    in much less well jeering for the thanks blindly sentimental whimpered less across objectively fanciful grimaced wildly some wow and rose jeepers outgrew lugubrious luridly irrationally attractively
-                                    dachshund.
-                                </p>
+                                @if($product->description)
+                                    {!!$product->description!!}
+                                @else
+                                    <h3>No description</h3>
+                                @endif
                             </div>
+                            @if($product->extraAttribute->count() > 0)
                             <h3 class="section-title style-1 mb-30">Additional info</h3>
                             <table class="font-md mb-30">
                                 <tbody>
-                                    <tr class="stand-up">
-                                        <th>Stand Up</th>
+                                    @foreach($product->extraAttribute as $extraAttri)
+                                    <tr>
+                                        <th>{!!$extraAttri->name!!}</th>
                                         <td>
-                                            <p>35″L x 24″W x 37-45″H(front to back wheel)</p>
+                                            <p>{!!$extraAttri->description!!}</p>
                                         </td>
                                     </tr>
-                                    <tr class="folded-wo-wheels">
-                                        <th>Folded (w/o wheels)</th>
-                                        <td>
-                                            <p>32.5″L x 18.5″W x 16.5″H</p>
-                                        </td>
-                                    </tr>
-                                    <tr class="folded-w-wheels">
-                                        <th>Folded (w/ wheels)</th>
-                                        <td>
-                                            <p>32.5″L x 24″W x 18.5″H</p>
-                                        </td>
-                                    </tr>
-                                    <tr class="door-pass-through">
-                                        <th>Door Pass Through</th>
-                                        <td>
-                                            <p>24</p>
-                                        </td>
-                                    </tr>
-                                    <tr class="frame">
-                                        <th>Frame</th>
-                                        <td>
-                                            <p>Aluminum</p>
-                                        </td>
-                                    </tr>
-                                    <tr class="weight-wo-wheels">
-                                        <th>Weight (w/o wheels)</th>
-                                        <td>
-                                            <p>20 LBS</p>
-                                        </td>
-                                    </tr>
-                                    <tr class="weight-capacity">
-                                        <th>Weight Capacity</th>
-                                        <td>
-                                            <p>60 LBS</p>
-                                        </td>
-                                    </tr>
-                                    <tr class="width">
-                                        <th>Width</th>
-                                        <td>
-                                            <p>24″</p>
-                                        </td>
-                                    </tr>
-                                    <tr class="handle-height-ground-to-handle">
-                                        <th>Handle height (ground to handle)</th>
-                                        <td>
-                                            <p>37-45″</p>
-                                        </td>
-                                    </tr>
-                                    <tr class="wheels">
-                                        <th>Wheels</th>
-                                        <td>
-                                            <p>12″ air / wide track slick tread</p>
-                                        </td>
-                                    </tr>
-                                    <tr class="seat-back-height">
-                                        <th>Seat back height</th>
-                                        <td>
-                                            <p>21.5″</p>
-                                        </td>
-                                    </tr>
-                                    <tr class="head-room-inside-canopy">
-                                        <th>Head room (inside canopy)</th>
-                                        <td>
-                                            <p>25″</p>
-                                        </td>
-                                    </tr>
-                                    <tr class="pa_color">
-                                        <th>Color</th>
-                                        <td>
-                                            <p>Black, Blue, Red, White</p>
-                                        </td>
-                                    </tr>
-                                    <tr class="pa_size">
-                                        <th>Size</th>
-                                        <td>
-                                            <p>M, S</p>
-                                        </td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
+                            @endif
                             <div class="social-icons single-share">
                                 <ul class="text-grey-5 d-inline-block">
                                     <li><strong class="mr-10">Share this:</strong></li>
