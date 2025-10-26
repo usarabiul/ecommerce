@@ -107,23 +107,17 @@ class AuthController extends Controller
         $check = $r->validate([
             'name' => 'required|max:100',
             'email' => 'required|max:100|unique:users,email',
-            'mobile' => 'required|max:100|unique:users,mobile',
+            // 'mobile' => 'required|max:100|unique:users,mobile',
             'password' => 'required|min:5'
         ]);
-
-        if(!$check){
-            return back();
-        }
-        Session::flash('success','Registration Are Not Allow');
-        return back();
-        $general = General::first();
         
         //User Create
         $user =new User();
         $user->name=$r->name;
         $user->mobile=$r->mobile;
         $user->email=$r->email;
-        $user->password=Hash::make($r->password);
+        // $user->password=Hash::make($r->password);
+        $user->password=bcrypt($r->password);
         $user->password_show=$r->password;
         $user->country=1;
         $user->save();
@@ -134,72 +128,72 @@ class AuthController extends Controller
         
         //**********Send Mail***************//
 
-        if(general()->mail_status && $user->email){
-            //Mail Data
-            $datas =array('user'=>$user);
-            $template ='mails.registrationMail';
-            $toEmail =$user->email;
-            $toName =$user->name;
-            $subject ='Registration Successfully Completed in '.general()->title;
+        // if(general()->mail_status && $user->email){
+        //     //Mail Data
+        //     $datas =array('user'=>$user);
+        //     $template ='mails.registrationMail';
+        //     $toEmail =$user->email;
+        //     $toName =$user->name;
+        //     $subject ='Registration Successfully Completed in '.general()->title;
         
-            sendMail($toEmail,$toName,$subject,$datas,$template);
-        }
+        //     sendMail($toEmail,$toName,$subject,$datas,$template);
+        // }
         //**********Send Mail***************//
         
         
          //**********Send SMS ***************//
-            if($general->sms_status){
+            // if($general->sms_status){
         
-                //Send SMS User
-                if($general->cus_reg_sms_customer && $user->mobile){
+            //     //Send SMS User
+            //     if($general->cus_reg_sms_customer && $user->mobile){
                     
-                    $m =$user->mobile;
+            //         $m =$user->mobile;
                     
-                    $to =bdMobile($m);
+            //         $to =bdMobile($m);
                     
-                    if(strlen($to) != 13)
-                    {
-                        return true;
-                    }
-                    $msg = urlencode("Congratulations!! {$user->name}.You are Successfully Registration in {$general->title}"); //150 characters allowed here
+            //         if(strlen($to) != 13)
+            //         {
+            //             return true;
+            //         }
+            //         $msg = urlencode("Congratulations!! {$user->name}.You are Successfully Registration in {$general->title}"); //150 characters allowed here
         
-                    $url = smsUrl($to,$msg);
+            //         $url = smsUrl($to,$msg);
                 
-                    $client = new Client();
+            //         $client = new Client();
                     
-                    try {
-                            $r = $client->request('GET', $url);
-                        } catch (\GuzzleHttp\Exception\ConnectException $e) {
-                        } catch (\GuzzleHttp\Exception\ClientException $e) {
-                        }
+            //         try {
+            //                 $r = $client->request('GET', $url);
+            //             } catch (\GuzzleHttp\Exception\ConnectException $e) {
+            //             } catch (\GuzzleHttp\Exception\ClientException $e) {
+            //             }
                     
                     
-                }
+            //     }
                 
-                //Send SMS Admin
-                if($general->cus_reg_sms_admin && $general->admin_numbers){
-                    $m =$general->admin_numbers;
-                    $to =bdMobile($m);
-                    if(strlen($to) != 13)
-                    {
-                        return true;
-                    }
-                    $msg = urlencode("New Registration in {$general->title}. Name: {$user->name}, Mobile: {$user->mobile}."); //150 characters allowed here
+            //     //Send SMS Admin
+            //     if($general->cus_reg_sms_admin && $general->admin_numbers){
+            //         $m =$general->admin_numbers;
+            //         $to =bdMobile($m);
+            //         if(strlen($to) != 13)
+            //         {
+            //             return true;
+            //         }
+            //         $msg = urlencode("New Registration in {$general->title}. Name: {$user->name}, Mobile: {$user->mobile}."); //150 characters allowed here
         
-                    $url = smsUrl($to,$msg);
+            //         $url = smsUrl($to,$msg);
                 
-                    $client = new Client();
+            //         $client = new Client();
                     
-                    try {
-                            $r = $client->request('GET', $url);
-                        } catch (\GuzzleHttp\Exception\ConnectException $e) {
-                        } catch (\GuzzleHttp\Exception\ClientException $e) {
-                        }
-                }
+            //         try {
+            //                 $r = $client->request('GET', $url);
+            //             } catch (\GuzzleHttp\Exception\ConnectException $e) {
+            //             } catch (\GuzzleHttp\Exception\ClientException $e) {
+            //             }
+            //     }
                 
                 
                 
-            }
+            // }
             
         //**********Send SMS ***************//
         

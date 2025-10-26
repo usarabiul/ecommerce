@@ -149,7 +149,9 @@ class WelcomeController extends Controller
         return abort('404');
       }
 
-      return view(welcomeTheme().'products.productView',compact('product'));
+      $relatedProducts =$product->relatedProducts()->limit(10)->get();
+
+      return view(welcomeTheme().'products.productView',compact('product','relatedProducts'));
     }
 
     public function blogCategory($slug){
