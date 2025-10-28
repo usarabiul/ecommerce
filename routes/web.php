@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Welcome\WelcomeController;
 use App\Http\Controllers\Customer\CustomerController;
+use App\Http\Controllers\Welcome\CartController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\MenusController;
@@ -32,6 +33,24 @@ Route::get('/blog/archives/{slug}',[WelcomeController::class,'blogArchives'])->n
 Route::get('/blog/search',[WelcomeController::class,'blogSearch'])->name('blogSearch');
 Route::get('/blog/{slug}',[WelcomeController::class,'blogView'])->name('blogView');
 Route::post('/blog-comments/{slug}',[WelcomeController::class,'blogComments'])->name('blogComments');
+
+Route::group(['middleware'=>['carts']], function(){
+    //Cart Route Start
+    Route::any('add-to-cart/{id}',[CartController::class,'addToCart'])->name('addToCart');
+    Route::get('change-to-cart/{id}/{type}',[CartController::class,'changeToCart'])->name('changeToCart');
+    Route::get('select-delivery-area/{id}',[CartController::class,'selectDeliveryArea'])->name('selectDeliveryArea');
+    Route::get('carts',[CartController::class,'carts'])->name('carts');
+    Route::any('checkout',[CartController::class,'checkout'])->name('checkout');
+    Route::get('order-payment/{id}',[CartController::class,'orderPayment'])->name('orderPayment')->middleware('auth');
+    Route::get('order-payment-send/{type}/{id}',[CartController::class,'orderPaymentSend'])->name('orderPaymentSend')->middleware('auth');
+    Route::any('OrderTrack',[CartController::class,'OrderTrack'])->name('OrderTrack');
+    Route::get('order-invoice/{invoice}',[CartController::class,'invoiceView'])->name('invoiceView');
+    Route::get('wishlist-compare/update/{id}/{type}',[CartController::class,'wishlistCompareUpdate'])->name('wishlistCompareUpdate');
+    Route::get('my-wishlist',[CartController::class,'myWishlist'])->name('myWishlist');
+    Route::get('my-compare',[CartController::class,'myCompare'])->name('myCompare');
+    Route::post('my-coupon-apply',[CartController::class,'couponApply'])->name('couponApply');
+    Route::post('order-now/{id}',[CartController::class,'orderNow'])->name('orderNow');
+});
 
 //Auth Route Start
 Route::group(['middleware'=>['authCheck']], function(){
