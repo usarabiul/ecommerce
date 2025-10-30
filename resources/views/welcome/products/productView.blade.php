@@ -121,7 +121,7 @@
                                         <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                     </div>
                                     <div class="product-extra-link2">
-                                        <button type="submit" class="button button-add-to-cart singleAddToCart">Add to cart</button>
+                                        <button type="button" class="button button-add-to-cart singleAddToCart" data-id="{{$product->id}}" data-url="{{route('addToCart',$product->id)}}" >Add to cart</button>
                                         <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
                                         <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
                                     </div>
@@ -355,32 +355,35 @@
 <script>
 
     $(document).ready(function(){
-        $(document).on("click", ".btnAddToCart", function () {
+        $(document).on("click", ".singleAddToCart", function () {
             var that =$(this);
             var id = that.attr("data-id");
             var url = that.attr("data-url");
+            var qty = parseInt($('.qty-val').text());
             
             $.ajax({
                 url: url,
                 method: "GET",
+                data:{qty:qty},
                 beforeSend: function() {
                     $(that).addClass('load-more-overlay loading');
                 },
             })
             .done(function (data) {
-                $(that).removeClass('load-more-overlay loading');
-                $(".cart-count").empty().append(data.cartCount);
-                $('.minipopup-area').empty().append(data.cartItem);
-                setTimeout(function() {
-                    $('.minipopup-box').removeClass('show');
-                }, 4000);
-                setTimeout(function() {
-                    $('.minipopup-area').empty();
-                }, 6000);
+                
+                // $(that).removeClass('load-more-overlay loading');
+                // $(".cart-count").empty().append(data.cartCount);
+                // $('.minipopup-area').empty().append(data.cartItem);
+                // setTimeout(function() {
+                //     $('.minipopup-box').removeClass('show');
+                // }, 4000);
+                // setTimeout(function() {
+                //     $('.minipopup-area').empty();
+                // }, 6000);
             })
             .fail(function () {
                 $(that).removeClass('load-more-overlay loading');
-                location.reload(true);
+                // location.reload(true);
             });
             
         });

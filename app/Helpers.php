@@ -244,3 +244,202 @@ function uploadFile($file,$src,$srcType,$fileUse,$author=null,$fileStatus=true){
     return $media;
 
 }
+
+function myCart($cookie=null){
+
+  $carts = array();
+  $cartsProductIds = array();
+  $cartsCtgIds = array();
+  $shippingZones=array();
+  $wlCount = 0;
+  $cpCount = 0;
+  $cartsItems = 0;
+  $cartsCount = 0;
+  $shippingCharge = 0;
+  $cartTax = 0;
+  $couponDisc = 0;
+  $grandTotal = 0;
+  $cartTotalPrice = 0;
+  $shippingActive = null;
+  $myCoupon=null;
+  $myCouponMessage=null;
+  $shippingActiveClass=null;
+  $shippingNote =null;
+  if( $cookie)
+  {
+    
+    $shippingZones=PostExtra::latest()->where('type',3)->where('id','<>',59)->where('status','active')->where('parent_id',null)->select(['id','name','content','shipping_charge'])->get();
+    $shippingZones->map(function($item){
+        return $item->shipping_type='1';
+    });
+    
+    $shippingSession =json_decode(Session::get('shippingServiceOptions'));
+    $shippingAddress =Session::get('shippingAddres');
+    
+    if($shippingSession){
+        if(isset($shippingSession->shippingServiceOptions)){
+            $shippingSession = $shippingSession->shippingServiceOptions;
+        }else{
+            $shippingSession=array();
+        }
+    }else{
+        $shippingSession=array();
+    }
+    
+    foreach($shippingSession as $ship){
+      $shippingZones->push(['id'=>$ship->code,'name'=>$ship->serviceCheckoutName,'content'=>'Company : '.$ship->serviceName,'shipping_charge'=>$ship->totalCost,'shipping_type'=>2]);
+        
+    }
+    
+    $checkShippingSelect =Session::get('selectZone');
+    if(!$checkShippingSelect){
+        if($zoneFF =$shippingZones->first()){
+            Session::put('selectZone',['id'=>$zoneFF['id'],'type'=>$zoneFF['shipping_type']]);
+        }
+    }
+    
+    $shippingSelect =Session::get('selectZone');
+    if($shippingSelect){
+        if($shippingSelect['type']==2){
+            $shippingActive = $shippingZones->where('shipping_type',2)->where('id',$shippingSelect['id'])->first();
+            $shippingActiveClass='active_2_';
+        }else{
+            $shippingActive = $shippingZones->where('shipping_type',1)->where('id',$shippingSelect['id'])->first();
+            $shippingActiveClass=null;
+            $shippingActiveClass='active_1_';
+        }
+    }
+    
+    $carts = Cart::where('cookie', $cookie)->latest()->select(['id','user_id','product_id','sku_id','cookie','quantity','emi','coupon_id','color','size'])->get();
+    $cartsCount=$carts->sum('quantity');
+    $cartsItems=$carts->count();
+    $uniqCartPrice=0;
+    $mci =0;
+    if ($mci = Session::get('my_coupon_id')){
+        $myCoupon =Attribute::latest()->where('type',13)->where('status','active')->where('parent_id',null)->where('id',$mci)->first();
+    }
+
+    foreach($carts as $cart){
+        if($cart->product){
+            $cartTotalPrice += $cart->subtotal();
+        }else{
+            $cart->delete();  
+        }
+        unset($cart->product);
+    }
+    
+    $wlCount = WishList::where('cookie',$cookie)->where('type',0)->count();
+    $cpCount = WishList::where('cookie',$cookie)->where('type',2)->count();
+    
+    // Shipping Charge
+    $shippingCharge=0;
+    // Shipping Charge
+    if($shippingActive){
+        $shippingCharge=$shippingActive['shipping_charge'];
+        $shippingActiveClass.=$shippingActive['id'];
+        
+        if(isset($shippingActive['name'])){
+          $shippingNote.=$shippingActive['name'];
+      }
+      if(isset($shippingActive['shipping_charge'])){
+          if($shippingActive['shipping_charge'] > 0){
+              $shippingNote.=' | Fee- '.priceFullFormat($shippingActive['shipping_charge']);
+          }
+      }
+      if(isset($shippingActive['shipping_type']) && isset($shippingActive['content'])){
+          if($shippingActive['shipping_type']==2){
+              $shippingNote.=' | Company: Pack And Send';
+          }else{
+              $shippingNote.=' | '.$shippingActive['content'];
+          }
+      }
+        
+    }
+
+    
+    // Coupon Apply
+    $couponData = myCouponCheck($cartTotalPrice,$uniqCartPrice);
+    
+    if ($couponData)
+    {
+        $couponDisc=$couponData['discount'];
+        $myCouponMessage=$couponData['message'];
+    }
+            
+    //Tax Charge
+    $cartTax =0;
+    
+    if(general()->tax_status==2){
+      $cartTax =  ($cartTotalPrice*general()->tax)/100;
+    }
+    
+    $grandTotal = $cartTotalPrice + $shippingCharge + $cartTax - $couponDisc;
+    
+  }
+
+
+
+  return compact('carts','cartTotalPrice','wlCount','cpCount','cartsCount','shippingZones','shippingActiveClass','shippingActive','shippingNote','shippingAddress','shippingCharge','cartTax','couponDisc','myCoupon','myCouponMessage','grandTotal');
+
+}
+
+
+function myCouponCheck($totalAmount,$uniqCartPrice){
+    
+  $total =$totalAmount;
+  $message =null;
+  $discount =0;
+  $status=true;
+  $coupon=null;
+  
+  $cId =Session::get('my_coupon_id');
+  
+  $coupon =Attribute::latest()->where('type',13)->where('status','active')->where('parent_id',null)
+          ->where('id',$cId)
+          ->first();
+
+  if(!$coupon){
+      $message='Coupon Are Not Found';
+      $status =false;
+  }else{
+      
+      
+      if($status==true && $coupon->min_shopping && $coupon->min_shopping > $total){
+          $message ='Sorry,Your coupon Are Invalid. Please, minimum Shopping '.priceFullFormat($coupon->min_shopping);
+          $status =false;
+      }
+
+      if($status==true && $coupon->max_shopping && $coupon->max_shopping < $total){
+          $message ='Sorry, Your coupon Are Invalid. Because, maximum Shopping '.priceFullFormat($coupon->max_shopping);
+          $status =false;
+      }
+
+      if($status==true && $coupon->menu_type==1 && $coupon->amounts > $total){
+          $message = 'Sorry, Your coupon Are Invalid. Because, Discount Big Amount ('.priceFullFormat($coupon->amounts).') Over Shopping Amount';
+          $status =false;
+      }
+
+      if($status==true && $coupon->menu_type==0 && $coupon->amounts > 100){
+          $status =false;
+          $message ='Sorry, your coupon Are Invalid. Because, Discount Can Not Over 100%';
+
+      }
+      
+      if($status==true){
+      
+          if($coupon->menu_type==1){
+          $discount = $coupon->amounts; 
+          }else{
+              if($coupon->target==1){
+                  $discount =$uniqCartPrice * ($coupon->amounts / 100);
+              }else{
+                  $discount = $total * ($coupon->amounts / 100);
+              }
+          }
+
+      }
+  }
+  
+  return compact('discount','message','coupon','status');
+
+}
