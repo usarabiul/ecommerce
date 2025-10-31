@@ -24,6 +24,14 @@ class Cart extends Model
     	return $this->belongsTo(Post::class, 'product_id');
     }
 
+    public function image(){
+        $img='medies/noimage.jpg';
+        if($this->product){
+            $img =$this->product->image();
+        }
+        return $img;
+    }
+
     public function itemprice()
     {
         if($this->product){

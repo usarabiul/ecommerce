@@ -4,6 +4,8 @@ use App\Models\General;
 use App\Models\Media;
 use App\Models\Country;
 use App\Models\Post;
+use App\Models\Cart;
+use App\Models\WishList;
 use App\Models\PostExtra;
 use App\Models\Attribute;
 use Carbon\Carbon;
@@ -268,7 +270,7 @@ function myCart($cookie=null){
   if( $cookie)
   {
     
-    $shippingZones=PostExtra::latest()->where('type',3)->where('id','<>',59)->where('status','active')->where('parent_id',null)->select(['id','name','content','shipping_charge'])->get();
+    $shippingZones=PostExtra::latest()->where('type',3)->where('id','<>',59)->where('status','active')->where('parent_id',null)->select(['id','name','description'])->get();
     $shippingZones->map(function($item){
         return $item->shipping_type='1';
     });

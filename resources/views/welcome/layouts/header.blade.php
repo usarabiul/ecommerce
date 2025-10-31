@@ -154,7 +154,7 @@
                                 </a>
                             </div>
                             <div class="header-action-icon-2">
-                                <a class="mini-cart-icon" href="shop-cart.html">
+                                <a class="mini-cart-icon" href="{{route('carts')}}">
                                     <img alt="Evara" src="{{asset(assetLink().'/images/icon-cart.svg')}}">
                                     <span class="pro-count blue">2</span>
                                 </a>

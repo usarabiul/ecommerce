@@ -98,7 +98,9 @@ class CartController extends Controller
     		$carts = $myCart['carts'];
     		$cartsCount =  $myCart['cartsCount'];
     		$cartTotalPrice =  $myCart['cartTotalPrice'];
-            $cartsItemsModal =view(welcomeTheme().'carts.includes.cartItemsModal',compact('carts','cartTotalPrice'))->render();
+    		$couponDisc =  $myCart['couponDisc'];
+    		$grandTotal =  $myCart['grandTotal'];
+            $cartsItemsModal =view(welcomeTheme().'carts.includes.cartItems',compact('carts','cartTotalPrice','couponDisc','grandTotal'))->render();
             return Response()->json([
                 'success' => true,
                 'cartsCount' =>$cartsCount,
