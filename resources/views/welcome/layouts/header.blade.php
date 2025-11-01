@@ -190,8 +190,8 @@
                                             <h4>Total <span>$4000.00</span></h4>
                                         </div>
                                         <div class="shopping-cart-button">
-                                            <a href="shop-cart.html" class="outline">View cart</a>
-                                            <a href="shop-checkout.html">Checkout</a>
+                                            <a href="{{route('carts')}}" class="outline">View cart</a>
+                                            <a href="{{route('checkout')}}">Checkout</a>
                                         </div>
                                     </div>
                                 </div>
@@ -283,7 +283,7 @@
                     </div>
                 </div>
                 <div class="hotline d-none d-lg-block">
-                    <p><i class="fi-rs-headset"></i><span>Hotline</span> 1900 - 888 </p>
+                    <p><i class="fi-rs-headset"></i><span>Hotline</span> {{general()->mobile}} </p>
                 </div>
                 <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p>
                 <div class="header-action-right d-block d-lg-none">
