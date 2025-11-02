@@ -129,19 +129,6 @@
                 <div class="header-right">
                     <div class="search-style-2">
                         <form action="#">
-                            <select class="select-active">
-                                <option>All Categories</option>
-                                <option>Women's</option>
-                                <option>Men's</option>
-                                <option>Cellphones</option>
-                                <option>Computer</option>
-                                <option>Electronics</option>
-                                <option> Accessories</option>
-                                <option>Home & Garden</option>
-                                <option>Luggage</option>
-                                <option>Shoes</option>
-                                <option>Mother & Kids</option>
-                            </select>
                             <input type="text" placeholder="Search for items...">
                         </form>
                     </div>
@@ -211,75 +198,58 @@
                     </a>
                 </div>
                 <div class="header-nav d-none d-lg-flex">
+                    @if($menu = menu('Categories Menu'))
                     <div class="main-categori-wrap d-none d-lg-block">
-                        <a class="categori-button-active" href="#">
-                            <span class="fi-rs-apps"></span> Browse Categories
+                        <a class="categori-button-active" href="javascript:void(0)">
+                            <span class="fi-rs-apps"></span> {{$menu->name}}
                         </a>
                         <div class="categori-dropdown-wrap categori-dropdown-active-large">
                             <ul>
-                                <li class="has-children">
-                                    <a href="shop-grid-right.html"><i class="evara-font-dress"></i>Women's Clothing</a>
+                                @foreach($menu->subMenus as $item)
+                                <li class="{{$item->subMenus->count() > 0?'has-children':''}}">
+                                    <a href="{{asset($menu->menuLink())}}"><i class="evara-font-dress"></i>{{$item->menuName()}}</a>
+                                    @if($item->subMenus->count() > 0)
                                     <div class="dropdown-menu">
                                         <ul class="mega-menu">
-                                            <li><a class="dropdown-item nav-link nav_item" href="#" style="padding: 5px 10px;">Dresses</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="#" style="padding: 5px 10px;">Blouses & Shirts</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="#" style="padding: 5px 10px;">Hoodies & Sweatshirts</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="#" style="padding: 5px 10px;">Women's Sets</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="#" style="padding: 5px 10px;">Suits & Blazers</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="#" style="padding: 5px 10px;">Bodysuits</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="#" style="padding: 5px 10px;">Tanks & Camis</a></li>
-                                            <li><a class="dropdown-item nav-link nav_item" href="#" style="padding: 5px 10px;">Coats & Jackets</a></li>
+                                            @foreach($item->subMenus as $item)
+                                            <li><a class="dropdown-item nav-link nav_item" href="{{asset($menu->menuLink())}}" style="padding: 5px 10px;">{{$item->menuName()}}</a></li>
+                                            @endforeach
                                         </ul>
                                     </div>
+                                    @endif
                                 </li>
-                                <li><a href="shop-grid-right.html"><i class="evara-font-desktop"></i>Computer & Office</a></li>
-                                <li><a href="shop-grid-right.html"><i class="evara-font-cpu"></i>Consumer Electronics</a></li>
-                                <li><a href="shop-grid-right.html"><i class="evara-font-diamond"></i>Jewelry & Accessories</a></li>
-                                <li><a href="shop-grid-right.html"><i class="evara-font-home"></i>Home & Garden</a></li>
-                                <li><a href="shop-grid-right.html"><i class="evara-font-high-heels"></i>Shoes</a></li>
-                                <li><a href="shop-grid-right.html"><i class="evara-font-teddy-bear"></i>Mother & Kids</a></li>
-                                <li><a href="shop-grid-right.html"><i class="evara-font-kite"></i>Outdoor fun</a></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
+                    @endif
                     <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
+                        @if($menu = menu('Header Menus'))
                         <nav>
                             <ul>
+                                @foreach($menu->subMenus as $item)
                                 <li>
-                                    <a class="active" href="index.html">Home</a>
-                                </li>
-                                <li>
-                                    <a href="page-about.html">About</a>
-                                </li>
-                                <li>
-                                    <a href="shop-grid-right.html">Shop</a>
-                                </li>
-                                <li>
-                                    <a href="blog-category-grid.html">Blog 
-                                        <!-- <i class="fi-rs-angle-down"></i> -->
-                                    </a>
+                                    <a class="active" href="{{asset($item->menuLink())}}">{{$item->menuName()}}</a>
+                                    {{--
                                     <!-- <ul class="sub-menu">
-                                        <li><a href="blog-category-grid.html">Blog Category Grid</a></li>
-                                        <li><a href="blog-category-list.html">Blog Category List</a></li>
-                                        <li><a href="blog-category-big.html">Blog Category Big</a></li>
-                                        <li><a href="blog-category-fullwidth.html">Blog Category Wide</a></li>
-                                        <li><a href="#">Single Post <i class="fi-rs-angle-right"></i></a>
-                                            <ul class="level-menu level-menu-modify">
-                                                <li><a href="blog-post-left.html">Left Sidebar</a></li>
-                                                <li><a href="blog-post-right.html">Right Sidebar</a></li>
-                                                <li><a href="blog-post-fullwidth.html">No Sidebar</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul> -->
+                                                <li><a href="blog-category-grid.html">Blog Category Grid</a></li>
+                                                <li><a href="blog-category-list.html">Blog Category List</a></li>
+                                                <li><a href="blog-category-big.html">Blog Category Big</a></li>
+                                                <li><a href="blog-category-fullwidth.html">Blog Category Wide</a></li>
+                                                <li><a href="#">Single Post <i class="fi-rs-angle-right"></i></a>
+                                                <ul class="level-menu level-menu-modify">
+                                                    <li><a href="blog-post-left.html">Left Sidebar</a></li>
+                                                    <li><a href="blog-post-right.html">Right Sidebar</a></li>
+                                                    <li><a href="blog-post-fullwidth.html">No Sidebar</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul> -->
+                                    --}}
                                 </li>
-                                <li>
-                                    <a href="#">Pages</a>
-                                </li>
-                                <li>
-                                    <a href="page-contact.html">Contact</a>
-                                </li>
+                                @endforeach
                             </ul>
                         </nav>
+                        @endif
                     </div>
                 </div>
                 <div class="hotline d-none d-lg-block">
