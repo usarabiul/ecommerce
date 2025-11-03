@@ -353,20 +353,18 @@ class WelcomeController extends Controller
     }
 
     public function search(Request $r){
-      
-      if($r->search){
 
-        $posts =Post::where('status','active')
-        ->where(function($q) use($r){
-          $q->where('search_key','LIKE','%'.$r->search.'%');
-        })
-        ->paginate(24);
+      $products =Post::where('type',2)
+            ->where('status','active')
+            ->whereDate('created_at','<=',Carbon::now())
+            ->where(function($q)use($r){
+              if($r->search){
+                $q->where('name','like','%'.$r->search.'%');
+              }
+            })
+            ->paginate(12);
 
-      }else{
-        $posts = array();
-      }
-
-      return view(welcomeTheme().'search');
+      return view(welcomeTheme().'products.productSearch',compact('products'));
 
     }
 

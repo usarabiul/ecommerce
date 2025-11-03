@@ -80,8 +80,7 @@
                 <div class="col-xl-3 col-lg-4">
                     <div class="header-info">
                         <ul>
-                            <li><i class="fi-rs-smartphone"></i> <a href="#">(+01) - 2345 - 6789</a></li>
-                            <li><i class="fi-rs-marker"></i><a  href="page-contact.html">Our location</a></li>
+                            <li><i class="fi-rs-smartphone"></i> <a href="tel:{{general()->mobile}}">{{general()->mobile}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -128,8 +127,8 @@
                 </div>
                 <div class="header-right">
                     <div class="search-style-2">
-                        <form action="#">
-                            <input type="text" placeholder="Search for items...">
+                        <form action="{{route('search')}}">
+                            <input type="text" name="search" placeholder="Search for items...">
                         </form>
                     </div>
                     <div class="header-action-right">

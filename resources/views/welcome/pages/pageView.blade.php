@@ -30,9 +30,6 @@
             {!!$page->description!!}
         </div>
     </div>
-    @if($page->hasNitEditorContent->count() > 0)
-        @include(welcomeTheme().'pages.nitEditor.primary',['datas'=>$page->hasNitEditorContent])
-    @endif
 </div>
 
 @endsection @push('js') @endpush

@@ -116,34 +116,46 @@
                         </div>
                         <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contact</h5>
                         <p class="wow fadeIn animated">
-                            <strong>Address: </strong>562 Wellington Road, Street 32, San Francisco
+                            <strong>Address: </strong> {!!general()->address_one!!}
                         </p>
                         <p class="wow fadeIn animated">
-                            <strong>Phone: </strong>+01 2222 365 /(+91) 01 2345 6789
+                            <strong>Phone: </strong>{{general()->mobile}}
                         </p>
                         <p class="wow fadeIn animated">
-                            <strong>Hours: </strong>10:00 - 18:00, Mon - Sat
+                            <strong>Email: </strong> {{general()->email}}
                         </p>
                         <h5 class="mb-10 mt-30 fw-600 text-grey-4 wow fadeIn animated">Follow Us</h5>
                         <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">
-                            <a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a>
-                            <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a>
-                            <a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a>
-                            <a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
-                            <a href="#"><img src="assets/imgs/theme/icons/icon-youtube.svg" alt=""></a>
+                            @if(general()->facebook_link)
+                            <a href="{{general()->facebook_link}}"><i class="fab fa-facebook"></i></a>
+                            @endif
+                            @if(general()->twitter_link)
+                            <a href="{{general()->twitter_link}}"><i class="fab fa-twitter"></i></a>
+                            @endif
+                            @if(general()->instagram_link)
+                            <a href="{{general()->instagram_link}}"><i class="fab fa-instagram"></i></a>
+                            @endif
+                            @if(general()->linkedin_link)
+                            <a href="{{general()->linkedin_link}}"><i class="fab fa-linkedin"></i></a>
+                            @endif
+                            @if(general()->youtube_link)
+                            <a href="{{general()->youtube_link}}"><i class="fab fa-youtube-play"></i></a>
+                            @endif
+                            @if(general()->pinterest_link)
+                            <a href="{{general()->pinterest_link}}"><i class="fab fa-pinterest-p"></i></a>
+                            @endif
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-3">
-                    <h5 class="widget-title wow fadeIn animated">About</h5>
+                    @if($menu = menu('Footer Two'))
+                    <h5 class="widget-title wow fadeIn animated">{{$menu->name}}</h5>
                     <ul class="footer-list wow fadeIn animated mb-sm-5 mb-md-0">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Delivery Information</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms &amp; Conditions</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Support Center</a></li>
+                        @foreach($menu->subMenus as $menu)
+                        <li><a href="{{asset($menu->menuLink())}}">{{$menu->menuName()}}</a></li>
+                        @endforeach
                     </ul>
+                    @endif
                 </div>
                 <div class="col-lg-2  col-md-3">
                     <h5 class="widget-title wow fadeIn animated">My Account</h5>
