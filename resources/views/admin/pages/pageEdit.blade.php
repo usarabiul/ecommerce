@@ -17,7 +17,7 @@
                 <ol class="breadcrumb mt-1 p-0 mb-0">
                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Category Edit</li>
+                    <li class="breadcrumb-item active" aria-current="page">Page Edit</li>
                 </ol>
             </nav>
         </div>
@@ -159,24 +159,6 @@
                             @endif
                             @endisset
                         </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-header" style="border-bottom: 1px solid #e3ebf3;">
-                    <h4 class="card-title">Galleries</h4>
-                </div>
-                <div class="card-content">
-                    <div class="card-body">
-                        @if ($errors->has('galleries*'))
-                        <div class="invalid-feedback">The Galleries Must Be a Number</div>
-                        @endif
-                        <select  name="galleries[]" class="selectpicker form-control" title="Select Gallery" multiple="">
-                            @foreach($galleries as $i=>$gallery)
-                            <option value="{{$gallery->id}}" @foreach($page->postTags as $posttag) {{$posttag->reff_id==$gallery->id?'selected':''}} @endforeach>{{$gallery->name}}</option>
-                            @endforeach
-                        </select>
                     </div>
                 </div>
             </div>

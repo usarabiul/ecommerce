@@ -212,13 +212,13 @@ class WelcomeController extends Controller
 
     public function blogSearch(Request $r){
       $check = $r->validate([
-          'search' => 'required|max:100',
+          'blog_search' => 'required|max:100',
       ]);
       
       $posts =Post::latest()->where('type',1)->where('status','active')
       ->where(function($q) use ($r) {
-        if($r->search){
-          $q->where('name','LIKE','%'.$r->search.'%');
+        if($r->blog_search){
+          $q->where('name','LIKE','%'.$r->blog_search.'%');
         }
 
       })

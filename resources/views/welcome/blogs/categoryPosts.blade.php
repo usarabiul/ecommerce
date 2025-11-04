@@ -13,43 +13,38 @@
 </style>
 @endpush 
 @section('contents')
-
-<div class="breadcrumb-area"
-@if($category->bannerFile)
-style="background-image:url({{asset($category->banner())}});background-repeat: no-repeat;
-    background-size: cover;padding: 50px 0;"
-@endif
->
+<div class="page-header breadcrumb-wrap">
     <div class="container">
-        <div class="title">
-            <h1>{{$category->name}}</h1>
-            <ul>
-                <li><a href="{{route('index')}}">Home</a></li>
-                <li>{{$category->name}}</li>
-            </ul>
+        <div class="breadcrumb">
+            <a href="{{route('index')}}" rel="nofollow">Home </a>
+            <span></span>
+            @if($pg =pageTemplate('Latest Blog'))
+            <a href="{{route('pageView',$pg->slug?:'no-title')}}" rel="nofollow">Blog </a>
+            <span></span>
+            @endif
+            {{$category->name}}
         </div>
     </div>
 </div>
 
-<div class="blogCompany">
-    <div class="container">
-		<div class="row">
-    		<div class="col-lg-8 col-md-7 col-sm-12 col-xs-12">
-                <div class="row">
+<section class="mt-50 mb-50">
+    <div class="container custom">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="loop-grid loop-list pr-30">
                     @foreach($posts as $post)
-                    <div class="col-md-6">
                         @include(welcomeTheme().'blogs.includes.blogGrid')
-                    </div>
                     @endforeach
                 </div>
-    			<!-- pagination -->
-    			{{$posts->links(welcomeTheme().'blogs.pagination')}}
-    		</div>
-    		<div class="col-lg-4 col-md-5  col-sm-12 col-xs-12">
-    			@include(welcomeTheme().'blogs.includes.sideBar')
-    		</div>
-		</div>
-	</div>
-</div>
+                <!--post-grid-->
+                {{$posts->links(welcomeTheme().'blogs.pagination')}}
+            </div>
+            <div class="col-lg-3 primary-sidebar sticky-sidebar">
+                @include(welcomeTheme().'blogs.includes.sideBar')
+            </div>
+        </div>
+    </div>
+</section>
+
 
 @endsection @push('js') @endpush

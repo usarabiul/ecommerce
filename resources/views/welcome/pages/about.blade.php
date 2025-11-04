@@ -15,23 +15,22 @@
 @endpush 
 
 @section('contents')
-<div class="breadcrumb-area"
-@if($page->bannerFile)
-style="background-image:url({{asset($page->banner())}});background-repeat: no-repeat;
-    background-size: cover;padding: 50px 0;"
-@endif
->
+<div class="page-header breadcrumb-wrap">
     <div class="container">
-        <div class="title">
-            <h1>{{$page->name}}</h1>
-            <ul>
-                <li><a href="{{route('index')}}">Home</a></li>
-                <li>{{$page->name}}</li>
-            </ul>
+        <div class="breadcrumb">
+            <a href="{{route('index')}}" rel="nofollow">Home </a>
+            <span></span> {{$page->name}}
         </div>
     </div>
 </div>
 
+<section class="mt-50 mb-50" style="transform: none;">
+    <div class="container" style="transform: none;">
+        <div class="pageContent">
+            {!!$page->description!!}
+        </div>
+    </div>
+</section>
 
 
 @endsection 

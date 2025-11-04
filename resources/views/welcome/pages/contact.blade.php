@@ -15,25 +15,17 @@
 @endpush 
 
 @section('contents')
-<div class="breadcrumb-area"
-@if($page->bannerFile)
-style="background-image:url({{asset($page->banner())}});background-repeat: no-repeat;
-    background-size: cover;padding: 50px 0;"
-@endif
->
+<div class="page-header breadcrumb-wrap">
     <div class="container">
-        <div class="title">
-            <h1>{{$page->name}}</h1>
-            <ul>
-                <li><a href="{{route('index')}}">Home</a></li>
-                <li>{{$page->name}}</li>
-            </ul>
+        <div class="breadcrumb">
+            <a href="{{route('index')}}" rel="nofollow">Home </a>
+            <span></span> {{$page->name}}
         </div>
     </div>
 </div>
 
-<div class="contact-page">
-    <div class="container">
+<section class="mt-50 mb-50" style="transform: none;">
+    <div class="container" style="transform: none;">
         <div class="row">
             <div class="col-md-12">
                 <div class="sitemap">
@@ -42,7 +34,7 @@ style="background-image:url({{asset($page->banner())}});background-repeat: no-re
             </div>
         </div>
 
-        <div class="contact-form">
+        <div class="contact-form mt-3">
             <div class="row">
                 <div class="col-md-8">
                     <div class="form-info">
@@ -120,7 +112,7 @@ style="background-image:url({{asset($page->banner())}});background-repeat: no-re
                             <i class="fa fa-phone" aria-hidden="true"></i>
                             <div class="media-body">
                                 <h5>Phone Number</h5>
-                                <p>+880 1677717525<br>+880 1917570742<br>+8801712589730</p>
+                                <p>{{general()->mobile}}</p>
                             </div>
                         </div>
                     </div>
@@ -128,7 +120,7 @@ style="background-image:url({{asset($page->banner())}});background-repeat: no-re
             </div>
         </div>
     </div>
-</div>
+</section>
 
 
 @endsection 
