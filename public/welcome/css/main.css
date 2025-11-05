@@ -5161,6 +5161,8 @@ h6.post-title {
   font-size: 14px;
   line-height: 10px;
   font-weight: 600;
+  max-height: 14px;
+  overflow: hidden;
 }
 
 .header-top-ptb-1 #news-flash li {

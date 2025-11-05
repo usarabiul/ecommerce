@@ -65,24 +65,21 @@ td.product-price {
 @endpush 
 
 @section('contents')
-<!-- Start of Breadcrumb -->
-<nav class="breadcrumb-nav mb-10" style="display:block;">
+<div class="page-header breadcrumb-wrap">
     <div class="container">
-        <ul class="breadcrumb">
-            <li><a href="{{route('index')}}">Home </a></li>
-            <li>Wishlist</li>
-        </ul>
+        <div class="breadcrumb">
+            <a href="index.html" rel="nofollow">Home</a>
+            <span></span> Wishlist
+        </div>
     </div>
-</nav>
-<!-- End of Breadcrumb -->
-
-<div class="page-content">
+</div>
+<section class="mt-50 mb-50">
     <div class="container">
         <h3 class="wishlist-title">My wishlist</h3>
         <div class="mywishList">
              @include(general()->theme.'.carts.includes.wishlistItems')
         </div>
     </div>
-</div>
+</section>
 
 @endsection @push('js') @endpush

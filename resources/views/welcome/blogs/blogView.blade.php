@@ -14,112 +14,77 @@
 @endpush 
 
 @section('contents')
-<div class="breadcrumb-area"
-@if($post->bannerFile)
-style="background-image:url({{asset($post->banner())}});background-repeat: no-repeat;
-    background-size: cover;padding: 50px 0;"
-@endif
->
+
+<div class="page-header breadcrumb-wrap">
     <div class="container">
-        <div class="title">
-            <h1>{{$post->name}}</h1>
-            <ul>
-                <li><a href="{{route('index')}}">Home</a></li>
-                @foreach($post->postCategories as $ctg)
-                <li><a href="{{route('blogCategory',$ctg->slug?:'no-title')}}">{{$ctg->name}}</a></li>
-                @endforeach
-            </ul>
+        <div class="breadcrumb">
+            <a href="index.html" rel="nofollow">Home</a>
+            <span></span>
+            @if($pg =pageTemplate('Latest Blog'))
+            <a href="{{route('pageView',$pg->slug?:'no-title')}}" rel="nofollow">Blog </a>
+            <span></span>
+            @endif
+            Detials
         </div>
     </div>
 </div>
 
-<div class="blogCompany">
-    <div class="container">
-		<div class="row">
-		    <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12">
-		        <div class="detailsBlogView">
-                    <div class="blog_public_info">
-                        <span><i class="fa fa-calendar"></i> {{$post->created_at->format('d F, Y')}} / </span>
-                        @if($post->user)
-                        <a href="{{route('blogAuthor',[$post->user->id,Str::slug($post->user->name)])}}"></a>
-                        @else
-                        <a href="javascript:void(0)">
-                        @endif
-                        <i class="fa fa-user"></i> {{$post->user?$post->user->name:'No Author'}}					    
-                        </a>
-                    {{--<i class="fa fa-comment"></i> {{$post->postComments->where('status','active')->count()}} Comments--}}
+<section class="mt-50 mb-50">
+    <div class="container custom">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="single-page pr-30">
+                    <div class="single-header style-2">
+                        <h1 class="mb-30">{{$post->name}}</h1>
+                        <div class="single-header-meta">
+                            <div class="entry-meta meta-1 font-xs mt-15 mb-15">
+                                @if($post->user)
+                                <span class="post-by">By 
+                                    <a href="#">{{$post->user->name}}</a>
+                                </span>
+                                @endif
+                                <span class="post-on has-dot">{{$post->created_at->format('d F, Y')}}</span>
+                                <span class="time-reading has-dot">8 mins read</span>
+                                <span class="hit-count  has-dot">{{$post->view}} Views</span>
+                            </div>
+                            <div class="social-icons single-share">
+                                <ul class="text-grey-5 d-inline-block">
+                                    <li><strong class="mr-10">Share this:</strong></li>
+                                    <li class="social-facebook"><a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a></li>
+                                    <li class="social-twitter"> <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a></li>
+                                    <li class="social-instagram"><a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a></li>
+                                    <li class="social-linkedin"><a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <h2 class="blog_title">{{$post->name}}</h2>
-                    <div class="single_blog_thumb">
-                        <img src="{{asset($post->image())}}" alt="{{$post->name}}" style="width:100%;" /> 
-                    </div>
-                    <div class="single-blog-content">
+                    <figure class="single-thumbnail">
+                        <img src="{{asset($post->image())}}" alt="{{$post->name}}">
+                    </figure>
+                    <div class="single-content">
                         {!!$post->description!!}
                     </div>
-                    {{--<div class="single-blog-comment">
-                        <h3>{{$post->postComments->where('status','active')->count()}} Comments</h3>
-                        @foreach($comments as $comment)
-                        <div class="card mb-3" style="max-width: 100%;">
-                            <div class="row g-0 m-0">
-                                <div class="col-md-4" style="max-width: 100px;padding: 5px;text-align: center;">
-                                    <img src="{{asset($comment->image())}}" class="img-fluid rounded-start" style="max-height:80px;" alt="{{$comment->name}}">
-                                </div>
-                                <div class="col-md-8" style="padding: 5px;">
-                                <div class="card-body" style="padding:5px 10px;">
-                                    <h5 style="margin:0;" >
-                                        {{$comment->name}}
-                                    </h5>
-                                    <span>{{$comment->created_at->format('F d, Y \a\t g:ia')}}</span>
-                                    <p style="margin:0;">{!!$comment->content!!}</p>
-                                </div>
-                                </div>
-                            </div>
+                    <div class="entry-bottom mt-50 mb-30 wow fadeIn  animated" style="visibility: visible; animation-name: fadeIn;">
+                        <div class="tags w-50 w-sm-100">
+                           
                         </div>
-                        @endforeach
-                        @if($comments->count()==0)
-                        <span>No Comment Yet</span>
-                        @endif
-                        <div class="commentForm">
-                            <h4>Leave A Reply</h4>
-                            <form action="{{route('blogComments',$post->slug)}}" method="post">
-                            @csrf
-                            <div class="form-group">
-                                @if ($errors->has('comment'))
-                                <p style="color: red; margin: 0;">{{ $errors->first('comment') }}</p>
-                                @endif
-                                <textarea rows="5" class="form-control" name="comment" placeholder="Write Your Comment*" required="">{{old('comment')}}</textarea>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 form-group">
-                                    <input type="text" name="name" value="{{old('name')}}" class="form-control" required="" placeholder="Your name*">
-                                    @if ($errors->has('name'))
-                                    <p style="color: red; margin: 0;">{{ $errors->first('name') }}</p>
-                                    @endif
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <input type="email" name="email" value="{{old('email')}}" class="form-control" required="" placeholder="Your Email*">
-                                    @if ($errors->has('email'))
-                                    <p style="color: red; margin: 0;">{{ $errors->first('email') }}</p>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="website" value="{{old('website')}}" class="form-control" required="" placeholder="Your website*">
-                                @if ($errors->has('website'))
-                                    <p style="color: red; margin: 0;">{{ $errors->first('website') }}</p>
-                                    @endif
-                            </div>
-                            <button type="submit" class="btn btn-success">Submit</button>
-                            </form>
+                        <div class="social-icons single-share">
+                            <ul class="text-grey-5 d-inline-block">
+                                <li><strong class="mr-10">Share this:</strong></li>
+                                <li class="social-facebook"><a href="#"><i class="fab fa-facebook"></i></a></li>
+                                <li class="social-twitter"> <a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li class="social-instagram"><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                <li class="social-linkedin"><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                            </ul>
                         </div>
-                     </div>--}}
+                    </div>
                 </div>
-		    </div>
-		    <div class="col-lg-4 col-md-5  col-sm-12 col-xs-12">
-			    @include(welcomeTheme().'blogs.includes.sideBar')
-		    </div>
-		</div>
-	</div>
-</div>
+            </div>
+            <div class="col-lg-3 primary-sidebar sticky-sidebar">
+                @include(welcomeTheme().'blogs.includes.sideBar')
+            </div>
+        </div>
+    </div>
+</section>
 
 @endsection @push('js') @endpush

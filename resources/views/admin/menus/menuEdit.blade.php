@@ -117,6 +117,7 @@
                                             <option value="Popular Categories" {{$parent->location=='Popular Categories'?'selected':''}}>Popular Categories</option>
                                             <option value="Footer Two" {{$parent->location=='Footer Two'?'selected':''}}>Footer Two</option>
                                             <option value="Footer Three" {{$parent->location=='Footer Three'?'selected':''}}>Footer Three</option>
+                                            <option value="Footer Four" {{$parent->location=='Footer Four'?'selected':''}}>Footer Four</option>
                                         </select>
                                     </div>
                                 </div>
