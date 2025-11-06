@@ -134,7 +134,7 @@
                     <div class="header-action-right">
                         <div class="header-action-2">
                             <div class="header-action-icon-2">
-                                <a href="shop-wishlist.html">
+                                <a href="{{route('myWishlist')}}">
                                     <img class="svgInject" alt="Evara" src="{{asset(assetLink().'/images/icon-heart.svg')}}">
                                     <span class="pro-count blue">4</span>
                                 </a>

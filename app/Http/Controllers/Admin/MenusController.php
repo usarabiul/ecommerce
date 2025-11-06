@@ -200,24 +200,7 @@ class MenusController extends Controller
                 for ($i =0; $i < count($r->deleteItems); $i++){
                     if($item =Attribute::find($r->deleteItems[$i])){
                         //Menus sub Menu Delete
-                        
                         $this->deleteMenuAndSubItems($item);
-                        
-                        // foreach($item->subMenus as $sub){
-                        //     // $sub->parent_id=$item->parent_id;
-                        //     // $sub->save();
-                        // }
-                
-                        // //Menu  Media File Delete
-                        // $medies =Media::where('src_type',3)->where('src_id',$item->id)->get();
-                        // foreach ($medies as  $media) {
-                        //     if(File::exists($media->file_url)){
-                        //         File::delete($media->file_url);
-                        //     }
-                        //     $media->delete();
-                        // }
-                
-                        // $item->delete();
                     }
                 }
             }

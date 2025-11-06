@@ -65,19 +65,26 @@ td.product-price {
 @endpush 
 
 @section('contents')
+
 <div class="page-header breadcrumb-wrap">
     <div class="container">
         <div class="breadcrumb">
             <a href="index.html" rel="nofollow">Home</a>
-            <span></span> Wishlist
+            <span></span> 
+            @if($pg =pageTemplate('Latest Product'))
+            <a href="{{route('pageView',$pg->slug?:'no-title')}}" rel="nofollow">{{$pg->name}}</a>
+            <span></span>
+            @endif
+            Wishlist
         </div>
     </div>
 </div>
 <section class="mt-50 mb-50">
     <div class="container">
-        <h3 class="wishlist-title">My wishlist</h3>
-        <div class="mywishList">
-             @include(general()->theme.'.carts.includes.wishlistItems')
+        <div class="row">
+            <div class="col-12 mywishList">
+                @include(general()->theme.'.carts.includes.wishlistItems')
+            </div>
         </div>
     </div>
 </section>

@@ -176,7 +176,7 @@
                                 <option value="Front Page" {{$page->template=='Front Page'?'selected':''}}>Front Page</option>
                                 <option value="Privacy Policy" {{$page->template=='Privacy Policy'?'selected':''}}>Privacy Policy</option>
                                 <option value="Latest Blog" {{$page->template=='Latest Blog'?'selected':''}}>Latest Blog</option>
-                                <option value="Latest Services" {{$page->template=='Latest Services'?'selected':''}}>Latest Services</option>
+                                <option value="Latest Product" {{$page->template=='Latest Product'?'selected':''}}>Latest Product</option>
                                 <option value="About Us" {{$page->template=='About Us'?'selected':''}}>About Us</option>
                                 <option value="Contact Us" {{$page->template=='Contact Us'?'selected':''}}>Contact Us</option>
                                 <option value="Galleries" {{$page->template=='Galleries'?'selected':''}}>Galleries</option>

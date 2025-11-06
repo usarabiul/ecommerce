@@ -86,7 +86,7 @@
                     @endif
                 </div>
                 <div class="col-lg-3">
-                    @if($menu = menu('Footer Three'))
+                    @if($menu = menu('Footer Four'))
                     <h5 class="widget-title wow fadeIn animated">{{$menu->name}}</h5>
                     <ul class="footer-list wow fadeIn animated mb-sm-5 mb-md-0">
                         @foreach($menu->subMenus as $menu)

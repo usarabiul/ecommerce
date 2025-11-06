@@ -157,7 +157,7 @@
                                         <a href="{{route('admin.menusAction',['edit',$menuli->id])}}" style="margin: 0 10px;"><i class="fa fa-plus"></i></a>
                                         
                                         
-                                        <label><i class="fa fa-trash text-danger"></i> <input class="checkbox" type="checkbox" name="checkid[]" value="{{$menuli->id}}"></label>
+                                        <label><i class="fa fa-trash text-danger"></i> <input class="checkbox" type="checkbox" name="deleteItems[]" value="{{$menuli->id}}"></label>
                          
                                         <span> </span>
                                     </span>

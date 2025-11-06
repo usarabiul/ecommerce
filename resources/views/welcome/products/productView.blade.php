@@ -122,7 +122,7 @@
                                     </div>
                                     <div class="product-extra-link2">
                                         <button type="button" class="button button-add-to-cart singleAddToCart" data-id="{{$product->id}}" data-url="{{route('addToCart',$product->id)}}" >Add to cart</button>
-                                        <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                        <a aria-label="Add To Wishlist" class="action-btn hover-up" href="{{route('wishlistCompareUpdate',[$product->id,'wishlist'])}}"><i class="fi-rs-heart"></i></a>
                                         <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
                                     </div>
                                 </div>

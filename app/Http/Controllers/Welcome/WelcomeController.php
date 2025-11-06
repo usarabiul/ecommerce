@@ -315,12 +315,12 @@ class WelcomeController extends Controller
       }
 
       //Latest Services Page
-      if($page->template=='Latest Services'){
-        $services = Post::latest()->where('type',3)->where('status','active')
+      if($page->template=='Latest Product'){
+        $products = Post::latest()->where('type',2)->where('status','active')
         ->select(['id','name','slug','short_description','addedby_id','created_at'])
         ->whereDate('created_at','<=',date('Y-m-d'))
         ->paginate(12);
-        return view(welcomeTheme().'services.latestServices',compact('services','page'));
+        return view(welcomeTheme().'products.latestProducts',compact('products','page'));
       }
 
       return view(welcomeTheme().'pages.pageView',compact('page'));
