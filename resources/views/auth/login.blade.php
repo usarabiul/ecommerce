@@ -25,7 +25,16 @@
 @endpush 
 @section('contents')
 
-<section class="pt-100 pb-100">
+<div class="page-header breadcrumb-wrap">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="{{route('index')}}">Home </a>
+            <span></span> Login
+        </div>
+    </div>
+</div>
+
+<section class="pt-50 pb-50">
 	<div class="container">
 	    <div class="row">
 	        <div class="col-md-3"></div>

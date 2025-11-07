@@ -23,7 +23,8 @@
     <div class="container">
         <div class="breadcrumb">
             <a href="index.html" rel="nofollow">Home</a>
-            <span></span> Shop
+            <span></span>
+            <a href="{{route('carts')}}" rel="nofollow">Cart</a>
             <span></span> Checkout
         </div>
     </div>

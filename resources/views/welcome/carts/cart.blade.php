@@ -24,8 +24,12 @@
     <div class="container">
         <div class="breadcrumb">
             <a href="index.html" rel="nofollow">Home</a>
-            <span></span> Shop
-            <span></span> Your Cart
+            <span></span>
+            @if($pg =pageTemplate('Latest Product'))
+            <a href="{{route('pageView',$pg->slug?:'no-title')}}" rel="nofollow">{{$pg->name}}</a>
+            <span></span>
+            @endif
+            Your Cart
         </div>
     </div>
 </div>
