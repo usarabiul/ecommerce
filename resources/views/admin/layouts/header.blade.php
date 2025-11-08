@@ -296,13 +296,12 @@
 				<a class="dropdown-item" href="user-profile.html">
 					<span class="dropdown-icon oi oi-person"></span> Profile
 				</a>
-				<a class="dropdown-item" href="auth-signin-v1.html">
+				<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
 					<span class="dropdown-icon oi oi-account-logout"></span> Logout
 				</a>
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="#">Help Center</a> 
-				<a class="dropdown-item" href="#">Ask Forum</a> 
-				<a class="dropdown-item" href="#">Keyboard Shortcuts</a>
+				<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+					@csrf
+				</form>
 			</div><!-- /.dropdown-menu -->
 			</div><!-- /.btn-account -->
 		</div><!-- /.top-bar-item -->

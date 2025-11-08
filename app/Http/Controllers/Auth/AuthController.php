@@ -105,12 +105,12 @@ class AuthController extends Controller
         {
         
         $check = $r->validate([
-            'name' => 'required|max:100',
-            'email' => 'required|max:100|unique:users,email',
-            // 'mobile' => 'required|max:100|unique:users,mobile',
-            'password' => 'required|min:5'
+            'name' => 'required|max:1',
+            'email' => 'required|max:1|unique:users,email',
+            'mobile' => 'required|max:1|unique:users,mobile',
+            'password' => 'required|min:1'
         ]);
-        
+        return $r;
         //User Create
         $user =new User();
         $user->name=$r->name;

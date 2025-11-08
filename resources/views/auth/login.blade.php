@@ -48,10 +48,23 @@
 						<form action="{{route('login')}}" method="post">
 							@csrf
 							<div class="form-group">
+								<label>Your Mobile/Email*</label>
 								<input type="text" required="" value="{{old('username')}}" name="username" placeholder="Your Email / Mobile">
+								@if ($errors->has('username'))
+                                <span class="text-danger">{{ $errors->first('username') }}</span>
+                                @endif
 							</div>
 							<div class="form-group">
-								<input required="" type="password" name="password" placeholder="Password">
+								<label>Password*</label>
+								<div class="input-group">
+									<input required="" type="password" class="password" name="password" placeholder="Password" style="flex: 1 1 auto;width: 1%;">
+									<div class="input-group-text showPassword">
+										<i class="fa fa-eye-slash"></i>
+									</div>
+								</div>
+								@if ($errors->has('password'))
+                                <span class="text-danger">{{ $errors->first('password') }}</span>
+                                @endif
 							</div>
 							<div class="login_footer form-group">
 								<div class="chek-form">
@@ -64,6 +77,9 @@
 							</div>
 							<div class="form-group">
 								<button type="submit" class="btn btn-fill-out btn-block hover-up" name="login">Log in</button>
+							</div>
+							<div class="text-center" >
+								I have no account? <a href="{{route('register')}}">Register</a>
 							</div>
 						</form>
 					</div>

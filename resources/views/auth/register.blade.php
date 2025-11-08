@@ -49,16 +49,37 @@
 						<form action="{{route('register')}}" method="post">
 							@csrf
 							<div class="form-group">
+								<label>Your Name*</label>
 								<input type="text" required="" value="{{old('name')}}" name="name" placeholder="Your name">
+								@if ($errors->has('name'))
+                                <span class="text-danger">{{ $errors->first('name') }}</span>
+                                @endif
 							</div>
 							<div class="form-group">
+								<label>Your Mobile*</label>
 								<input type="text" required="" value="{{old('mobile')}}" name="mobile" placeholder="Your Mobile">
+								@if ($errors->has('mobile'))
+                                <span class="text-danger">{{ $errors->first('mobile') }}</span>
+                                @endif
 							</div>
 							<div class="form-group">
+								<label>Your Email*</label>
 								<input type="email" required="" value="{{old('email')}}" name="email" placeholder="Your Email">
+								@if ($errors->has('email'))
+                                <span class="text-danger">{{ $errors->first('email') }}</span>
+                                @endif
 							</div>
 							<div class="form-group">
-								<input required="" type="password" name="password" placeholder="Password">
+								<label>Password*</label>
+								<div class="input-group">
+									<input required="" type="password" class="password" name="password" placeholder="Password" style="flex: 1 1 auto;width: 1%;">
+									<div class="input-group-text showPassword">
+										<i class="fa fa-eye-slash"></i>
+									</div>
+								</div>
+								@if ($errors->has('password'))
+                                <span class="text-danger">{{ $errors->first('password') }}</span>
+                                @endif
 							</div>
 							<div class="login_footer form-group">
 								<div class="chek-form">
@@ -72,7 +93,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<button type="submit" class="btn btn-fill-out btn-block hover-up" name="login">Register</button>
+								<button type="submit" class="btn btn-fill-out btn-block hover-up" >Register</button>
 							</div>
 						</form>
 					</div>

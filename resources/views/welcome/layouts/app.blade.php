@@ -153,8 +153,20 @@
                   }else{
                     return false;
             }
-      
           }
+          
+            $(document).on('click','.showPassword',function(){
+                $(this).toggleClass('active-show');
+                if ($(this).hasClass('active-show')) {
+                    $('input.password').prop('type','text');
+                    $(this).empty().append('<i class="fa fa-eye"></i>');
+                } else {
+                    $('input.password').prop('type','password');
+                    $(this).empty().append('<i class="fa fa-eye-slash"></i>');
+                }
+            });
+
+
       </script>
       
       @stack('js')
