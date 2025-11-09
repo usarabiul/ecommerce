@@ -21,29 +21,10 @@ use Illuminate\Http\Request;
 class CustomerController extends Controller
 {
     
-      
-    public function __construct(){
-
-        function isMobileDevice() {
-          return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo 
-        |fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i" 
-        , $_SERVER["HTTP_USER_AGENT"]); 
-        }
-
-        if(isMobileDevice())
-        {
-          $this->device =general()->theme.'.customer.';
-        }
-        else
-        {
-          $this->device =general()->theme.'.customer.';
-        }
-
-    }
 
     public function dashboard(Request $request){
-        return 'login success';
-        return view($this->device.'dashboard');
+
+        return view(welcomeTheme().'customer.dashboard');
 
     }
 

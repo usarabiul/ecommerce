@@ -293,6 +293,9 @@
 				<div class="dropdown-arrow d-lg-none" x-arrow=""></div>
 				<div class="dropdown-arrow ml-3 d-none d-lg-block"></div>
 				<h6 class="dropdown-header d-none d-md-block d-lg-none"> {{Auth::user()->name}} </h6>
+				<a class="dropdown-item" href="{{route('customer.dashboard')}}">
+					<span class="dropdown-icon oi oi-person"></span> My Dashboard
+				</a>
 				<a class="dropdown-item" href="user-profile.html">
 					<span class="dropdown-icon oi oi-person"></span> Profile
 				</a>
