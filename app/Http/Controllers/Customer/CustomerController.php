@@ -127,7 +127,11 @@ class CustomerController extends Controller
 
     }
 
+    public function orders(Request $request){
 
+        return view(welcomeTheme().'customer.orders');
+
+    }
     
 
 
