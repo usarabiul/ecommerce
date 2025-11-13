@@ -68,6 +68,7 @@ Route::get('/{slug}',[WelcomeController::class,'pageView'])->name('pageView');
 Route::group(['prefix'=>'customer', 'as'=>'customer.','middleware'=>['auth','role:customer']], function(){
     Route::get('/dashboard',[CustomerController::class,'dashboard'])->name('dashboard');
     Route::get('/orders',[CustomerController::class,'orders'])->name('orders');
+    Route::get('/profile',[CustomerController::class,'profile'])->name('profile');
 });
 
 

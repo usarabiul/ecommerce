@@ -28,8 +28,8 @@ class CustomerController extends Controller
 
     }
 
-    public function profileEdit(){
-      return view($this->device.'profileEdit');
+    public function profile(){
+      return view(welcomeTheme().'customer.profile');
     }
 
 
