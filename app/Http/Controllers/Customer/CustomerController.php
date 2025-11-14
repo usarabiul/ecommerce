@@ -29,7 +29,15 @@ class CustomerController extends Controller
     }
 
     public function profile(){
-      return view(welcomeTheme().'customer.profile');
+      $user =Auth::user();
+
+      return view(welcomeTheme().'customer.profile',compact('user'));
+    }
+   
+    public function changePassword(){
+      $user =Auth::user();
+
+      return view(welcomeTheme().'customer.changePassword',compact('user'));
     }
 
 
@@ -95,11 +103,6 @@ class CustomerController extends Controller
 
     }
     
-    
-
-    public function changePassword(){
-      return view($this->device.'changePassword');
-    }
 
     public function changePasswordUpdate(Request $r){
        $user = Auth::user();

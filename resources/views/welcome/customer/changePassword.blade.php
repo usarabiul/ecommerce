@@ -37,26 +37,22 @@
                             <div class="tab-pane fade active show" id="orders" role="tabpanel" aria-labelledby="orders-tab">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h5 class="mb-0">Profile</h5>
+                                        <h5 class="mb-0">Change Password</h5>
                                     </div>
                                     <div class="card-body">
                                         <form method="post" name="enq">
                                             <div class="row">
                                                 <div class="form-group col-md-12">
-                                                    <label>Your Name <span class="required">*</span></label>
-                                                    <input required="" class="form-control square" name="name" value="{{old('name')?:$user->name}}" type="text" placeholder="Enter your name">
+                                                    <label>Current Password <span class="required">*</span></label>
+                                                    <input required="" class="form-control square" name="name" value="{{old('name')}}" type="password" placeholder="Enter current password">
                                                 </div>
                                                 <div class="form-group col-md-12">
-                                                    <label>Mobile Number <span class="required">*</span></label>
-                                                    <input required="" class="form-control square" name="mobile" value="{{old('mobile')?:$user->mobile}}" type="text" placeholder="Enter mobile number">
+                                                    <label>Password <span class="required">*</span></label>
+                                                    <input required="" class="form-control square" name="mobile" value="{{old('mobile')}}" type="password" placeholder="Enter password">
                                                 </div>
                                                 <div class="form-group col-md-12">
-                                                    <label>Email Address <span class="required">*</span></label>
-                                                    <input required="" class="form-control square" name="email" value="{{old('email')?:$user->email}}" type="email" placeholder="Enter email address">
-                                                </div>
-                                                <div class="form-group col-md-12">
-                                                    <label>Address</label>
-                                                    <textarea  class="form-control square" name="address" placeholder="Write address" >{{old('address')?:$user->address}}</textarea>
+                                                    <label>Confirm Password <span class="required">*</span></label>
+                                                    <input required="" class="form-control square" name="email" value="{{old('email')}}" type="password" placeholder="Enter confirm password">
                                                 </div>
                                                 <div class="col-md-12">
                                                     <button type="submit" class="btn btn-fill-out submit" name="submit" value="Submit">Save</button>

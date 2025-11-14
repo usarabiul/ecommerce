@@ -7,13 +7,14 @@
             <a class="nav-link {{ Request::is('customer/orders*') ? 'active' : '' }}" href="{{route('customer.orders')}}" ><i class="fi-rs-shopping-bag mr-10"></i>Orders</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link"  href="#track-orders"  ><i class="fi-rs-shopping-cart-check mr-10"></i>Track Your Order</a>
+            <a class="nav-link"  href="#track-orders"  ><i class="fi-rs-shopping-cart-check mr-10"></i>My Review</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" id="address-tab" data-bs-toggle="tab" href="#address" role="tab" aria-controls="address" aria-selected="true"><i class="fi-rs-marker mr-10"></i>My Address</a>
-        </li>
+        
         <li class="nav-item">
             <a class="nav-link {{ Request::is('customer/profile*') ? 'active' : '' }}" href="{{route('customer.profile')}}" ><i class="fi-rs-user mr-10"></i>Account details</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ Request::is('customer/change-password*') ? 'active' : '' }}" href="{{route('customer.changePassword')}}" ><i class="fi-rs-marker mr-10"></i>Change Password</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="page-login-register.html"><i class="fi-rs-sign-out mr-10"></i>Logout</a>
