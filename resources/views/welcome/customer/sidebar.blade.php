@@ -7,7 +7,7 @@
             <a class="nav-link {{ Request::is('customer/orders*') ? 'active' : '' }}" href="{{route('customer.orders')}}" ><i class="fi-rs-shopping-bag mr-10"></i>Orders</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link"  href="#track-orders"  ><i class="fi-rs-shopping-cart-check mr-10"></i>My Review</a>
+            <a class="nav-link {{ Request::is('customer/reviews*') ? 'active' : '' }}"  href="{{route('customer.reviews')}}"  ><i class="fi-rs-shopping-cart-check mr-10"></i>My Review</a>
         </li>
         
         <li class="nav-item">

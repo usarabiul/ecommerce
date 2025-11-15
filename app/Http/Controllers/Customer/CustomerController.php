@@ -39,6 +39,12 @@ class CustomerController extends Controller
 
       return view(welcomeTheme().'customer.changePassword',compact('user'));
     }
+    
+    public function reviews(){
+      $user =Auth::user();
+
+      return view(welcomeTheme().'customer.reviews',compact('user'));
+    }
 
 
     public function profileUpdate(Request $r){
