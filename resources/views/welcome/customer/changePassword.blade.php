@@ -40,19 +40,26 @@
                                         <h5 class="mb-0">Change Password</h5>
                                     </div>
                                     <div class="card-body">
-                                        <form method="post" name="enq">
+                                        @include(welcomeTheme().'alerts')
+                                        <form method="post" action="{{route('customer.changePassword')}}" method="post">
+                                            @csrf
                                             <div class="row">
                                                 <div class="form-group col-md-12">
                                                     <label>Current Password <span class="required">*</span></label>
-                                                    <input required="" class="form-control square" name="name" value="{{old('name')}}" type="password" placeholder="Enter current password">
+                                                    <div class="input-group">
+                                                        <input required="" type="password" class="password" name="current_password" placeholder="Current Password" style="flex: 1 1 auto;width: 1%;">
+                                                        <div class="input-group-text showPassword">
+                                                            <i class="fa fa-eye-slash"></i>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Password <span class="required">*</span></label>
-                                                    <input required="" class="form-control square" name="mobile" value="{{old('mobile')}}" type="password" placeholder="Enter password">
+                                                    <input required="" class="form-control password " name="mobile" value="{{old('mobile')}}" type="password" placeholder="Enter password">
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Confirm Password <span class="required">*</span></label>
-                                                    <input required="" class="form-control square" name="email" value="{{old('email')}}" type="password" placeholder="Enter confirm password">
+                                                    <input required="" class="form-control password" name="email" value="{{old('email')}}" type="password" placeholder="Enter confirm password">
                                                 </div>
                                                 <div class="col-md-12">
                                                     <button type="submit" class="btn btn-fill-out submit" name="submit" value="Submit">Save</button>

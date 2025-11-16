@@ -40,7 +40,9 @@
                                         <h5 class="mb-0">Profile</h5>
                                     </div>
                                     <div class="card-body">
-                                        <form method="post" name="enq">
+                                        @include(welcomeTheme().'alerts')
+                                        <form method="post" action="{{route('customer.profile')}}" enctype="multipart/form-data" >
+                                            @csrf
                                             <div class="row">
                                                 <div class="form-group col-md-12">
                                                     <label>Your Name <span class="required">*</span></label>
@@ -56,7 +58,7 @@
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Address</label>
-                                                    <textarea  class="form-control square" name="address" placeholder="Write address" >{{old('address')?:$user->address}}</textarea>
+                                                    <textarea  class="form-control square" name="address" placeholder="Write address" >{{old('address')?:$user->address_line1}}</textarea>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <button type="submit" class="btn btn-fill-out submit" name="submit" value="Submit">Save</button>

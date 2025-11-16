@@ -28,15 +28,57 @@ class CustomerController extends Controller
 
     }
 
-    public function profile(){
+    public function profile(Request $r){
       $user =Auth::user();
+      if($r->isMethod('post')){
+          $r->validate([
+              'name' => 'required|max:100',
+              'email' => 'required|email|max:100|unique:users,email,'.$user->id,
+              'mobile' => 'nullable|max:20|unique:users,mobile,'.$user->id,
+              'address' => 'nullable|max:200',
+              'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,bmp,tiff,webp|max:2048',
+          ]);
 
+          $user->name =$r->name;
+          $user->mobile =$r->mobile;
+          $user->email =$r->email;
+          $user->address_line1 =$r->address;
+
+          ///////Image UploadStart////////////
+          if($r->hasFile('image')){
+            $file =$r->image;
+            $src  =$user->id;
+            $srcType  =6;
+            $fileUse  =1;
+            $author=Auth::id();
+            uploadFile($file,$src,$srcType,$fileUse,$author);
+          }
+          ///////Image Upload End////////////
+          $user->save();
+  
+          Session()->flash('success','Your Updated Are Successfully Done!');
+          return redirect()->back();
+      }
       return view(welcomeTheme().'customer.profile',compact('user'));
     }
    
-    public function changePassword(){
+    public function changePassword(Request $r){
       $user =Auth::user();
-
+      if($r->isMethod('post')){
+        $r->validate([
+            'current_password' => 'required|string|min:8',
+            'password' => 'required|string|min:8|confirmed|different:current_password',
+        ]);
+        if(Hash::check($r->current_password, $user->password)){
+          $user->password_show=$r->password;
+          $user->password=Hash::make($r->password);
+          $user->save();
+          Session()->flash('success','Your Are Successfully Done');
+        }else{
+          Session()->flash('error','Carrent Password Are Not Match');
+        }
+        return redirect()->back();
+      }
       return view(welcomeTheme().'customer.changePassword',compact('user'));
     }
     
@@ -44,96 +86,6 @@ class CustomerController extends Controller
       $user =Auth::user();
 
       return view(welcomeTheme().'customer.reviews',compact('user'));
-    }
-
-
-    public function profileUpdate(Request $r){
-      
-        $myprofile =Auth::user();
-        $check = $r->validate([
-            'name' => 'required|max:50',
-            'address' => 'nullable|max:191',
-            'division' => 'nullable|numeric',
-            'district' => 'nullable|numeric',
-            'city' => 'nullable|numeric',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-
-        ]);
-
-        if(!$check){
-            Session::flash('error','Need To validatation');
-            return back();
-        }
-
-        $myprofile->name =$r->name;
-        $myprofile->division =$r->division;
-        $myprofile->district =$r->district;
-        $myprofile->city =$r->city;
-        $myprofile->address_line1 =$r->address;
-        
-        $addr =$myprofile->address_line1;
-        $city =Country::find($myprofile->city);
-        if($city){
-         $addr .=', '.$city->name;
-        }
-        
-        $dis =Country::find($myprofile->district);
-        if($dis){
-         $addr .=', '.$dis->name;
-        }
-        
-        $div =Country::find($myprofile->division);
-        if($div){
-         $addr .=', '.$div->name;
-        }
-        
-       $myprofile->full_address=$addr;
-        
-        ///////Image Uploard Start////////////
-      if($r->hasFile('image')){
-            $file =$r->image;
-            $src  =$myprofile->id;
-            $srcType  =6;
-            $fileUse  =1;
-          
-            uploadFile($file,$src,$srcType,$fileUse);
-      }
-      
-      ///////Image Uploard End////////////
-        
-      $myprofile->save();
-
-
-      Session::flash('success','Your Are Successfully Done');
-      return redirect()->back();
-
-    }
-    
-
-    public function changePasswordUpdate(Request $r){
-       $user = Auth::user();
-
-        $check = $r->validate([
-            'current_password' => 'required|string|min:8',
-            'password' => 'required|string|min:8|confirmed|different:current_password',
-        ]);
-
-        if(!$check){
-            Session::flash('error','Need To validatation');
-            return redirect()->back();
-        }
-        
-        if(Hash::check($r->current_password, $user->password)){
-          $user->password_show=$r->password;
-          $user->password=Hash::make($r->password);
-          $user->save();
-          Session()->flash('success','Your Are Successfully Done');
-          return redirect()->back();
-        }else{
-        Session()->flash('error','Carrent Password Are Not Match');
-        return redirect()->back();
-        }
-
     }
 
     public function orders(Request $request){

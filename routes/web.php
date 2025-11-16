@@ -69,8 +69,8 @@ Route::group(['prefix'=>'customer', 'as'=>'customer.','middleware'=>['auth','rol
     Route::get('/dashboard',[CustomerController::class,'dashboard'])->name('dashboard');
     Route::get('/orders',[CustomerController::class,'orders'])->name('orders');
     Route::get('/reviews',[CustomerController::class,'reviews'])->name('reviews');
-    Route::get('/profile',[CustomerController::class,'profile'])->name('profile');
-    Route::get('/change-password',[CustomerController::class,'changePassword'])->name('changePassword');
+    Route::match(['get', 'post'], '/profile', [CustomerController::class, 'profile'])->name('profile');
+    Route::match(['get', 'post'],'/change-password',[CustomerController::class,'changePassword'])->name('changePassword');
 });
 
 
