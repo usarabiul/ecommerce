@@ -47,18 +47,30 @@
                                                 <div class="form-group col-md-12">
                                                     <label>Your Name <span class="required">*</span></label>
                                                     <input required="" class="form-control square" name="name" value="{{old('name')?:$user->name}}" type="text" placeholder="Enter your name">
+                                                    @if ($errors->has('name'))
+                                                    <div class="invalid-feedback d-block">{{ $errors->first('name') }}</div>
+                                                    @endif
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Mobile Number <span class="required">*</span></label>
                                                     <input required="" class="form-control square" name="mobile" value="{{old('mobile')?:$user->mobile}}" type="text" placeholder="Enter mobile number">
+                                                    @if ($errors->has('mobile'))
+                                                    <div class="invalid-feedback d-block">{{ $errors->first('mobile') }}</div>
+                                                    @endif
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Email Address <span class="required">*</span></label>
                                                     <input required="" class="form-control square" name="email" value="{{old('email')?:$user->email}}" type="email" placeholder="Enter email address">
+                                                    @if ($errors->has('email'))
+                                                    <div class="invalid-feedback d-block">{{ $errors->first('email') }}</div>
+                                                    @endif
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Address</label>
                                                     <textarea  class="form-control square" name="address" placeholder="Write address" >{{old('address')?:$user->address_line1}}</textarea>
+                                                    @if ($errors->has('address'))
+                                                    <div class="invalid-feedback d-block">{{ $errors->first('address') }}</div>
+                                                    @endif
                                                 </div>
                                                 <div class="col-md-12">
                                                     <button type="submit" class="btn btn-fill-out submit" name="submit" value="Submit">Save</button>

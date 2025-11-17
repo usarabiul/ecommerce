@@ -47,19 +47,28 @@
                                                 <div class="form-group col-md-12">
                                                     <label>Current Password <span class="required">*</span></label>
                                                     <div class="input-group">
-                                                        <input required="" type="password" class="password" name="current_password" placeholder="Current Password" style="flex: 1 1 auto;width: 1%;">
+                                                        <input required="" type="text" class="password" name="current_password" value="{{old('current_password')}}" placeholder="Current Password" style="flex: 1 1 auto;width: 1%;">
                                                         <div class="input-group-text showPassword">
                                                             <i class="fa fa-eye-slash"></i>
                                                         </div>
                                                     </div>
+                                                    @if ($errors->has('current_password'))
+                                                    <div class="invalid-feedback d-block">{{ $errors->first('current_password') }}</div>
+                                                    @endif
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Password <span class="required">*</span></label>
-                                                    <input required="" class="form-control password " name="mobile" value="{{old('mobile')}}" type="password" placeholder="Enter password">
+                                                    <input required="" class="form-control password " name="password" value="{{old('password')}}" type="password" placeholder="Enter password">
+                                                    @if ($errors->has('password'))
+                                                    <div class="invalid-feedback d-block">{{ $errors->first('password') }}</div>
+                                                    @endif
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Confirm Password <span class="required">*</span></label>
-                                                    <input required="" class="form-control password" name="email" value="{{old('email')}}" type="password" placeholder="Enter confirm password">
+                                                    <input required="" class="form-control password" name="password_confirmation" value="{{old('password_confirmation')}}" type="password" placeholder="Enter confirm password">
+                                                    @if ($errors->has('password_confirmation'))
+                                                    <div class="invalid-feedback d-block">{{ $errors->first('password_confirmation') }}</div>
+                                                    @endif
                                                 </div>
                                                 <div class="col-md-12">
                                                     <button type="submit" class="btn btn-fill-out submit" name="submit" value="Submit">Save</button>
