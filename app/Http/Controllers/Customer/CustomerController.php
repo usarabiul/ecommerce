@@ -23,9 +23,11 @@ class CustomerController extends Controller
     
 
     public function dashboard(Request $request){
+      $user =Auth::user();
 
-        return view(welcomeTheme().'customer.dashboard');
+      
 
+      return view(welcomeTheme().'customer.dashboard',compact('user'));
     }
 
     public function profile(Request $r){

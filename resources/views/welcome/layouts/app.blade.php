@@ -101,6 +101,23 @@
       </script>
       
       <script>
+
+          $(document).on("click", ".cartUpdate", function () {
+                var that =$(this);
+                  var url = that.attr("data-url");
+                  $.ajax({
+                      url: url,
+                      method: "GET",
+                  })
+                  .done(function (data) {
+                      $(".cart-count").empty().append(data.cartCount);
+                      $('.cartItemsAll').empty().append(data.cartItems);
+                  })
+                  .fail(function () {
+                      // location.reload(true);
+                  });
+            });
+
           $(document).on('click','.subsriberbtm',function(e){
             e.preventDefault();
               var url = $('#subscirbeForm').data('url');

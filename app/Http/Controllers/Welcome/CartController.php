@@ -192,12 +192,10 @@ class CartController extends Controller
                 $couponDisc =  $myCart['couponDisc'];
 
 		    	$cartItems =view(welcomeTheme().'carts.includes.cartItems',compact('carts','cartTotalPrice','couponDisc'))->render();
-                $cartsItemsModal =view(welcomeTheme().'carts.includes.cartItemsModal',compact('carts','cartTotalPrice'))->render();
-
+                
 		    	return Response()->json([
 			            'success' => $s,
 			            'cartsCount' =>$cartsCount,
-                        'cartsItemsModal' =>$cartsItemsModal,
                         'cartItems' =>$cartItems,
 			          ]);
 

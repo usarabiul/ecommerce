@@ -33,9 +33,9 @@
 						<td class="price" data-title="Price"><span>{{priceFullFormat($cart->itemprice())}}</span></td>
 						<td class="text-center" data-title="Stock">
 							<div class="detail-qty border radius  m-auto">
-								<a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+								<a href="javascript:void(0)" class="qty-down cartUpdate" data-url="{{ route('changeToCart', [$cart, 'decrement']) }}"><i class="fi-rs-angle-small-down"></i></a>
 								<span class="qty-val">{{$cart->quantity}}</span>
-								<a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+								<a href="javascript:void(0)" class="qty-up cartUpdate" data-url="{{ route('changeToCart', [$cart, 'increment']) }}"><i class="fi-rs-angle-small-up"></i></a>
 							</div>
 						</td>
 						<td class="text-right" data-title="Cart">
@@ -88,15 +88,15 @@
 							<tbody>
 								<tr>
 									<td class="cart_total_label">Cart Subtotal</td>
-									<td class="cart_total_amount"><span class="font-lg fw-900 text-brand">$240.00</span></td>
+									<td class="cart_total_amount"><span class="font-lg fw-900 text-brand">{{priceFullFormat($cartTotalPrice)}}</span></td>
 								</tr>
 								<tr>
 									<td class="cart_total_label">Discount</td>
-									<td class="cart_total_amount"> <span class="font-lg fw-900 text-brand">$0.00</span></td>
+									<td class="cart_total_amount"> <span class="font-lg fw-900 text-brand">{{priceFullFormat($couponDisc)}}</span></td>
 								</tr>
 								<tr>
 									<td class="cart_total_label">Total</td>
-									<td class="cart_total_amount"><strong><span class="font-xl fw-900 text-brand">$240.00</span></strong></td>
+									<td class="cart_total_amount"><strong><span class="font-xl fw-900 text-brand">{{priceFullFormat($cartTotalPrice-$couponDisc)}}</span></strong></td>
 								</tr>
 							</tbody>
 						</table>
