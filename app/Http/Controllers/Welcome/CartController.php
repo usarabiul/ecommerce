@@ -305,7 +305,7 @@ class CartController extends Controller
                 'district' => 'required|numeric',
                 'city' => 'required|numeric',
                 'address' => 'required|max:500',
-                'payment_option' => 'required',
+                'payment_method' => 'required',
             ]);
            
             $order =new Order();
@@ -367,12 +367,12 @@ class CartController extends Controller
             
             $order->coupon_discount=$couponDisc;
             Session::forget('my_coupon_id');
-            $order->shipping_charge =$shippingCharge;
+            $order->shipping_charge =$shippingCharge?:0;
             $order->total_price=$order->items->sum('final_price');
             $order->tax=($order->total_price*general()->tax)/100;
             $order->grand_total =$order->total_price + $order->shipping_charge + $order->tax - $order->coupon_discount;
             $order->paid_amount=0;
-            $order->payment_method=$r->payment_option;
+            $order->payment_method=$r->payment_method;
             $order->due_amount=$order->grand_total;
             $order->save();
 

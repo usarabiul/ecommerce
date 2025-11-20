@@ -41,13 +41,13 @@
                             <h4>Billing Details</h4>
                         </div>
                         <div class="form-group">
-                            <input type="text" required="" name="name" placeholder="Enter your name *">
+                            <input type="text" required="" name="name" value="{{old('name')}}" placeholder="Enter your name *">
                         </div>
                         <div class="form-group">
-                            <input type="text" required="" name="mobile" placeholder="Enter Mobbile number *">
+                            <input type="text" required="" name="mobile" value="{{old('mobile')}}" placeholder="Enter Mobbile number *">
                         </div>
                         <div class="form-group">
-                            <input type="email" name="email" placeholder="Enter Email Address">
+                            <input type="email" name="email" value="{{old('email')}}" placeholder="Enter Email Address">
                         </div>
                         <div class="row">
                             <div class="col-md-6 form-group mb-3">
@@ -69,13 +69,13 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="billing_address" required="" placeholder="Address *">
+                            <input type="text" name="address" value="{{old('address')}}" required="" placeholder="Address *">
                         </div>
                         <div class="mb-20">
                             <h5>Additional information</h5>
                         </div>
                         <div class="form-group mb-30">
-                            <textarea rows="5" placeholder="Order notes"></textarea>
+                            <textarea rows="5" placeholder="Order notes">{{old('address')}}</textarea>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -143,22 +143,22 @@
                                 </div>
                                 <div class="payment_option">
                                     <div class="custome-radio">
-                                        <input class="form-check-input" required="" type="radio" name="payment_option" id="exampleRadios3" checked="">
+                                        <input class="form-check-input" required="" type="radio" name="payment_method" id="exampleRadios3" value="bank" >
                                         <label class="form-check-label" for="exampleRadios3" data-bs-toggle="collapse" data-target="#bankTranfer" aria-controls="bankTranfer">Direct Bank Transfer</label>
                                         <div class="form-group collapse in" id="bankTranfer">
                                             <p class="text-muted mt-5">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration. </p>
                                         </div>
                                     </div>
                                     <div class="custome-radio">
-                                        <input class="form-check-input" required="" type="radio" name="payment_option" id="exampleRadios4" checked="">
+                                        <input class="form-check-input" required="" type="radio" name="payment_method" id="exampleRadios4" value="check" >
                                         <label class="form-check-label" for="exampleRadios4" data-bs-toggle="collapse" data-target="#checkPayment" aria-controls="checkPayment">Check Payment</label>
                                         <div class="form-group collapse in" id="checkPayment">
                                             <p class="text-muted mt-5">Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode. </p>
                                         </div>
                                     </div>
                                     <div class="custome-radio">
-                                        <input class="form-check-input" required="" type="radio" name="payment_option" id="exampleRadios5" checked="">
-                                        <label class="form-check-label" for="exampleRadios5" data-bs-toggle="collapse" data-target="#paypal" aria-controls="paypal">Paypal</label>
+                                        <input class="form-check-input" required="" type="radio" name="payment_method" id="exampleRadios5" value="Cash On Delivery" checked="">
+                                        <label class="form-check-label" for="exampleRadios5" data-bs-toggle="collapse" data-target="#paypal" aria-controls="paypal">Cash On Delivery</label>
                                         <div class="form-group collapse in" id="paypal">
                                             <p class="text-muted mt-5">Pay via PayPal; you can pay with your credit card if you don't have a PayPal account.</p>
                                         </div>
