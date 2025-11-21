@@ -84,6 +84,9 @@
                                     <p>{{$product->short_description}}</p>
                                 </div>
                                 @endif
+                                {{--
+                                    
+                                   
                                 <div class="product_sort_info font-xs mb-30">
                                     <ul>
                                         <li class="mb-10"><i class="fi-rs-crown mr-5"></i> 1 Year AL Jazeera Brand Warranty</li>
@@ -113,6 +116,7 @@
                                         <li><a href="#">XXL</a></li>
                                     </ul>
                                 </div>
+                                 --}}
                                 <div class="bt-1 border-color-1 mt-30 mb-30"></div>
                                 <div class="detail-extralink">
                                     <div class="detail-qty border radius">
@@ -127,8 +131,8 @@
                                     </div>
                                 </div>
                                 <ul class="product-meta font-xs color-grey mt-50">
-                                    <li class="mb-5">SKU: <a href="#">FWM15VKT</a></li>
-                                    <li class="mb-5">Tags: <a href="#" rel="tag">Cloth</a>, <a href="#" rel="tag">Women</a>, <a href="#" rel="tag">Dress</a> </li>
+                                    <li class="mb-5">SKU: <a href="javascript:void(0)">FWM15VKT</a></li>
+                                    <li class="mb-5">Category: <a href="#" rel="tag">Cloth</a>, <a href="#" rel="tag">Women</a>, <a href="#" rel="tag">Dress</a> </li>
                                     <li>Availability:<span class="in-stock text-success ml-5">8 Items In Stock</span></li>
                                 </ul>
                             </div>

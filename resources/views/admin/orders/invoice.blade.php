@@ -2,111 +2,7 @@
 <title>{{websiteTitle('Invoice')}}</title>
 @endsection @push('css')
 
-<style type="text/css">
-    .invoice-inner {
-        /*box-shadow: 0px 0px 5px #ccc;*/
-        padding: 10px 20px;
-    }
-    
-    .invoice-header {
-        padding: 20px 0px 35px;
-    }
 
-    
-    .invoice-header h6{
-        margin-top: 15px!important;
-    }
-    
-    .invoice-header h6, p{
-        margin: 0;
-        line-height: 15px;
-        font-size: 12px;
-    }
-    
-    .invoice-inner h2{
-        margin: 10px 0px;
-        font-size: 41px;
-        letter-spacing: 3px;
-        color: #00549e;
-    }
-    
-    .ordrinfotable {
-        padding: 10px 12px;
-        border: 1px solid #ccc;
-    }
-    
-    table.tableOrderinfo.table {
-        margin: 0;
-        padding: 0;
-    }
-    
-    .tableOrderinfo td{
-        padding: 0;
-        font-size: 13px;
-        line-height: 17px;
-        border: none;
-    }
-    
-    .mainTable{
-        margin: 30px 0;
-    }
-    
-    .mainproducttable{
-        margin: 0;
-        padding: 0;
-        width: 100%;
-    }
-    
-    .mainproducttable td{
-        padding: 5px 7px;
-        font-size: 12px;
-        border: 1px solid #ccc;
-    }
-    
-    tr.headerTable {
-        background-color: #e2e2e2;
-    }
-    
-    tr.headerTable td{
-        font-size: 13px;
-        padding: 7px;
-    }
-    
-    .boxFrozen {
-        border: 1px solid #ccc;
-        text-align: center;
-        margin-bottom: 6px;
-        border-bottom: 0px solid #ccc;
-    }
-    
-    .boxFrozen h3{
-        padding: 5px;
-        color: #fff;
-        margin: 0;
-        background-color: #ff1414;
-        font-size: 16px;
-    }
-    
-    .boxFrozen p{
-        font-size: 16px;
-        padding: 5px 0px;
-        border-bottom: 1px solid #ccc;
-    }
-    
-    .footerInvoice{
-        margin-top: 100px;
-    }
-
-    @media only screen and (max-width: 567px) {
-        .invoice-inner {
-            padding: 10px;
-            margin: 10px 0px;
-        }
-        .invoiceContainer{
-            padding:0;
-        }
-    }
-</style>
 
 @endpush 
 @section('contents')
@@ -116,8 +12,7 @@
         <div class="mr-sm-auto">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mt-1 p-0 mb-0">
-                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a>
-                    </li>
+                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Invoice</li>
                 </ol>
             </nav>
@@ -141,7 +36,110 @@
                 <div class="card">
 
             	   <div class="invoice-inner invoicePage PrintAreaContact">
-                    
+                    <style type="text/css">
+						.invoice-inner {
+							padding: 10px 20px;
+						}
+						
+						.invoice-header {
+							padding: 20px 0px 35px;
+						}
+
+						
+						.invoice-header h6{
+							margin-top: 15px!important;
+						}
+						
+						.invoice-header h6, p{
+							margin: 0;
+							line-height: 15px;
+							font-size: 12px;
+						}
+						
+						.invoice-inner h2{
+							margin: 10px 0px;
+							font-size: 41px;
+							letter-spacing: 3px;
+							color: #00549e;
+						}
+						
+						.ordrinfotable {
+							padding: 10px 12px;
+							border: 1px solid #ccc;
+						}
+						
+						table.tableOrderinfo.table {
+							margin: 0;
+							padding: 0;
+						}
+						
+						.tableOrderinfo td{
+							padding: 0;
+							font-size: 13px;
+							line-height: 17px;
+							border: none;
+						}
+						
+						.mainTable{
+							margin: 30px 0;
+						}
+						
+						.mainproducttable{
+							margin: 0;
+							padding: 0;
+							width: 100%;
+						}
+						
+						.mainproducttable td{
+							padding: 5px 7px;
+							font-size: 12px;
+							border: 1px solid #ccc;
+						}
+						
+						tr.headerTable {
+							background-color: #e2e2e2;
+						}
+						
+						tr.headerTable td{
+							font-size: 13px;
+							padding: 7px;
+						}
+						
+						.boxFrozen {
+							border: 1px solid #ccc;
+							text-align: center;
+							margin-bottom: 6px;
+							border-bottom: 0px solid #ccc;
+						}
+						
+						.boxFrozen h3{
+							padding: 5px;
+							color: #fff;
+							margin: 0;
+							background-color: #ff1414;
+							font-size: 16px;
+						}
+						
+						.boxFrozen p{
+							font-size: 16px;
+							padding: 5px 0px;
+							border-bottom: 1px solid #ccc;
+						}
+						
+						.footerInvoice{
+							margin-top: 100px;
+						}
+
+						@media only screen and (max-width: 567px) {
+							.invoice-inner {
+								padding: 10px;
+								margin: 10px 0px;
+							}
+							.invoiceContainer{
+								padding:0;
+							}
+						}
+					</style>
                     <div class="invoiceContainer">
 	                    <div class="invoice-inner InnerInvoiePage" >
                 			<div class="invoice-header">
@@ -205,10 +203,10 @@
                     				<table class="table mainproducttable">
             						  <thead>
             						    <tr class="headerTable">
-            						      <td style="width: 40%;">Product Name & Description</td>
-            						      <td style="width: 10%; text-align: center;">Unit Price</td>
-            						      <td style="width: 15%; text-align: center;">Quantity</td>
-            						      <td style="width: 15%; text-align: center;">Total Price</td>
+            						      <td style="width: 40%;border: 1px solid #cccccc;">Product Name & Description</td>
+            						      <td style="width: 10%; text-align: center;border: 1px solid #cccccc;">Unit Price</td>
+            						      <td style="width: 15%; text-align: center;border: 1px solid #cccccc;">Quantity</td>
+            						      <td style="width: 15%; text-align: center;border: 1px solid #cccccc;">Total Price</td>
             						    </tr>
             						  </thead>
             						  <tbody>

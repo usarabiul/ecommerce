@@ -18,15 +18,15 @@
     <!-- GOOGLE FONT -->
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600" rel="stylesheet"><!-- End GOOGLE FONT -->
     <!-- BEGIN PLUGINS STYLES -->
-    <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/vendor/open-iconic/font/css/open-iconic-bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}">
-    <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/vendor/flatpickr/flatpickr.min.css')}}">
-    <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/vendor/select2/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/vendor/open-iconic/font/css/open-iconic-bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}">
+    <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/vendor/flatpickr/flatpickr.min.css')}}">
+    <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/vendor/select2/css/select2.min.css')}}">
     <!-- END PLUGINS STYLES -->
     <!-- BEGIN THEME STYLES -->
-    <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/stylesheets/theme.min.css')}}" data-skin="default">
-    <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/stylesheets/custom.css')}}">
-    <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/assets/stylesheets/tag-editor.css')}}" >
+    <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/stylesheets/theme.min.css')}}" data-skin="default">
+    <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/stylesheets/custom.css')}}">
+    <link rel="stylesheet" href="{{asset(assetLinkAdmin().'/stylesheets/tag-editor.css')}}" >
 
     <style type="text/css">
       .card-title {
@@ -118,27 +118,28 @@
         </main>
       </div>
     <!-- BEGIN BASE JS -->
-    <script src="{{asset(assetLinkAdmin().'/assets/vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{asset(assetLinkAdmin().'/assets/vendor/popper.js/umd/popper.min.js')}}"></script>
-    <script src="{{asset(assetLinkAdmin().'/assets/vendor/bootstrap/js/bootstrap.min.js')}}"></script> <!-- END BASE JS -->
+    <script src="{{asset(assetLinkAdmin().'/vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset(assetLinkAdmin().'/vendor/popper.js/umd/popper.min.js')}}"></script>
+    <script src="{{asset(assetLinkAdmin().'/vendor/bootstrap/js/bootstrap.min.js')}}"></script> <!-- END BASE JS -->
     <!-- BEGIN PLUGINS JS -->
-    <script src="{{asset(assetLinkAdmin().'/assets/vendor/pace-progress/pace.min.js')}}"></script>
-    <script src="{{asset(assetLinkAdmin().'/assets/vendor/stacked-menu/js/stacked-menu.min.js')}}"></script>
-    <script src="{{asset(assetLinkAdmin().'/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
-    <script src="{{asset(assetLinkAdmin().'/assets/vendor/flatpickr/flatpickr.min.js')}}"></script>
-    <script src="{{asset(assetLinkAdmin().'/assets/vendor/easy-pie-chart/jquery.easypiechart.min.js')}}"></script>
-    <script src="{{asset(assetLinkAdmin().'/assets/vendor/chart.js/Chart.min.js')}}"></script> 
+    <script src="{{asset(assetLinkAdmin().'/vendor/pace-progress/pace.min.js')}}"></script>
+    <script src="{{asset(assetLinkAdmin().'/vendor/stacked-menu/js/stacked-menu.min.js')}}"></script>
+    <script src="{{asset(assetLinkAdmin().'/vendor/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
+    <script src="{{asset(assetLinkAdmin().'/vendor/flatpickr/flatpickr.min.js')}}"></script>
+    <script src="{{asset(assetLinkAdmin().'/vendor/easy-pie-chart/jquery.easypiechart.min.js')}}"></script>
+    <script src="{{asset(assetLinkAdmin().'/vendor/chart.js/Chart.min.js')}}"></script> 
     <!-- END PLUGINS JS -->
     <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.min.js"></script>
-    <script src="{{asset(assetLinkAdmin().'/assets/js/tag-editor.js')}}"></script>
-    <script src="{{asset(assetLinkAdmin().'/assets/vendor/select2/js/select2.min.js')}}"></script>
-    <script src="{{asset(assetLinkAdmin().'/assets/javascript/pages/select2-demo.js')}}"></script>
+    <script src="{{asset(assetLinkAdmin().'/printThis.js')}}"></script>
+    <script src="{{asset(assetLinkAdmin().'/js/tag-editor.js')}}"></script>
+    <script src="{{asset(assetLinkAdmin().'/vendor/select2/js/select2.min.js')}}"></script>
+    <script src="{{asset(assetLinkAdmin().'/javascript/pages/select2-demo.js')}}"></script>
     <!-- BEGIN THEME JS -->
-    <script src="{{asset(assetLinkAdmin().'/assets/javascript/theme.min.js')}}"></script> <!-- END THEME JS -->
+    <script src="{{asset(assetLinkAdmin().'/javascript/theme.min.js')}}"></script> <!-- END THEME JS -->
     <!-- BEGIN PAGE LEVEL JS -->
-    <script src="{{asset(assetLinkAdmin().'/assets/javascript/pages/dashboard-demo.js')}}"></script> 
+    <script src="{{asset(assetLinkAdmin().'/javascript/pages/dashboard-demo.js')}}"></script> 
     <!-- END PAGE LEVEL JS -->
-      <script src="{{asset(assetLinkAdmin().'/assets/javascript/tag-editor.js')}}"></script>
+      <script src="{{asset(assetLinkAdmin().'/javascript/tag-editor.js')}}"></script>
     <script src="{{asset('tinymce/tinymce.min.js')}}"></script>
     
      <script>

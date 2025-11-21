@@ -37,7 +37,7 @@
                         <div class="card-body">
                         	<div class="row">
                         		<div class="col-md-6">
-                        		    <div class="table-responsive">
+                        		    <div class="table-responsived">
                         			<table class="table table-borderless">
                         			    <tr>
 		                        			<th>INVOICE:</th>
@@ -45,28 +45,56 @@
 		                        		</tr>
 		                        		
 		                        		<tr>
-		                        			<th>Name:</th>
-		                        			<td>{{$order->name}}</td>
+		                        			<th>Name*:</th>
+		                        			<td style="padding:1px;">
+												<input type="text" class="form-control" name="name" value="{{$order->name}}" placeholder="Enter Name" required="" />	
+											</td>
 		                        		</tr>
 		                        		<tr>
-		                        			<th>Mobile:</th>
-		                        			<td>{{$order->mobile}}</td>
+		                        			<th>Mobile*:</th>
+											<td style="padding:1px;">
+												<input type="text" class="form-control" name="mobile" value="{{$order->mobile}}" placeholder="Enter mobile" required="" />	
+											</td>
 		                        		</tr>
 		                        		<tr>
 		                        			<th>Email:</th>
-		                        			<td>{{$order->email}}</td>
+											<td style="padding:1px;">
+												<input type="email" class="form-control" name="email" value="{{$order->email}}" placeholder="Enter email" />	
+											</td>
 		                        		</tr>
 		                        		<tr>
-		                        			<th>Billing:</th>
-		                        			<td>{{$order->fullAddress()}}</td>
-		                        		</tr>
-										<tr>
-		                        			<th>Shipping:</th>
-		                        			<td></td>
+		                        			<th>Address*:</th>
+		                        			<td style="padding:1px;">
+												<div class="row">
+													<div class="col-md-6 mb-3">
+														<select class="form-control" id="district" name="district" required="">
+															<option value="">Select District</option>
+															@foreach(geoData(3) as $data)
+															<option value="{{$data->id}}" {{$data->id==$order->district?'selected':''}} >{{$data->name}}</option>
+                                        					@endforeach
+														</select>
+													</div>
+													<div class="col-md-6 mb-3">
+														<select class="form-control" id="city" name="city" required="">
+															<option value="">Select city</option>
+															@if($order->district)
+																@foreach(geoData(4,$order->district) as $data)
+																<option value="{{$data->id}}" {{$data->id==$order->city?'selected':''}} >{{$data->name}}</option>
+																@endforeach
+															@endif
+														</select>
+													</div>
+													<div class="col-md-12 mb-3">
+														<input type="text" name="address" value="{{$order->address}}" class="form-control" placeholder="Enter address" required="">
+													</div>
+												</div>
+											</td>
 		                        		</tr>
 		                        		<tr>
 		                        			<th>Note:</th>
-		                        			<td>{!!$order->note!!}</td>
+		                        			<td style="padding:1px;">
+												<textarea class="form-control" name="note" placeholder="Write note" >{{$order->note}}</textarea>
+											</td>
 		                        		</tr>
 		                        	</table>
 		                        	</div>
@@ -154,6 +182,19 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
+							<div class="row">
+								<div class="col-md-4">
+									
+								</div>
+								<div class="col-md-4">
+									<div class="input-group mb-1">
+										<input class="form-control" placeholder="Search Itme" />
+										<div class="input-group-text">
+											<i class="fa fa-search"></i>
+										</div>
+									</div>
+								</div>
+							</div>
                         	<form class="form-inline" method="post" action="{{route('admin.ordersAction',['update',$order->id])}}">
 					                @csrf
 					                <div class="table-responsive m-t">
