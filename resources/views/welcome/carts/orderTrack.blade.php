@@ -151,16 +151,16 @@
                     @endif
                 </div>
                 
-                <center>
+                <div>
                     <a href="{{ route('customer.orderDetails',$order->id) }}" class="btn btn-sm btn-success" style="background: #bf203d;border-color: #bf203d;"> View Invoice</a>
-                </center>
+                </div>
                 </div>
                
                @else
                
-               <center style="padding: 20px;color: gray;">
+               <div style="padding: 20px;color: gray;">
                    <h4>No Order Found</h4>
-               </center>
+               </div>
                
                @endif
                 
