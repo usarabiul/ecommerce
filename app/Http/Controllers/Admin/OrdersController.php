@@ -135,6 +135,7 @@ class OrdersController extends Controller
         }
 
         if($action=='update'){
+            return $r;
             $check = $r->validate([
                 'order_status' => 'required',
             ]);
