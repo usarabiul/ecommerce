@@ -1,7 +1,35 @@
 @extends('admin.layouts.app') @section('title')
 <title>{{websiteTitle('Order Manage')}}</title>
 @endsection @push('css')
-<style type="text/css"></style>
+<style type="text/css">
+	.searchModel {
+		position: relative;
+	}
+
+	.seachList {
+		position: absolute;
+		width: 100%;
+		top: 36px;
+	}
+
+	.seachList ul {
+		background: white;
+		width: 100%;
+		display: block;
+		border: 1px solid #cfc5c5;
+		padding: 0;
+		margin: 0;
+		list-style: none;
+		border-bottom: none;
+	}
+
+	.seachList ul li a {
+		display: block;
+		padding: 5px 10px;
+		border-bottom: 1px solid #cfc5c5;
+		text-decoration: none;
+	}
+</style>
 @endpush @section('contents')
 
 <header class="page-title-bar">
@@ -189,10 +217,20 @@
 										
 									</div>
 									<div class="col-md-4">
-										<div class="input-group mb-1">
-											<input class="form-control" placeholder="Search Itme" />
-											<div class="input-group-text">
-												<i class="fa fa-search"></i>
+										<div class="searchModel">
+											<div class="input-group mb-1">
+												<input class="form-control" placeholder="Search Itme" />
+												<div class="input-group-text">
+													<i class="fa fa-search"></i>
+												</div>
+											</div>
+											<div class="seachList">
+												<ul>
+													<li><a href="">Home</a></li>
+													<li><a href="">Home</a></li>
+													<li><a href="">Home</a></li>
+													<li><a href="">Home</a></li>
+												</ul>
 											</div>
 										</div>
 									</div>
