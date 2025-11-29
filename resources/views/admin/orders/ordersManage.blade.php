@@ -511,6 +511,17 @@
 
 <script>
     $(document).ready(function(){
+		$(".seachList").hide();
+        $(document).on('click', function(e) {
+            var container = $(".searchModel");
+            var containerClose = $(".seachList");
+            if (!$(e.target).closest(container).length) {
+                containerClose.hide();
+            }else{
+                containerClose.show();
+            }
+        });
+
         $('.paymentType').click(function(){
             var amount =$(this).data('amount');
             
