@@ -92,7 +92,9 @@ class CustomerController extends Controller
 
     public function orders(Request $request){
 
-        return view(welcomeTheme().'customer.orders');
+      $user =Auth::user();
+      $orders =$user->orders()->where('order_type','customer_order')->latest()->paginate(10);
+      return view(welcomeTheme().'customer.orders',compact('orders'));
 
     }
     

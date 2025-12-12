@@ -109,6 +109,10 @@ class User extends Authenticatable
          return $this->belongsTo(User::class,'addedby_id');
      }
  
+     public function orders(){
+         return $this->hasMany(Order::class,'user_id')->where('order_status','<>','temp');
+     }
+     
      public function comments(){
          return $this->hasMany(Review::class,'addedby_id')->where('type',1);
      }
