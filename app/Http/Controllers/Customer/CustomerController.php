@@ -98,6 +98,11 @@ class CustomerController extends Controller
 
     }
     
+    public function ordersAction(Request $request,$action,$id){
+        $user =Auth::user();
+        $order =$user->orders()->where('order_type','customer_order')->find($id);
+        return view(welcomeTheme().'customer.orderDetials',compact('order'));
+    }
 
 
 }
