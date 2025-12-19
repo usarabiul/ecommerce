@@ -1,5 +1,10 @@
 <div class="dashboard-menu">
     <ul class="nav flex-column" role="tablist">
+        @if(Auth::user()->admin)
+        <li class="nav-item">
+            <a class="nav-link"  href="{{route('admin.dashboard')}}" ><i class="fi-rs-settings-sliders mr-10"></i>Admin Dashboard</a>
+        </li>
+        @endif
         <li class="nav-item">
             <a class="nav-link {{ Request::is('customer/dashboard') ? 'active' : '' }} "  href="{{route('customer.dashboard')}}" ><i class="fi-rs-settings-sliders mr-10"></i>Dashboard</a>
         </li>
