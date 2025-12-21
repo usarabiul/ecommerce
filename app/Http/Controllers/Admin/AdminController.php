@@ -20,6 +20,7 @@ use App\Models\PostExtra;
 use App\Models\Review;
 use App\Models\General;
 use App\Models\Country;
+use App\Models\Order;
 use App\Models\Media;
 use App\Models\Attribute;
 use App\Models\Permission;
@@ -57,117 +58,38 @@ class AdminController extends Controller
     }
     
     public function dashboard(){
-        // $datas = [];
-        // return PostExtra::count();
-        // $apiUrl = 'https://randomuser.me/api/1.4/?results=250';
-        // $datasApi =null;
-        //         try {
-        //             $ch = curl_init();
         
-        //             // Set cURL options
-        //             curl_setopt($ch, CURLOPT_URL, $apiUrl);
-        //             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        //             // Additional options if needed...
-        
-        //             // Execute cURL session and capture the output
-        //             $apiResponse = curl_exec($ch);
-        
-        //             // Check for cURL errors
-        //             if (curl_errno($ch)) {
-        //                 throw new \Exception('Curl error: ' . curl_error($ch));
-        //             }
-        
-        //             // Close cURL session
-        //             curl_close($ch);
-        
-        //             // Process and use the $apiResponse as needed
-        //             $datasApi = json_decode($apiResponse, true);
-        //         } catch (\Exception $e) {
-        //             // Handle any exceptions that occur during the cURL request
-        //             //return response()->json(['error' => $e->getMessage()], 500);
-        //         }
-                
-                // if($datasApi){
-
-                //     foreach($datasApi['results'] as $result){
-                //         $name =null;
-                //         if(isset($result['name']['title'])){
-                //             $name .=$result['name']['title'];
-                //         }
-                //         if(isset($result['name']['first'])){
-                //             $name .=' '.$result['name']['first'];
-                //         }
-                //         if(isset($result['name']['last'])){
-                //             $name .=' '.$result['name']['last'];
-                //         }
-                //         $email =null;
-                //         if(isset($result['email'])){
-                //             $email .=$result['email'];
-                //         }
-                        
-                //         $datas[] = [
-                //         'name' => $name,
-                //         'email' => $email,
-                //         'status' => 'active',
-                //         'type' => 0,
-                //         'addedby_id' => Auth::id(),
-                //         ];
-
-                //     }
-                // }
-        // Insert data into the database
-        //PostExtra::insert($datas);
-               
-     
-        //         return 'stopo';
-        // for ($i = 1; $i <= 10000; $i++) {
-        //     $datas[] = [
-        //         'name' => 'Name ' . $i+40000,
-        //         'content' => 'Content ' . $i+40000,
-        //         'drag' => $i+40000,
-        //         'status' => 'active',
-        //         'type' => 0,
-        //         'addedby_id' => Auth::id(),
-        //         // Add other fields as needed
-        //     ];
-        // }
-
-        // // Insert data into the database
-        // PostExtra::insert($datas);
-        
-        // return PostExtra::where('type',0)->select(['name as namefile','status as statusName',DB::raw('COUNT(*) as rowcount')])->limit(100)->get();
         ///Reports  Summery Dashboard
-        $services30Days=Post::where('type',3)
-        ->where('status','<>','temp')
-        ->whereMonth('created_at', Carbon::now()->month)
-        ->whereYear('created_at', Carbon::now()->year)
+        $productsTotal=Post::where('type',2)
+        ->where('status','active')
         ->count();
 
-        $posts30Days=Post::where('type',1)
-        ->where('status','<>','temp')
-        ->whereMonth('created_at', Carbon::now()->month)
-        ->whereYear('created_at', Carbon::now()->year)
+        $blogsTotal=Post::where('type',1)
+        ->where('status','active')
         ->count();
 
         $pagesTotal=Post::where('type',0)
-        ->where('status','<>','temp')
+        ->where('status','active')
         ->count();
 
         $userTotal=User::where('customer',true)
         ->where('status',1)
         ->count();
+        
+        $ordersTotal=Order::where('order_type','customer_order')
+        ->whereNotIn('order_status',['temp','cancelled','returned'])
+        ->count();
 
         $reports=array(
-                    "services"=>$services30Days,
-                    "posts"=>$posts30Days,
+                    "products"=>$productsTotal,
+                    "blogs"=>$blogsTotal,
                     "pages"=>$pagesTotal,
                     "users"=>$userTotal,
+                    "orders"=>$ordersTotal,
                 );
         ///Reports  Summery Dashboard
-
-        $posts =Post::latest()->where('type',1)->where('status','<>','temp')->paginate(10);
         
-        return view(adminTheme().'dashboard',compact('posts','reports'));
+        return view(adminTheme().'dashboard',compact('reports'));
       
     }
 
