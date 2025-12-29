@@ -134,6 +134,24 @@ class OrdersController extends Controller
             return view(adminTheme().'orders.invoice',compact('order'));
         }
 
+        if($action=='search'){
+
+            $key = $r->search;
+
+            $products =Post::latest()->where('type',2)->where('status','active')
+                ->where('name','like','%'.$key.'%')
+                ->limit(10)     
+                ->get();
+
+
+            $view =View(adminTheme().'orders.includes.searchItem',compact('products','order'))->render();
+
+            return Response()->json([
+                    'success' => true,
+                    'view' => $view,
+                    ]);
+        }
+
         if($action=='update'){
             return $r;
             $check = $r->validate([

@@ -6,13 +6,13 @@
 		position: relative;
 	}
 
-	.seachList {
+	.searchResult {
 		position: absolute;
 		width: 100%;
 		top: 36px;
 	}
 
-	.seachList ul {
+	.searchResult ul {
 		background: white;
 		width: 100%;
 		display: block;
@@ -23,12 +23,17 @@
 		border-bottom: none;
 	}
 
-	.seachList ul li a {
+	.searchResult ul li a {
 		display: block;
 		padding: 5px 10px;
 		border-bottom: 1px solid #cfc5c5;
 		text-decoration: none;
 	}
+
+	.searchResult ul li a:hover {
+		background: #dcd9d9;
+	}
+
 </style>
 @endpush @section('contents')
 
@@ -219,14 +224,12 @@
 									<div class="col-md-4">
 										<div class="searchModel">
 											<div class="input-group mb-1">
-												<input class="form-control" placeholder="Search Itme" />
+												<input class="form-control searchItem" data-url="{{route('admin.ordersAction',['search',$order->id])}}" placeholder="Search Item" />
 												<div class="input-group-text">
 													<i class="fa fa-search"></i>
 												</div>
 											</div>
-											<div class="seachList">
-												
-											</div>
+											<div class="searchResult"></div>
 										</div>
 									</div>
 								</div>
@@ -412,10 +415,10 @@
 
 <script>
     $(document).ready(function(){
-		$(".seachList").hide();
+		$(".searchResult").hide();
         $(document).on('click', function(e) {
             var container = $(".searchModel");
-            var containerClose = $(".seachList");
+            var containerClose = $(".searchResult");
             if (!$(e.target).closest(container).length) {
                 containerClose.hide();
             }else{
@@ -423,9 +426,27 @@
             }
         });
 
+        $('.searchItem').keyup(function(){
+			var key =$(this).val();
+			var url =$(this).data('url');
+			if(key.length < 2){
+				$('.searchResult').html('');
+				return;
+			}
+
+			$.ajax({
+				url: url,
+				type: 'GET',
+				data: { search: key },
+				success: function (res) {
+					$('.searchResult').html(res.view);
+				}
+			});
+			
+		});
+
         $('.paymentType').click(function(){
             var amount =$(this).data('amount');
-            
             if(amount==0){
                 amount='';
             }
@@ -434,6 +455,12 @@
             $('.PayAmount').val(amount);
 
         });
+
+
+
+
+
+
     });
 </script>
 

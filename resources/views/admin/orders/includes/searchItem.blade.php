@@ -1,4 +1,5 @@
 <ul>
-    <li><a href="">Home</a></li>
-    <li><a href="">Home</a></li>
+    @foreach($products as $product)
+    <li><a href="">{{$product->name}}</a></li>
+    @endforeach
 </ul>
